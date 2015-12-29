@@ -1,0 +1,137 @@
+﻿<!DOCTYPE HTML>
+<html>
+<head>
+<meta charset="utf-8" />
+<title>91农产品溯源平台</title>
+<link rel="stylesheet" type="text/css" href="/Plugins/jqueryui/jquery-ui.css" />
+<link rel="stylesheet" href="/Plugins/bootstrap/css/bootstrap.css">
+<link rel="stylesheet" href="/Styles/reset.css">
+<link rel="stylesheet" href="/Styles/global.css">
+<link rel="stylesheet" type="text/css" href="/Scripts/jquery.Cloud/jquery.Cloud.css" />
+<link rel="stylesheet" type="text/css" href="/Plugins/LoadMask/jquery.loadmask.css" />
+<link rel="stylesheet" href="/Styles/newTrace.css">
+</head>
+<body>
+<div class="topwrapper"> </div>
+<div class="midwrapper">
+  <div class="w1030 clearfix" id="prolist">
+    <div class="main">
+      <div class="section-first clearfix">
+        <div class="slide">
+          <div class="index-slides">
+            <div class="img-slide"> <a href="javascript:;"> <img src="/Images/trace/slide_01.png"/> </a> </div>
+            <div class="img-slide"> <a href="/AgriProTraceability/91QueryEntrance/TraceabilityReg.html"> <img src="/Images/trace/slide_02.png"/> </a> </div>
+          </div>
+        </div>
+        <div class="extra">
+          <div class="mc">
+            <p class="title"> 溯源档案查询</p>
+            <p>
+              <input type="text" class="form-text form-text-block" placeholder="请输入14位追溯码" id="txtBatchID" />
+            </p>
+            <p class="mt20"> <a href="javascript:void(0);" onclick="QueryTraceData();" class="btn btn-block btn-search">查询</a></p>
+            <p class="ft ar"> <a href="javascript:;">了解更多<i class="icon-arrow-right"></i></a></p>
+          </div>
+        </div>
+      </div>
+      <div class="t-section clearfix mod-product fresh-market">
+        <div class="titlebar"> <span class="more fr"><a href="tctrace_product.html"><i class="arrow-more"></i>更多产品</a></span> <span class="col-name">新鲜上市</span> </div>
+        <div class="bd">
+          <ul class="product-list">
+          </ul>
+        </div>
+      </div>
+      <div class="t-section clearfix mod-product hot-commend">
+        <div class="titlebar"> <span class="more fr"><a href="tctrace_product.html"><i class="arrow-more"></i>更多产品</a></span> <span class="col-name">热门推荐</span> </div>
+        <div class="bd">
+          <div class="main-left fl">
+            <ul class="product-row-list" id="hotproleft">
+            </ul>
+          </div>
+          <div class="main-right fr">
+            <ul class="big-row-product-item" id="hotproright">
+            </ul>
+          </div>
+        </div>
+      </div>
+      <div class="t-section clearfix mod-product most-popular-product">
+        <div class="titlebar"> <span class="more fr"><a href="tctrace_product.html"><i class="arrow-more"></i>更多产品</a></span> <span class="col-name">人气最高</span> </div>
+        <div class="bd">
+          <div class="main-left fr">
+            <ul class="product-row-list" id="topproleft">
+            </ul>
+          </div>
+          <div class="main-right fl">
+            <ul class="big-row-product-item" id="topproright">
+            </ul>
+          </div>
+        </div>
+      </div>
+      <div class="section5 clearfix mt40">
+        <ul>
+          <li class="fore1"><a href="javascript:;">
+            <div class="text">
+              <p class="title"> 智能监控</p>
+              <p>生长期全程实时监控</p>
+            </div>
+            <img src="/images/trace/ic_ad1.png"> </a></li>
+          <li class="fore2"><a href="javascript:;">
+            <div class="text">
+              <p class="title"> 查询便捷</p>
+              <p>随时随地查询产品信息</p>
+            </div>
+            <img src="/images/trace/ic_ad2.png"></a></li>
+          <li class="fore3"><a href="javascript:;">
+            <div class="text">
+              <p class="title"> 信息全面</p>
+              <p>全面展现产品各种信息</p>
+            </div>
+            <img src="/images/trace/ic_ad3.png"></a></li>
+          <li class="fore4"><a href="javascript:;">
+            <div class="text">
+              <p class="title"> 综合销售</p>
+              <p>网店链接+实体店地址</p>
+            </div>
+            <img src="/images/trace/ic_ad4.png"></a></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>
+<div id="footer" class="footer"></div>
+<script type="text/javascript" src="/Scripts/jquery-1.9.1.min.js"></script>
+<script type="text/javascript" src="/Scripts/jquery.Cloud/jquery.Cloud.js"></script>
+<script type="text/javascript" src="/Scripts/Base.service.js"></script>
+<script src="/Scripts/Base.Storage.js" type="text/javascript"></script>
+<script src="/Scripts/CookieStorage.js" type="text/javascript"></script>
+<script type="text/javascript" src="/Scripts/Service.js"></script>
+<script type="text/javascript" src="/Scripts/Setting.js"></script>
+<script type="text/javascript" src="/Scripts/Util.js"></script>
+<script type="text/javascript" src="/Scripts/Transfer.js"></script>
+<script type="text/javascript" src="/Scripts/History/MyHistory.js"></script>
+<script src="/Scripts/Messages.js" type="text/javascript"></script>
+<script type="text/javascript" src="/DynamicPages.js"></script>
+<script type="text/javascript" src="/Plugins/LoadMask/jquery.loadmask.min.js"></script>
+<script src="/Plugins/bootstrap/js/bootstrap.min.js" type="text/javascript"></script>
+<script type="text/javascript" src="/Plugins/Slides/jquery.slides.min.js"></script>
+<script type="text/javascript" src="/Scripts/jquery.Cloud/jquery.Cloud.js"></script>
+<script src="/Scripts/CreateCaptcha.js" type="text/javascript"></script>
+<script type="text/javascript" src="/AgriProTraceability/QueryTrace/Transferload.pageHtml.js"></script>
+<script type="text/javascript" src="/AgriProTraceability/QueryTrace/queryEntrance.databind.js"></script>
+<script type="text/javascript">
+    function QueryTraceData() {
+        var batchid = document.getElementById("txtBatchID").value;
+        if (batchid == "") {
+            ZENG.msgbox.show("溯源编码不能为空!", 5, 2000);
+            return;
+        }
+        location.href = "query.html?p=742&batchid=" + batchid;
+    }
+    $(function () {
+        Transferload.pageHtml.SlideTransition();
+        Transferload.pageHtml.initLoadHtml();
+        queryEntrance.databind.initDataBind();
+    });
+</script>
+</body>
+</html>

@@ -1,0 +1,105 @@
+﻿<!DOCTYPE HTML>
+<html>
+<head>
+<meta charset="utf-8"/>
+<title>91农产品溯源平台</title>
+<link rel="stylesheet" type="text/css" href="/Plugins/jqueryui/jquery-ui.css" />
+<link rel="stylesheet" type="text/css" href="/Scripts/jquery.Cloud/jquery.Cloud.css" />
+<link rel="stylesheet" type="text/css" href="/Plugins/LoadMask/jquery.loadmask.css" />
+<link rel="stylesheet" type="text/css" href="/Styles/uniform.default.css">
+<link rel="stylesheet" href="/Plugins/bootstrap/css/bootstrap.css">
+<link rel="stylesheet" href="/Styles/reset.css">
+<link rel="stylesheet" href="/Styles/global.css">
+<link rel="stylesheet" href="/Styles/newTrace.css">
+<link rel="stylesheet" href="/Styles/usercenter.css">
+</head>
+<body>
+<div class="topwrapper" id="UserHead">
+</div>
+<div class="actionbar reg-actionbar ">
+  <div class="w1030">
+    <h2 class="title">找回密码</h2>
+    <div class="card-signup">
+            <div class="flowsteps">
+					<ol class="num3 TabFindPwd">
+                            <li class="first current"><span><i>1</i><em>身份验证</em></span></li>
+                            <li><span><i>2</i><em>重置密码</em></span></li>
+                            
+                            <li class="last"><span><i>3</i><em>完成</em></span></li>
+					</ol>
+				</div>
+      <div class="signup reg-form ">
+        <form id="ForGetPwdDiv">
+          <ul class="form-group GetCheckCodeUl">
+            <li>
+              <input type="text" value="" class="form-text" id="username" name="username" autocomplete="off" placeholder="邮箱或手机号" />
+              <span class="help-inline" style="display:none"><span class="error valid"></span></span>
+              <span class="help-inline usernamevalid" style="display:none"><span class="error">请输入邮箱或手机号</span></span> </li>
+            <li>
+              <input type="text"  class="form-text input-yzm mr10" id="VerifyCode" name="VerifyCode" placeholder="验证码" />
+              <a href="javascript:" id="BtnGetVerifyCode" class="btn btn-default btn-get btn-primary">点击获取验证码</a> 
+              <span class="help-inline verifycodevalid" style="display:none"><span class="error">请输入验证码</span></span> </li>
+            <li class="mt15"> <a href="javascript:"  id="SureUserName" class="btn btn-primary btn-block ">确定</a> </li>
+          </ul>
+          <ul class="form-group UpdatePwdUl hide">
+           <li>
+              <input type="password" value="" class="form-text" id="password1" name="password" placeholder="密码" />
+              <span class="help-inline okpwd1 pwd1" style="display:none"><span class="error valid"></span></span>
+              <span class="help-inline Putpwd1 pwd1" style="display:none"><span class="error">请输入密码</span></span>
+              <span class="pwdNoSame help-inline pwd1" style="display:none"><span class="error">两次输入的密码不一致</span></span> </li>
+            <li>
+              <input type="password" value="" class="form-text" id="password2" name="password" placeholder="确认密码" />
+              <span class="help-inline okpwd2" style="display:none"><span class="error valid"></span></span>
+              <span class="help-inline Putpwd2" style="display:none"><span class="error">请再次输入密码</span></span>
+              <span class="pwdNoSame help-inline " style="display:none"><span class="error">两次输入的密码不一致</span></span> </li>
+            <li class="mt15"> <a href="javascript:"  id="BtnForgetUpDatePwd" class="btn btn-primary btn-block ">确定</a> </li>
+          </ul>
+        </form>
+        <div class="success-wrap EditpwdSuccess hide">
+          <div class="tip">
+          <h2>修改成功</h2>
+          <p><span>已成功修改账户密码 。</span></p>
+          <p class="mt20"><a href="javascript:" id="BtnLogin" class="btn btn-primary btn-longer mr10 btn-login">立即登录</a><a href="/AgriProTraceability/queryEntrance.html" class="btn btn-default">返回首页</a></p>
+                </div>
+       </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div id="UserFooter" class="footer">
+</div>
+</body>
+</html>
+<script type="text/javascript" src="/Scripts/jquery-1.9.1.min.js"></script>
+<script type="text/javascript" src="/Scripts/jquery.Cloud/jquery.Cloud.js"></script>
+<script type="text/javascript" src="/Scripts/Base.service.js"></script>
+<script src="/Scripts/Base.Storage.js" type="text/javascript"></script>
+<script src="/Scripts/CookieStorage.js" type="text/javascript"></script>
+<script type="text/javascript" src="/Scripts/Transfer.js"></script>
+<script src="/Scripts/Messages.js" type="text/javascript"></script>
+<script type="text/javascript" src="/Scripts/Service.js"></script>
+<script type="text/javascript" src="/Scripts/History/MyHistory.js"></script>
+<script type="text/javascript" src="/Scripts/jquery.Cloud/jquery.Cloud.js"></script>
+<script type="text/javascript" src="/Plugins/LoadMask/jquery.loadmask.min.js"></script>
+<script src="/Plugins/bootstrap/js/bootstrap.min.js" type="text/javascript"></script>
+<script src="custom.js" type="text/javascript"></script>
+<script src="/Scripts/CreateCaptcha.js" type="text/javascript"></script>
+<script src="TransferloadUser.js" type="text/javascript"></script>
+<script src="ForgetPwd.js" type="text/javascript"></script>
+<script type="text/javascript">
+    $(function () {
+        TransferloadUser.initLoadHtml("reg");
+        TransferloadUser.TraceabilityInfo = Base.session.getLoginUser();
+        if (TransferloadUser.TraceabilityInfo) {
+            $(".loginuser").html(TransferloadUser.TraceabilityInfo.UserName);
+            $(".Unlogin").hide();
+            $(".Hadlogin").show();
+            $(".LoginLi").hide();
+        }
+        ForgetPwd.initClick();
+
+    });
+</script>
+        <!--百度在线咨询嵌入代码-->
+<script type="text/javascript">    var _bdhmProtocol = (("https:" == document.location.protocol) ? " https://" : " http://"); document.write(unescape("%3Cscript src='" + _bdhmProtocol + "hm.baidu.com/h.js%3F584aabc063c4727f313a155d70713da4' type='text/javascript'%3E%3C/script%3E")) </script>

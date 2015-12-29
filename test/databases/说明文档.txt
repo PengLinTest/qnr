@@ -1,0 +1,7 @@
+1.fertilizer_pesticides_use 化肥农药使用表，由于化肥分为有机肥和无机肥，所以fertilizer_pesticides_use中use_type的字段定义如下
+（use_type=0 化肥;use_type=1 农药
+2.environment_data环境数据表中data_type暂时有四种数据（1:空气温度;5:光照度;2:空气湿度;4:土壤湿度;3:土壤温度）
+3.basicinfo表中的basicinfo_type为产品类型（1:吃喝;2:娱乐;3:实用）
+4.vendor表中的vendor_type为产品类型（1:食品;2:种养殖;3:生活用品）
+5.vendor_auth 中的auth_ispass字段分为3种状态（1:未填写;2:认证中3:通过;4:未通过
+6.vendor_auth 中的auth_auth字段分为2种状态（0:代表公司验证；1:代表法人验证）

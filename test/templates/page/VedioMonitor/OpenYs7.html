@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf8" />
+<title></title>
+<link rel="shortcut icon" href="/favicon.ico">
+<link rel="stylesheet" type="text/css"
+	href="templates/Plugins/HLSPlayer/images/common.css">
+<link rel="stylesheet" type="text/css"
+	href="templates/Plugins/HLSPlayer/images/style.css">
+<script type="text/javascript" src="templates/Scripts/jquery-1.9.1.js"></script>
+<script type="text/javascript" src="templates/Scripts/CookieStorage.js"></script>
+<script type="text/javascript"
+	src="templates/Scripts/Base.sessionStorage.js"></script>
+</head>
+<body>
+	<div>
+		<div id="HLSPlayer">
+			<SCRIPT LANGUAGE=JavaScript>
+				var vID = "";
+				var vWidth = "100%"; //播放器宽度设置
+				var vHeight = 290; //播放器宽度设置
+				var vPlayer = "templates/Plugins/HLSPlayer/HLSplayer.swf"; //播放器文件
+				var vHLSset = "templates/Plugins/HLSPlayer/HLS.swf"; //HLS配置
+				var vPic =  Base.sessionStorage.getSession("PicUrl");    //视频缩略图
+				var vCssurl = "templates/Plugins/HLSPlayer/images/mini.css"; //移动端CSS应用文件
+
+				//HLS(m3u8)地址,适配PC,安卓,iOS,WP
+				var vHLSurl = Base.sessionStorage.getSession("VedioURL");
+			</SCRIPT>
+			<script type="text/javascript"
+				src="templates/Plugins/HLSPlayer/js/hls.min.js"></script>
+		</div>
+	</div>
+</body>
+</html>

@@ -1,0 +1,854 @@
+/*上传图片按钮美化*/
+.upload-btn {
+	display: inline-block;
+	margin-bottom: 0;
+	font-size: 12px;
+	font-weight: normal;
+	line-height: 1.428571429;
+	text-align: center;
+	white-space: nowrap;
+	vertical-align: middle;
+	cursor: pointer;
+	border: 1px solid transparent;
+	border-radius: 4px;
+	-webkit-user-select: none;
+	-moz-user-select: none;
+	-ms-user-select: none;
+	-o-user-select: none;
+	user-select: none;
+	color: #777;
+	height: 30px;
+	line-height: 30px;
+	border: 1px solid #ddd;
+	border-radius: 3px;
+	width: 120px
+}
+
+.fileinput-button {
+	position: relative;
+	overflow: hidden;
+}
+
+.fileinput-button input {
+	position: absolute;
+	top: 0;
+	left: 0;
+	margin: 0;
+	opacity: 0;
+	filter: alpha(opacity = 0);
+	transform: translate(-300px, 0) scale(4);
+	font-size: 23px;
+	direction: ltr;
+	cursor: pointer;
+	height: 30px;
+}
+
+/*注册*/
+.card-signup {
+	height: 490px;
+	border: 1px solid #ddd;
+	background: #fff;
+	-webkit-box-sizing: border-box;
+	-moz-box-sizing: border-box;
+	box-sizing: border-box;
+	padding-top: 49px
+}
+
+.signup li {
+	margin-bottom: 10px
+}
+
+.signup .hd {
+	text-align: center;
+	margin-top: -90px;
+}
+
+.signup .btn {
+	height: 40px;
+	line-height: 40px;
+	font-size: 12px;
+	width: 310px
+}
+
+.signup .form-text {
+	height: 40px;
+	line-height: 1.31;
+	font-size: 12px;
+	width: 310px
+}
+
+.signup .input-yzm {
+	width: 110px;
+}
+
+.signup .tips {
+	font-size: 42px;
+	color: #385;
+	text-align: center;
+	padding: 40px 0px 30px 0px
+}
+
+.reg-success-card {
+	height: 500px;
+	width: 600px;
+	margin: 0 auto;
+	padding-top: 0
+}
+
+.reg-success-card .signup {
+	width: 310px;
+	margin: 0 auto
+}
+
+.reg-form {
+	padding-left: 360px;
+}
+
+.reg-form .btn-get {
+	height: 30px;
+	line-height: 30px;
+	width: 187px;
+}
+
+/*发布档案*/
+.publish-form {
+	background: #fff;
+	border: 1px solid #ddd;
+	padding: 40px
+}
+
+.publish-form .section {
+	margin-bottom: 40px
+}
+
+.publish-form .section.last {
+	margin-bottom: 0
+}
+
+.publish-form .section .title {
+	font-size: 24px;
+	color: #222;
+	height: 40px;
+	margin-bottom: 25px
+}
+
+.publish-form .section .title small {
+	font-size: 12px;
+	color: #888;
+	padding-left: 15px
+}
+
+.publish-form .section .bd {
+	padding: 0px 80px
+}
+
+.publish-form .form-item {
+	padding-left: 80px
+}
+
+.publish-form .form-item .form-label {
+	color: #222;
+	margin-left: -80px;
+	width: 60px
+}
+
+.publish-form .table .icon-recycle {
+	margin-right: 20px
+}
+
+.publish-form .table>tbody>tr.even {
+	background-color: #f5f6f7
+}
+
+.publish-form .action-bar {
+	padding: 20px 0px
+}
+
+.growth-period .item {
+	position: relative;
+	border-bottom: 1px solid #ddd
+}
+
+.growth-period .item .opration {
+	position: absolute;
+	bottom: 20px;
+	right: -35px
+}
+
+.growth-period .col-left, .growth-period .col-right {
+	float: left
+}
+
+.growth-period .col-left {
+	margin-right: 20px
+}
+
+.growth-period .col-right {
+	width: 280px;
+	float: right;
+	padding-top: 15px
+}
+
+.growth-period .col-right img {
+	width: 280px
+}
+
+.growth-period .form-text {
+	width: 406px
+}
+
+.growth-period textarea.form-text {
+	resize: none
+}
+
+.use-section .table>tbody>tr>td {
+	padding-top: 5px;
+	padding-bottom: 5px;
+	line-height: 30px
+}
+
+.buy-info .item {
+	border-bottom: 1px solid #ddd;
+	padding: 5px 0px
+}
+
+.buy-info .item:first-child {
+	border-top: 1px solid #ddd
+}
+
+.buy-info .item .form-text {
+	margin-left: 10px;
+	width: 604px
+}
+
+.buy-info .form-item {
+	padding-left: 100px
+}
+
+.buy-info .form-item .form-label {
+	margin-left: -100px;
+	width: 80px
+}
+
+.buy-info .form-item p {
+	position: relative;
+	padding-right: 60px
+}
+
+.buy-info .form-item .opration {
+	position: absolute;
+	right: 10px;
+	top: 0
+}
+
+.buy-info .form-item .col-name {
+	padding-left: 25px;
+	color: #222
+}
+
+.product-certification .item {
+	border-bottom: 1px solid #ddd;
+	position: relative
+}
+
+.product-certification .item:first-child {
+	border-top: 1px solid #ddd
+}
+
+.product-certification .form-item-inline {
+	float: left;
+	width: 41%;
+	-webkit-box-sizing: border-box;
+	-moz-box-sizing: border-box;
+	box-sizing: border-box
+}
+
+.product-certification .form-item-inline.even {
+	float: right
+}
+
+.product-certification .item .opration {
+	position: absolute;
+	right: -40px;
+	bottom: 20px
+}
+
+/*档案中心*/
+.produces {
+	padding: 20px 30px;
+	border: 1px solid #ddd;
+	background: #fff;
+	min-height: 470px;
+	-webkit-box-sizing: border-box;
+	-moz-box-sizing: border-box;
+	box-sizing: border-box
+}
+
+.produces .title {
+	height: 40px
+}
+
+.produces .title h2 {
+	font-size: 18px;
+	color: #222;
+	line-height: 30px;
+}
+
+.produces .title .icon-produces {
+	width: 30px;
+	height: 30px;
+	background: url(../images/trace/icon-30.png) 0 0 no-repeat;
+	vertical-align: middle;
+	margin-right: 5px
+}
+
+.btn-new {
+	display: inline-block;
+	width: 56px;
+	height: 56px;
+	background: #385;
+	border-radius: 50%;
+	text-align: center;
+	line-height: 56px;
+	display: inline-block;
+	box-shadow: 0px 3px 5px 0px rgba(0, 0, 0, 0.15);
+	cursor: pointer
+}
+
+.no-content {
+	font-size: 18px;
+	color: #222
+}
+
+.no-content .btn-new {
+	margin: 20px 0px
+}
+
+.produces .no-content {
+	width: 180px;
+	margin: 90px auto 30px auto;
+	text-align: center
+}
+
+.profile {
+	border: 1px solid #ddd;
+	background: #fff;
+	-webkit-box-sizing: border-box;
+	-moz-box-sizing: border-box;
+	box-sizing: border-box;
+	position: relative
+}
+
+.company-profile {
+	padding: 25px 30px 0px 30px
+}
+
+.company-profile .title {
+	margin-bottom: 20px
+}
+
+.company-profile .title h2 {
+	font-size: 24px;
+	color: #222;
+	line-height: 24px
+}
+
+.company-profile .title small {
+	font-size: 12px
+}
+
+.company-profile .title .icon-edit {
+	margin-right: -10px;
+	margin-top: 2px
+}
+
+.company-profile .info li {
+	padding-left: 70px;
+	margin-bottom: 15px;
+	color: #222
+}
+
+.company-profile .info .col-name {
+	width: 70px;
+	margin-left: -70px;
+	text-align: left;
+	color: #888;
+	float: left;
+}
+
+.company-profile .info .icon-check {
+	width: 11px;
+	height: 8px;
+	background: url(../images/trace/icon-30.png) -190px -12px no-repeat;
+}
+
+.profile .map {
+	position: absolute;
+	bottom: 0
+}
+
+.nomap {
+	width: 310px;
+	height: 232px;
+	background: url(../images/trace/nomap.png) 0 0 no-repeat;
+}
+
+.nomap .text {
+	font-size: 18px;
+	color: #555;
+	text-align: center;
+	padding-top: 170px
+}
+
+.count {
+	border: 1px solid #ddd;
+	background: #fff;
+	font-size: 18px;
+	color: #222;
+	padding: 25px 30px;
+}
+
+.count .num {
+	font-size: 48px;
+	margin-right: 10px;
+	line-height: 48px
+}
+
+.field {
+	border: 1px solid #ddd;
+	background: #fff;
+	padding: 25px 0px;
+	min-height: 300px;
+	-webkit-box-sizing: border-box;
+	-moz-box-sizing: border-box;
+	box-sizing: border-box;
+}
+
+.field .title {
+	font-size: 18px;
+	color: #222;
+	padding: 0px 30px
+}
+
+.field .title small {
+	font-size: 12px;
+	color: #888;
+	padding: 25px 0px 10px 0px;
+	display: inline-block
+}
+
+.field ul li {
+	height: 40px;
+	line-height: 40px;
+	border-left: 6px solid #fff;
+	padding: 0px 24px
+}
+
+.field ul li.active, .field ul li.active:hover {
+	border-left: 6px solid #385;
+}
+
+.field ul li a {
+	display: block
+}
+
+.field ul li.active a {
+	color: #385
+}
+
+.field ul li:hover {
+	border-left: 6px solid #ddd;
+}
+
+.produces .sort {
+	line-height: 30px;
+	margin-right: 25px
+}
+
+.produces .sort .dropdown-toggle .caret {
+	margin-left: 5px
+}
+
+.produces .item {
+	padding: 20px 0px;
+	border-bottom: 1px solid #f2f2f2
+}
+
+.produces .item .pic, .produces .item .time {
+	float: left
+}
+
+.produces .item .opration {
+	padding-right: 10px;
+	float: right
+}
+
+.produces .item .table .opration {
+	float: right;
+	padding-right: 0
+}
+
+.produces .item .pic {
+	width: 280px
+}
+
+.produces .item .time {
+	padding-top: 10px
+}
+
+.produces .item .pic img {
+	float: left;
+	margin-right: 30px;
+	border: 1px solid #f2f2f2
+}
+
+.produces .item .pic .name {
+	color: #555;
+	padding: 10px 0px 18px 0px
+}
+
+.produces .item .pic .caret {
+	margin-left: 5px
+}
+
+.produces .item .pic .expand .caret {
+	border-top: none;
+	border-bottom: 4px solid
+}
+
+.produces .item .table {
+	border: 1px solid #eee;
+	margin-top: 20px;
+	background: #f8f8f8
+}
+
+.produces .item .table>tbody>tr>td {
+	padding-top: 0;
+	padding-bottom: 0;
+	line-height: 30px
+}
+
+.produces .item .table>tbody>tr.even {
+	background: #f2f2f2
+}
+
+ul.pages li {
+	line-height: 20px;
+}
+
+.produces ul.pages li.page-number {
+	width: 20px;
+	height: 20px;
+	line-height: 20px;
+	border: none;
+	margin-right: 10px;
+	padding: 0
+}
+
+.produces ul.pages li.pagination-start, .produces ul.pages li.pagination-next,
+	.produces ul.pages li.thpoint, .produces ul.pages .btn-jump {
+	display: none
+}
+
+.produces .pagination {
+	padding-bottom: 0
+}
+
+/*个人资料*/
+.card-list {
+	width: 1040px
+}
+
+.card-list .card {
+	border: 1px solid #ddd;
+	width: 310px;
+	height: 182px;
+	float: left;
+	margin: 0px 8px 10px 0;
+	-webkit-box-sizing: border-box;
+	-moz-box-sizing: border-box;
+	box-sizing: border-box;
+	padding: 30px 30px 20px 30px;
+	background: #fff;
+	position: relative
+}
+
+.base-info .card-list .card {
+	margin-right: 0
+}
+
+.card-list .card-produces, .card-list .card-fields {
+	width: 390px;
+}
+
+.card-list .card-contact {
+	height: auto;
+	min-height: 180px
+}
+
+.card-list .card .title {
+	height: 30px;
+	line-height: 30px;
+}
+
+.card-list .card .title h2 {
+	font-size: 24px;
+	color: #222;
+	line-height: 32px
+}
+
+.card-list .card .bd {
+	padding-top: 25px
+}
+
+.card-list .card .info li {
+	margin-bottom: 15px;
+	color: #222;
+	padding-left: 70px;
+}
+
+.card-list .card .col-name {
+	width: 50px;
+	margin-right: 20px;
+	float: left;
+	color: #888;
+	margin-left: -70px
+}
+
+.card-list .card .icon-check {
+	margin-left: 10px
+}
+
+.card-list .statistics .icon-produces {
+	width: 56px;
+	height: 56px;
+	background: url(../images/trace/img-produces.png) 0 0 no-repeat;
+	float: left;
+	margin-right: 14px
+}
+
+.card-list .statistics .icon-checked {
+	width: 56px;
+	height: 56px;
+	background: url(../images/trace/img-check2.png) 0 0 no-repeat;
+	float: left;
+	margin-right: 14px
+}
+
+.card-list .statistics .icon-field {
+	width: 56px;
+	height: 56px;
+	background: url(../images/trace/img-field.png) 0 0 no-repeat;
+	float: left;
+	margin-right: 14px
+}
+
+.card-list .statistics .icon-produces.icon-disabled {
+	background: url(../images/trace/icon_03.png) 0 0 no-repeat
+}
+
+.card-list .statistics .icon-checked.icon-disabled {
+	background: url(../images/trace/icon_07.png) 0 0 no-repeat
+}
+
+.card-list .statistics .icon-field.icon-disabled {
+	background: url(../images/trace/icon_09.png) 0 0 no-repeat
+}
+
+.card-list .statistics .text {
+	padding-top: 12px;
+	line-height: 30px
+}
+
+.card-list .card .nocon-text {
+	padding-top: 2px;
+}
+
+.card-list .card .nocon-text a {
+	padding-top: 15px;
+	color: #385;
+	display: inline-block;
+	font-size: 15px
+}
+
+.card-list .card-field {
+	width: 510px;
+	padding-left: 210px
+}
+
+.card-list .card-field .title h2 {
+	font-size: 18px
+}
+
+.card-list .card .map {
+	position: absolute;
+	left: 0;
+	top: 0;
+}
+
+.card-list .add-field {
+	background: #eee;
+	font-size: 24px;
+	color: #222;
+	line-height: 56px;
+	padding: 62px 30px 30px 30px;
+	text-align: center;
+	cursor: pointer
+}
+
+.card-list .add-field .btn-new {
+	margin-right: 20px;
+}
+
+.more-action {
+	display: inline-block;
+	margin-left: 10px
+}
+
+.more-action .dropdown-menu {
+	top: 0;
+	left: -130px;
+	border-radius: 0;
+	border: 1px solid #ddd
+}
+
+.more-action .dropdown-menu a {
+	width: auto;
+	background: none;
+	border-radius: 0;
+	font-size: 12px
+}
+
+.add-photo {
+	display: inline-block;
+	width: 56px;
+	height: 56px;
+	background: #385;
+	border-radius: 50%;
+	text-align: center;
+	line-height: 56px;
+	display: inline-block;
+	box-shadow: 0px 3px 5px 0px rgba(0, 0, 0, 0.15);
+	cursor: pointer
+}
+
+/*忘记密码流程步骤*/
+.flowsteps {
+	width: 880px;
+	height: 48px;
+	margin: 0 auto 40px;
+	*zoom: 1;
+}
+
+.flowsteps ol {
+	margin: 0;
+	padding: 0;
+	position: relative;
+	overflow: hidden;
+	*zoom: 1;
+}
+
+.flowsteps li {
+	float: left;
+	display: inline;
+	font-size: 12px;
+	line-height: 23px;
+	color: #8b8b8b;
+	font-family: "\5FAE\8F6F\96C5\9ED1", "\9ED1\4F53",
+		"\534E\6587\7EC6\9ED1";
+	list-style: none;
+	background: url(../images/trace/line.gif) repeat-x 0 20px;
+}
+
+.flowsteps .num3 li {
+	width: 50%;
+}
+
+.flowsteps .last {
+	width: auto !important;
+	position: absolute;
+	right: 0;
+}
+
+.flowsteps span {
+	float: left;
+	width: auto;
+}
+
+.flowsteps .first span {
+	*width: 0;
+	*white-space: nowrap;
+}
+
+.flowsteps em {
+	position: relative;
+	left: -50%;
+	display: block;
+	text-align: center;
+}
+
+.flowsteps li i {
+	position: relative;
+	left: -20px;
+	display: block;
+	width: 40px;
+	height: 40px;
+	line-height: 40px;
+	color: #FFF;
+	text-align: center;
+	font-size: 16px;
+	font-style: normal;
+	background: #ddd;
+	border-radius: 50%;
+	margin-bottom: 5px
+}
+
+.flowsteps .first i {
+	margin-left: 0
+}
+
+.flowsteps .first i {
+	*width: 34px;
+}
+
+.flowsteps .first i, .flowsteps .first em, .flowsteps .last i,
+	.flowsteps .last em {
+	left: 0;
+}
+
+.flowsteps .last i {
+	margin: 0 auto;
+}
+
+.flowsteps a {
+	color: #5185B6;
+	text-decoration: underline;
+}
+
+.flowsteps .current span i {
+	background: #385;
+}
+
+/*修改密码成功提示*/
+.success-wrap {
+	padding: 40px 0px
+}
+
+.success-wrap .tip {
+	padding-left: 80px;
+	background: url(../images/common/icon-success.png) 0 0 no-repeat;
+	min-height: 60px;
+}
+
+.success-wrap .tip h2 {
+	color: #222;
+	font-size: 24px;
+	font-weight: normal;
+	padding: 5px 0px
+}
+
+.success-wrap .btn {
+	height: 30px;
+	line-height: 30px;
+	width: 160px
+}
