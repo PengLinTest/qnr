@@ -65,19 +65,17 @@ class ProductDetail extends ActionBase {
 	 * 获取产品批次表的最后一条信息
 	 */
 	public function getProductLastBatch(){
+		$res = array("result" => false);
 		$batchIdList = isset($_REQUEST['batchIdList'])?$_REQUEST['batchIdList']:null;
 		if(!empty($batchIdList)){
-			$arr = explode(",", $batchIdList);
-			$len = count($arr);
-			if($len > 0){
-				$batchLastId = $arr[$len - 1];
-				//调用获取batch数据
-				$res = (new ProductBatchModel())->getProductBatch((int)$batchLastId);
-				if($res != null){
-					echo json_encode($res);
-				}
+			//调用获取batch数据
+			$temp = (new ProductBatchModel())->getlastVaildBatch($batchIdList);
+			if($temp != null){
+				$res['result'] = true;
+				$res['data'] = $temp;
 			}
 		}
+		echo json_encode($res);
 	}
 	
 	/**

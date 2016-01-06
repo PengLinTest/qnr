@@ -46,14 +46,14 @@ function initData(data) {
         $("#proremark").html(data.product_intro);
     }
     //产品指标
-    if (data.basicinfo_remark == "") {
-        $("#quota").hide();
-        $("#quotanone").show();
-    } else {
-        $("#quota").show();
-        $("#quotanone").hide();
-        $("#quota").html(data.basicinfo_remark);
-    }
+//    if (data.basicinfo_remark == "") {
+//        $("#quota").hide();
+//        $("#quotanone").show();
+//    } else {
+//        $("#quota").show();
+//        $("#quotanone").hide();
+//        $("#quota").html(data.basicinfo_remark);
+//    }
 
     //企业认证
     TraceRecords_getCompanyInfo(data.vendor_id);

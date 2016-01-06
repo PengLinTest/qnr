@@ -71,7 +71,7 @@ class UserCenterProductModel{
 				,"batch_auditstatus" => 1,"batch_isvalid" => 1,"batch_isdelete" => 0
 				,"batch_remark_color" => $batch['color'],"batch_remark_power" => $batch['power']
 				,"batch_remark_weight" => $batch['weight'],"batch_remark_SugarScale" => $batch['sugar']
-				,"batch_remark_other" => $batch['other']
+				,"batch_remark_other" => $batch['other'],"batch_qrcode_loc" => $batch['batch_qrcode_loc']
 		);
 		$batchDAO = new DaoProductBatch();
 		$batchResult = $batchDAO->insertTransaction($data, $conn);
@@ -97,6 +97,23 @@ class UserCenterProductModel{
 		return $result;
 	}
 	
+	/**
+	 * 更新批次信息
+	 * @param 批次信息 $batch
+	 */
+	public function updateProductBatch($batch){
+		$result = false;
+		$data = array("batch_harvesttime" => Tools::getNowTime(),"batch_num" => Tools::getFileName()
+				,"batch_auditstatus" => 1,"batch_isvalid" => 1,"batch_isdelete" => 0
+				,"batch_remark_color" => $batch['color'],"batch_remark_power" => $batch['power']
+				,"batch_remark_weight" => $batch['weight'],"batch_remark_SugarScale" => $batch['sugar']
+				,"batch_remark_other" => $batch['other']
+		);
+		$batchDAO = new DaoProductBatch();
+		$result = $batchDAO->update($data,array("batch_id =" => $batch['id']));
+		return $result;
+	}
+	
 	public function updateProductStatus($basicinfoID,$status){
 		$data = array("basicinfo_status" => $status);
 		$where = array("basicinfo_id = " => $basicinfoID);
@@ -116,6 +133,15 @@ class UserCenterProductModel{
 			if(!empty($batchlist)){
 				$res = (new DaoProductBatch())->getBatchListByIdList($batchlist);
 			}
+		}
+		return $res;
+	}
+	
+	public function upOrDownBatch($batchid,$isUp){
+		$res = false;
+		if($batchid != null){
+			$data = array("batch_isvalid" => $isUp);
+			$res = (new DaoProductBatch())->update($data,array("batch_id = " =>$batchid));
 		}
 		return $res;
 	}

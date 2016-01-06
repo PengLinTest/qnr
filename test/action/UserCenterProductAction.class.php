@@ -14,7 +14,6 @@ class UserCenterProduct extends ActionBase {
 	
 	//构造函数
 	public function __construct(){
-		//TODO 后面需要修改
 		$this->need_login = 1;
 		parent::__construct();
 	}
@@ -24,14 +23,16 @@ class UserCenterProduct extends ActionBase {
 			"deleteProduct",
 			"newProductBatch",
 			"submitProductCheck",
-			"getBatchList"
+			"getBatchList",
+			"upOrDownBatchInfo",
+			"updateProductBatch"
 	);
 	
 	/**
 	 * 默认调用函数，分派调用方法
 	 */
 	public function action() {
-		$method = Tools::getMethodParams ();
+		$method = Tools::getMethodParams();
 		$exist = in_array ( $method, $this->methodlist );
 		if ($exist) {
 			// 方法存在
@@ -64,10 +65,37 @@ class UserCenterProduct extends ActionBase {
 			echo json_encode($res);
 			return;
 		}
+		//生成二维码
+		//TODO 替换url
+		$url = "http://www.baidu.com";
+		$QRpath = Tools::createQRcode($url);
 		$batch = array("color" => $RemarkColorInput,"power" => $RemarkPowerInput
-				,"weight" => $RemarkWeightInput,"sugar" =>$RemarkSugarInput,"other" => $RemarkOtherInput
+				,"weight" => $RemarkWeightInput,"sugar" =>$RemarkSugarInput
+				,"other" => $RemarkOtherInput,"batch_qrcode_loc" => $QRpath
 		);
 		$res['result'] = (new UserCenterProductModel())->addProductBatch($productID, $batch);
+		echo json_encode($res);
+	}
+	public function updateProductBatch(){
+		$res = array("result" => false);
+		$batchID = isset($_REQUEST['batchID'])?$_REQUEST['batchID']:null;
+		$RemarkColorInput = isset($_REQUEST['RemarkColorInput'])?$_REQUEST['RemarkColorInput']:null;
+		$RemarkPowerInput = isset($_REQUEST['RemarkPowerInput'])?$_REQUEST['RemarkPowerInput']:null;
+		$RemarkWeightInput = isset($_REQUEST['RemarkWeightInput'])?$_REQUEST['RemarkWeightInput']:null;
+		$RemarkSugarInput = isset($_REQUEST['RemarkSugarInput'])?$_REQUEST['RemarkSugarInput']:null;
+		$RemarkOtherInput = isset($_REQUEST['RemarkOtherInput'])?$_REQUEST['RemarkOtherInput']:null;
+		if(empty($batchID) || empty($RemarkColorInput) || empty($RemarkPowerInput)
+				|| empty($RemarkWeightInput) || empty($RemarkSugarInput)
+				|| empty($RemarkOtherInput)){
+			echo json_encode($res);
+			return;
+		}
+		
+		$batch = array("color" => $RemarkColorInput,"power" => $RemarkPowerInput
+				,"weight" => $RemarkWeightInput,"sugar" =>$RemarkSugarInput
+				,"other" => $RemarkOtherInput,"id" =>$batchID
+		);
+		$res['result'] = (new UserCenterProductModel())->updateProductBatch($batch);
 		echo json_encode($res);
 	}
 	/**
@@ -91,5 +119,17 @@ class UserCenterProduct extends ActionBase {
 			$result = (new UserCenterProductModel())->getProductBatchList($productID);
 		}
 		echo json_encode($result);
+	}
+	/**
+	 * 将产品批次上架或者下架
+	 */
+	public function upOrDownBatchInfo(){
+		$res = array("result" => false);
+		$batchID = isset($_REQUEST['batchID'])?$_REQUEST['batchID']:null;
+		$isUp = isset($_REQUEST['isUp'])?$_REQUEST['isUp']:null;
+		if($batchID != null & $isUp != null){
+			$res['result'] = (new UserCenterProductModel())->upOrDownBatch($batchID, $isUp);
+		}
+		echo json_encode($res);		
 	}
 }

@@ -14,9 +14,13 @@ UserCenterRecord = {
     },
     initExpandRecord: function() {
         $(".show-batchfile").unbind("click").click(function() {
-            if ($(this).hasClass("expand")) $(this).parent().parent().find(".table").hide(),
-            $(this).removeClass("expand");
-            else {
+        	
+            if ($(this).hasClass("expand")){
+            	$(this).parent().parent().find(".table").hide();
+            	$(this).removeClass("expand");
+            }else {
+            	//如果是展开的话，需要先把其他的关闭
+            	$(".btn-takeup").click();
                 $(this).parent().parent().find(".table").show();
                 $(this).addClass("expand");
                 var a = $(this).data("show-batchfile");
@@ -230,18 +234,23 @@ UserCenterRecord = {
     	var RemarkOtherInput = $("#RemarkOtherInput").val();
     	if(!RemarkColorInput){
     		ZENG.msgbox.show("请填写产品外观信息",5,2E3);
+    		return;
     	}
     	if(!RemarkPowerInput){
     		ZENG.msgbox.show("请填写产品成熟度信息",5,2E3);
+    		return;
     	}
     	if(!RemarkWeightInput){
     		ZENG.msgbox.show("请填写产品口感信息",5,2E3);
+    		return;
     	}
     	if(!RemarkSugarInput){
     		ZENG.msgbox.show("请填写产品多糖含量信息",5,2E3);
+    		return;
     	}
     	if(!RemarkOtherInput){
     		ZENG.msgbox.show("请填写产品其他信息",5,2E3);
+    		return;
     	}
         $.ajax({
             url: "?action=UserCenterProduct",
@@ -268,6 +277,8 @@ UserCenterRecord = {
         })
     },
     GetBatchData: function(a, e) {
+    	//将其他批次信息收起，防止进行错误处理
+    	$(".table");
         UserCenterRecord.ClickExpand = e;
         UserCenterRecord.ClickExpandData = a;
         $.ajax({
@@ -280,7 +291,8 @@ UserCenterRecord = {
             dataType:"json",
             success: function(response) {
                 var f = e.parent().parent().find(".table").children(".ProBatchTable");
-                f.empty();
+                //清除其他的ProBatchTable表中的数据，防止出现影响
+                $(".table .ProBatchTable").empty();
                 if (response && response.length) {
                     for (var g = 0,
                     k = response.length; g < k; g++) {
@@ -289,7 +301,7 @@ UserCenterRecord = {
                         var h = "1900/01/01" == Util.formatDateTime(d.batch_harvesttime, "yyyy/MM/dd") ? "": Util.formatDateTime(d.batch_harvesttime, "yyyy/MM/dd");
                         c = c + (0 == g % 2 ? '<tr class="even">': "<tr>");
                         c = c + ("<td>" + h + "</td>");
-                        c = c + ("<td>" + d.batch_num + "</td><td><a href='javascript:void(0);' onclick='UserCenterRecord.buildQrCode(" + d.batch_id + ")'>点击查看</a></td>");
+                        c = c + ("<td>" + d.batch_num + "</td><td><a class='QrCode' href='javascript:void(0)';>点击查看</a></td>");
                         if(parseInt(d.batch_isvalid) == 1){
                         	c += ("<td>上架</td>");
                         }else{
@@ -297,34 +309,32 @@ UserCenterRecord = {
                         }    
                         c = c + '<td><span class="opration"> ';    
                         c += '<a href="javascript:" class="EditBatch" title="编辑批次"><i class="icon-edit"></i></a>';
-                        c += '<a title="预览" target="_blank" href="/AgriProTraceability/query.html?p=742&batchid=' + d.batch_id + '"><i class="icon-preview"></i></a>';
-                        c += '<a title="删除批次"  onclick= UserCenterRecord.DeleteProBatchInfo(' + d.batch_id + ",1," + d.IsVisble + ',"\u5220\u9664");><i class="icon-up"></i></a> </span></td></tr>'    
-                        f.append(c);     
-                            
-                            
-//                        } else h = "1900/01/01" == Util.formatDateTime(d.batch_harvesttime, "yyyy/MM/dd") ? "": Util.formatDateTime(d.batch_harvesttime, "yyyy/MM/dd"),
-//                        	c += 0 == g % 2 ? '<tr class="even">': "<tr>",
-//                			c += "<td>" + h + "</td>",
-//		                    c += "<td>" + d.batch_id + "</td><td><a href='javascript:void(0);' onclick= UserCenterRecord.GetContactdialog();>\u70b9\u51fb\u67e5\u770b<a></td>",
-//		                    
-//		                    c += "<td>" + UserCenterRecord.ProductStatusEnum(d.batch_auditstatus) + "</td>",
-//		                    c = 0 == d.batch_isvalid ? c + ("<td><a href='javascript:void(0);' onclick= UserCenterRecord.DeleteProBatchInfo(" + d.batch_id + "," + d.batch_auditstatus + ",1,'\u4e0a\u67b6');>\u4e0b\u67b6<a></td>") : c + ("<td><a href='javascript:void(0);' onclick= UserCenterRecord.DeleteProBatchInfo(" + d.batch_id + "," + d.batch_auditstatus + ",0,'\u4e0b\u67b6');>\u4e0a\u67b6<a></td>"),
-//		                    c += '<td><span class="opration"> ',
-//		                    1 != a.basicinfo_status && (c += '<a href="javascript:" class="EditBatch" title="\u7f16\u8f91\u6279\u6b21"><i class="icon-edit"></i></a>'),
-//		                    c += '<a title="\u9884\u89c8" onclick= UserCenterRecord.GetContactdialog();><i class="icon-preview"></i></a>',
-//		                    c += '<a title="\u5220\u9664\u6279\u6b21" onclick= UserCenterRecord.DeleteProBatchInfo(' + d.batch_id + ",1," + d.batch_isvalid + ',"\u5220\u9664");><i class="icon-recycle"></i></a> </span></td></tr>';
-//		                    f.append(c);
-//		                    1 != a.basicinfo_status && $(".EditBatch:last").data("EditBatch", d)
+                        c += '<a title="预览" target="_blank" href="?action=ProductDetail&productId=' + a.product_id + '"><i class="icon-preview"></i></a>';
+                        if(parseInt(d.batch_isvalid) == 1){
+                        	c += '<a title="下架"  onclick= UserCenterRecord.UpOrDownBatchInfo(' + d.batch_id  
+                        		+ ',"下架",0);><img class="rotate" src="templates/images/trace/up.png" width="15px" height="20px" style="margin-left:7px"></a> </span></td></tr>'
+                        }else{
+                        	c += '<a title="上架"  onclick= UserCenterRecord.UpOrDownBatchInfo(' + d.batch_id
+                    			+ ',"上架",1);><img src="templates/images/trace/up.png" width="15px" height="20px" style="margin-left:7px"></a> </span></td></tr>'
+                        }   
+                        f.append(c);
+                        var editbatchData = {
+                                ProductID: a.product_id,
+                                batchId: d.batch_id,
+                                batchInfo:d,
+                            };
+                        $(".EditBatch:last").data("EditBatch",editbatchData);
+                        $(".EditBatch:last").unbind("click").click(function() {
+                            var a = $(this).data("EditBatch");
+                            UserCenterRecord.InitProBatchDialog(a.ProductID,a.batchId,a.batchInfo);
+                            return ! 1
+                        });
+                        $(".QrCode:last").data("src",d.batch_qrcode_loc);
+                        $(".QrCode:last").unbind("click").click(function(){
+                        	var data = $(this).data("src");
+                        	UserCenterRecord.buildQrCode(data);
+                        });
                     }
-                    $(".EditBatch").unbind("click").click(function() {
-                        var a = $(this).data("EditBatch");
-                        UserCenterRecord.Productdata = {
-                            ProductID: a.ProductID,
-                            ReleaseStatus: a.ReleaseStatus
-                        };
-                        UserCenterRecord.InitProBatchDialog(a);
-                        return ! 1
-                    })
                 }
             }
         })
@@ -341,7 +351,7 @@ UserCenterRecord = {
             return "审核不通过"
         }
     },
-    InitProBatchDialog: function(productID,batchID) {
+    InitProBatchDialog: function(productID,batchID,batchInfo) {
         $("#SaveProductAttributes").unbind("click").click(function() {
         	if(batchID){
         		UserCenterRecord.SaveProductAttributes(batchID);
@@ -368,38 +378,89 @@ UserCenterRecord = {
             }
         }).dialog("open");
         if(batchID){
-        	UserCenterRecord.GetProductAttributes(batchID);
         	$("#ProductAttributesTitle").html("编辑批次<br/><small>完善产品指标，批次展示更加美观</small>");
+        	$('#RemarkColorInput').val(batchInfo.batch_remark_color);
+        	$('#RemarkPowerInput').val(batchInfo.batch_remark_power);
+        	$('#RemarkWeightInput').val(batchInfo.batch_remark_weight);
+        	$('#RemarkSugarInput').val(batchInfo.batch_remark_SugarScale);
+        	$('#RemarkOtherInput').val(batchInfo.batch_remark_other);
         }else{
         	$("#ProductAttributesTitle").html("发布批次<br/><small>完善产品指标，批次展示更加美观</small>");
+        	
         } 
     },
-    GetProductAttributes: function(a) {
-        Service.post({
-            url: "/TraceabilityService.svc/GetProductAttributes",
-            params: {
-                BatchID: a
+    SaveProductAttributes: function(batchID) {
+    	var RemarkColorInput = $("#RemarkColorInput").val();
+    	var RemarkPowerInput = $("#RemarkPowerInput").val();
+    	var RemarkWeightInput = $("#RemarkWeightInput").val();
+    	var RemarkSugarInput = $("#RemarkSugarInput").val();
+    	var RemarkOtherInput = $("#RemarkOtherInput").val();
+    	if(!RemarkColorInput){
+    		ZENG.msgbox.show("请填写产品外观信息",5,2E3);
+    		return;
+    	}
+    	if(!RemarkPowerInput){
+    		ZENG.msgbox.show("请填写产品成熟度信息",5,2E3);
+    		return;
+    	}
+    	if(!RemarkWeightInput){
+    		ZENG.msgbox.show("请填写产品口感信息",5,2E3);
+    		return;
+    	}
+    	if(!RemarkSugarInput){
+    		ZENG.msgbox.show("请填写产品多糖含量信息",5,2E3);
+    		return;
+    	}
+    	if(!RemarkOtherInput){
+    		ZENG.msgbox.show("请填写产品其他信息",5,2E3);
+    		return;
+    	}
+        $.ajax({
+            url: "?action=UserCenterProduct",
+            type:"post",
+            data: {
+            	htmlMethod:"updateProductBatch",
+            	batchID: batchID,
+                RemarkColorInput: RemarkColorInput,
+                RemarkPowerInput: RemarkPowerInput,
+                RemarkWeightInput:RemarkWeightInput,
+                RemarkSugarInput: RemarkSugarInput,
+                RemarkOtherInput: RemarkOtherInput,
             },
-            success: function(a) {
-                a && ($("#ProductAttributesTxt").wysiwyg("setContent", a.BatchDesCribe), "1900-01-01" != Util.formatDateTime(a.HarvestTime, "yyyy-MM-dd") && (a = "1900-01-01" == Util.formatDateTime(a.HarvestTime, "yyyy-MM-dd") ? "": Util.formatDateTime(a.HarvestTime, "yyyy-MM-dd"), $("#txtHarvestTime").val(a)))
+            dataType:"json",
+            success: function(response) {
+            	if(response.result){
+            		ZENG.msgbox.show("编辑成功",4,2E3);
+            		$(".ProductAttributesDialog").dialog("destroy")
+                    UserCenterRecord.GetProductRecord(UserCenterRecord.pageNum);
+            	}else{
+                	ZENG.msgbox.show("编辑失败，请稍候重新提交",5,2E3);
+                }
             }
         })
     },
-    SaveProductAttributes: function(a, e) {
-        Service.post({
-            url: "/TraceabilityService.svc/UpdateProBatchAttributes",
-            params: {
-                BatchID: e,
-                ProductAttributes: $("#ProductAttributesTxt").val(),
-                HarvestTime: $("#txtHarvestTime").val(),
-                Status: 0
-            },
-            success: function(b) {
-                115 == b.Status && (0 == a ? ($(".ProductAttributesDialog").dialog("destroy"), Messages.slideResult("\u63d0\u4ea4\u6210\u529f,\u7cfb\u7edf\u5ba1\u6838\u901a\u8fc7\u540e,\u53ef\u5728\u9996\u9875\u67e5\u770b\u5230\u60a8\u7684\u6279\u6b21\u6863\u6848.<br>", 5E3,
-                function() {})) : 1 == a && ($(".ProductAttributesDialog").dialog("destroy"), Messages.slideResult("\u7f16\u8f91\u6210\u529f,\u7cfb\u7edf\u5ba1\u6838\u901a\u8fc7,\u540e\u53ef\u5728\u9996\u9875\u67e5\u770b\u5230\u60a8\u7684\u6279\u6b21\u6863\u6848.<br>", 5E3,
-                function() {})), UserCenterRecord.GetProductRecord(UserCenterRecord.PageNum))
-            }
-        })
+    UpOrDownBatchInfo: function(batchid,hint,isUp) {
+        Messages.confirm("你确定要要将产品" + hint + "吗?",
+        function() {
+            $.ajax({
+                url: "?action=UserCenterProduct",
+                type:"post",
+                data: {
+                	htmlMethod:"upOrDownBatchInfo",
+                    batchID: batchid,
+                    isUp:isUp,
+                },
+                dataType:"json",
+                success: function(response) {
+                	if(response.result){
+                		ZENG.msgbox.show("修改成功",4,2E3);
+                	}else{
+                		ZENG.msgbox.show("修改失败",5,2E3);
+                	}
+                	UserCenterRecord.GetBatchData(UserCenterRecord.ClickExpandData,UserCenterRecord.ClickExpand);
+                }
+            })
+        });
     },
     DeleteProBatchInfo: function(a, e, b, f) {
         Messages.confirm("\u60a8\u786e\u5b9a\u8981" + f + "?",
@@ -433,38 +494,31 @@ UserCenterRecord = {
         });
         return ! 1
     },
-    buildQrCode: function(a) {
+    buildQrCode: function(src) {
         0 < $("#buildTraceInfoID").length && $("#buildTraceInfoID").remove();
         $("<div id='buildTraceInfoID'></div>").appendTo("body");
-        Transfer.reload("#buildTraceInfoID", {
-            url: "/AgriProTraceability/CreateQrCodeView.html",
-            scripts: []
-        },
-        function() {
-            Transfer.loadCSS([]);
-            UserCenterRecord.buildQrCodeImg(a, "query");
-            $("#saveQrcode").unbind("click").click(function(e) {
-                UserCenterRecord.buildQrCodeImg(a, "save")
-            });
-            $("#buildTraceInfoID").dialog({
-                autoOpen: !0,
-                width: "auto",
-                height: "auto",
-                title: "\u67e5\u770b\u4e8c\u7ef4\u7801",
-                modal: !0,
-                resizable: !1,
-                minHeight: 100,
-                minWidth: 100,
-                show: {
-                    effect: "clip",
-                    duration: 300
-                },
-                hide: {
-                    effect: "clip",
-                    duration: 300
-                }
-            }).dialog("open")
-        })
+        $("#buildTraceInfoID").dialog({
+            autoOpen: !0,
+            width: "auto",
+            height: "auto",
+            title: "查看二维码",
+            modal: !0,
+            resizable: !1,
+            minHeight: 100,
+            minWidth: 100,
+            show: {
+                effect: "clip",
+                duration: 300
+            },
+            hide: {
+                effect: "clip",
+                duration: 300
+            }
+        }).dialog("open");
+        var b;
+        b = "<table align=center><tr>" + ('<td><img src=' + src + '>') + ("<br></td>");
+        b += "</tr></table>";
+        $("#buildTraceInfoID").html(b)
     },
     buildQrCodeImg: function(a, e) {
         if ("save" == e) $.ajax({

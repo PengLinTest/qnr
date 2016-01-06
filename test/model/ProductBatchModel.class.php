@@ -22,4 +22,14 @@ class ProductBatchModel{
     	}
     	return null;
     }
+    public function getlastVaildBatch($idString){
+    	$res = array();
+    	if(!empty($idString)){
+    		$temp = (new DaoProductBatch())->getBatchListByIdListOrderTimeDesc($idString);
+    		if($temp && count($temp) > 0){
+    			$res = $temp[0];
+    		}
+    	}
+    	return $res;
+    }
 }

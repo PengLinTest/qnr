@@ -21,7 +21,7 @@ class DaoProductBatch extends DaoBase {
 			"batch_remark_SugarScale",
 			"batch_remark_other"
 		);
-		$where = array('batch_auditstatus = ' => 1,'batch_isvalid =' => 1,'batch_isdelete =' => 0,'batch_id =' => $id);
+		$where = array('batch_isvalid =' => 1,'batch_isdelete =' => 0,'batch_id =' => $id);
 		$endWith = "";
 		return $this->select($filed,$where,$endWith);
 	}
@@ -45,6 +45,28 @@ class DaoProductBatch extends DaoBase {
 		);
 		$where = array('batch_isdelete =' => 0);
 		$endWith = " and batch_id in (".$idString.")";
+		return $this->select($filed,$where,$endWith);
+	}
+	/**
+	 * 根据idString获取上架的产品批次信息按照时间倒叙排列
+	 * @param $id
+	 */
+	public function getBatchListByIdListOrderTimeDesc($idString){
+		$filed = array(
+				"batch_id",
+				"batch_harvesttime",
+				"batch_num",
+				"batch_qrcode_loc",
+				"batch_auditstatus",
+				"batch_isvalid",
+				"batch_remark_color",
+				"batch_remark_power",
+				"batch_remark_weight",
+				"batch_remark_SugarScale",
+				"batch_remark_other"
+		);
+		$where = array('batch_isvalid =' => 1,'batch_isdelete =' => 0);
+		$endWith = " and batch_id in (".$idString.")"."order by batch_harvesttime desc";
 		return $this->select($filed,$where,$endWith);
 	}
 }

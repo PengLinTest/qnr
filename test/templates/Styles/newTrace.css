@@ -2204,6 +2204,12 @@ ul.pages .btn-jump: hover {
 	background: url(../images/trace/up.png);
 	vertical-align: middle;
 }
+.rotate{
+    -ms-transform:rotate(180deg); /* IE 9 */
+    -moz-transform:rotate(180deg); /* Firefox */
+    -webkit-transform:rotate(180deg); /* Safari and Chrome */
+    -o-transform:rotate(180deg); /* Opera */
+}
 
 .form-item .photo {
 	position: relative;

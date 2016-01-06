@@ -7,5 +7,6 @@
 class ConstData{
 	public static $pageSize = 10;
 	public static $authFolder = "templates/UpFiles/Vendor/auth/";
+	public static $QRpath = "templates/images/QRcode/";
 }
  

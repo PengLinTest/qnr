@@ -1,4 +1,7 @@
 <?php
+require_once 'templates/Plugins/phpqrcode/phpqrcode.php';
+require_once 'lib/ConstData.class.php';
+
 class Tools{
     public static function getMethodParams(){
     	$res = isset($_REQUEST['htmlMethod'])?$_REQUEST['htmlMethod']:"getHtml";
@@ -47,5 +50,13 @@ class Tools{
      */
     public static function getFileName(){
     	return Tools::getNowTimeString().rand(1000,9999);
+    }
+    /**
+     * 生成二维码
+     */
+    public static function createQRcode($text,$level = 3,$size = 3,$margin = 4){
+    	$path = ConstData::$QRpath.DIRECTORY_SEPARATOR.Tools::getFileName().".png";
+    	QRcode::png($text,$path,$level,$size,$margin);
+    	return $path;
     }
 }

@@ -27,10 +27,11 @@ ProAttributes.config = {
             	batchIdList: batchid
             },
             dataType:"json",
-            success: function (response) {
+            success: function (data) {
                 var atthtml = "<ul>";
-                if (response) {
+                if (data.result) {
                 	//外观
+                	response = data.data;
                 	if(response.batch_remark_color != ""){
 	                    atthtml += "<li>";
 	                    atthtml += "<label class=\"label-like\">外观</label>";
@@ -66,11 +67,13 @@ ProAttributes.config = {
 	                    atthtml += "</li>";
                     }
                 } else {
-                    atthtml += "<li>";
-                    atthtml += "<label class=\"label-like\"></label>";
-                    atthtml += "<p class=\"text\"></p>";
-                    atthtml += "<p class=\"explain\"></p>";
-                    atthtml += "</li>";
+                	$("#quota").hide();
+                	$("#quotanone").show();
+//                    atthtml += "<li>";
+//                    atthtml += "<label class=\"label-like\"></label>";
+//                    atthtml += "<p class=\"text\"></p>";
+//                    atthtml += "<p class=\"explain\"></p>";
+//                    atthtml += "</li>";
                 }
                 atthtml += "</ul>";
                 $(".quota-list").html(atthtml);
