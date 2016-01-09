@@ -1,212 +1,96 @@
 ﻿var Transfer;
-
-if (!Transfer) {
-    Transfer = {};
-}
-
-(function () { 
-//js css 版本管理
-var version = "201508311210";
-
-Transfer = {
-    version: {
-        scriptVersion: "?v=" + version
-    },
-
-    transfer: function (url, action) {
-        window.location.href = url;
-
-        if (action) {
-            action();
-        }
-    },
-
-    //动态加载html，并自动获取html中的script文件<script> tag  
-    //参数 elementId: string, 插入内容的元素id
-    //参数 html ： json object, 定义的动态页面，含页面路径，使用到的js 文件，页面加载所要进行的初始化
-    loadHtml: function (elementId, html) {
-        Transfer.reload(elementId, html);
-        return false;
-    },
-
-    //加载html到指定的div
-    reload: function (elementId, html, afterAction) {
-        var loadScripts = function (html) {
-            var scripts = html.scripts,
-                    onCompleted = html.initial,
-                    src = "",
-                    jsReference = "",
-                    scriptArray = [],
-                    params = html.params;
-
-            for (var i = 0, j = scripts.length; i < j; i++) {
-                src = scripts[i] + Transfer.version.scriptVersion; //加入版本进行刷新管理
-                jsReference = String.format('script[src="{0}"]', src);
-                if ($(jsReference).length <= 0) {
-                    scriptArray.push(src);
-                }
-            }
-
-            var completed = function () {
-                if (typeof onCompleted === "function") {
-                    onCompleted();
-                }
-                else {
-                    if (onCompleted) {
-                        var fnCompleted = $.fn.toFunction(onCompleted);
-                        if (params) {
-                            if ($.isArray(params)) {
-                                fnCompleted.apply(this, params);
-                            }
-                            else {
-                                fnCompleted(params);
-                            }
-
-
-                            //如果需要删除参数(同一个页面被不同引用)
-                            if (params.resetParam) {
-                                html.params = null;
-                            }
-                        }
-                        else {
-                            fnCompleted();
-                        }
+Transfer || (Transfer = {}); (function() {
+    Transfer = {
+        version: {
+            scriptVersion: "?v=201510291210"
+        },
+        transfer: function(b, a) {
+            window.location.href = b;
+            a && a()
+        },
+        loadHtml: function(b, a) {
+            Transfer.reload(b, a);
+            return ! 1
+        },
+        reload: function(b, a, e) {
+            var d = function(a) {
+                for (var b = a.scripts,
+                d = a.initial,
+                g = "",
+                m = "",
+                k = [], h = a.params, l = 0, q = b.length; l < q; l++) g = b[l] + Transfer.version.scriptVersion,
+                m = String.format('script[src="{0}"]', g),
+                0 >= $(m).length && k.push(g);
+                var n = function() {
+                    if ("function" === typeof d) d();
+                    else if (d) {
+                        var b = $.fn.toFunction(d);
+                        h ? ($.isArray(h) ? b.apply(this, h) : b(h), h.resetParam && (a.params = null)) : b()
                     }
-                }
-
-                if (typeof (afterAction) === "function") {
-                    afterAction();
-                }
-            }
-
-            if (scriptArray.length > 0) {
-                //需加载完，故分开写
-                $.getScripts(scriptArray, function () {
-                    completed();
-                });
-            }
-            else {    //hwl 同一个地方加载多次，暂时找不出原因，故屏蔽此
-                //上面需加载完，故分开写
-                completed();
-            }
-        }
-
-        //先清空，再加载
-        $(elementId).children().remove();
-        $(elementId).empty();
-        $(elementId).load(html.url, function (data) {
-            if (html.excludeSelector) {
-                $(elementId).find(html.excludeSelector).remove();
-            }
-
-            //页面load html 后对页面要进行处理 
-            if (typeof (html.pageAction) === "function") {
-                html.pageAction();
-            }
-
-            loadScripts(html);
-        });
-
-        if (html.animate) {
-            /*                $(elementId).hide('slide', {direction: 'left'}, 400); 
-            $(elementId).show('slide', {direction: 'right'}, 600); 
-            $(elementId).show('slide', {direction: 'left'}, 1000);*/
-
-        }
-    },
-
-    //把地址切换放到statechange中去执行
-    loadByHistory: function (elementId, html) {
-        var State = History.getState(),
-                urlId = Util.getUrlParam("p", State.cleanUrl) || null;
-
-        var url = String.format("?p={0}", html.id);
-        var stateObj = {
-            elementId: elementId,
-            html: html
-        }
-
-        //如果导航的目标地址没有发生变更，手工触发statechange
-        if (!$.isEmptyObject(State.data)) {
-            if (urlId && urlId == html.id) {
-                History.pushState(stateObj, document.title, url); //也要写入，参数可以不同
-                History.Adapter.trigger(window, "statechange");
-
-                return false;
-            }
-        }
-
-        History.pushState(stateObj, document.title, url);
-        return false;
-    },
-    //加载溯源档案 zwb add 0925
-    loadByTraceUrl: function (elementId, html) {
-        var State = History.getState(),urlId = Util.getUrlParam("p", State.cleanUrl) || null;
-        var url = String.format("?p={0}&batchid={1}", html.id, html.params.BatchID);
-        var stateObj = {
-            elementId: elementId,
-            html: html
-        }
-
-        //如果导航的目标地址没有发生变更，手工触发statechange
-        if (!$.isEmptyObject(State.data)) {
-            if (urlId && urlId == html.id) {
-                History.pushState(stateObj, document.title, url); //也要写入，参数可以不同
-                History.Adapter.trigger(window, "statechange");
-                return false;
-            }
-        }
-        History.pushState(stateObj, document.title, url);
-        return false;
-    },
-
-    loadScripts: function (scripts, callback) {
-        var 
-                src = "",
-                jsReference = "",
-                scriptArray = [];
-
-        for (var i = 0, j = scripts.length; i < j; i++) {
-            src = scripts[i] + Transfer.version.scriptVersion; //加入版本进行刷新管理
-            jsReference = String.format('script[src="{0}"]', src);
-            if ($(jsReference).length <= 0) {
-                scriptArray.push(src);
-            }
-        }
-
-        var completed = function () {
-            if (typeof (callback) === "function") {
-                callback();
-            }
-        }
-        if (scriptArray.length > 0) {
-            //需加载完，故分开写
-            $.getScripts(scriptArray, function () {
-                completed();
-            });
-        }
-        else {
-            completed();
-        }
-    },
-
-    loadCSS: function (arrCss) {
-        var unfindArray = [],
-                href = "",
-                cssReference = "";
-        for (var i = 0, j = arrCss.length; i < j; i++) {
-            href = arrCss[i] + Transfer.version.scriptVersion;
-            cssReference = String.format("link[href='{0}']", href);
-
-            if ($(cssReference).length <= 0) {
-                unfindArray.push(href);
-            }
-        }
-
-        for (var i = 0, j = unfindArray.length; i < j; i++) {
-            $("head").append(String.format("<link rel='stylesheet' type='text/css' href='{0}' />", unfindArray[i]));
+                    "function" === typeof e && e()
+                };
+                0 < k.length ? $.getScripts(k,
+                function() {
+                    n()
+                }) : n()
+            };
+            $(b).children().remove();
+            $(b).empty();
+            $(b).load(a.url,
+            function(c) {
+                a.excludeSelector && $(b).find(a.excludeSelector).remove();
+                "function" === typeof a.pageAction && a.pageAction();
+                d(a)
+            })
+        },
+        loadByHistory: function(b, a) {
+            var e = History.getState(),
+            d = Util.getUrlParam("p", e.cleanUrl) || null,
+            c = String.format("?p={0}", a.id),
+            f = {
+                elementId: b,
+                html: a
+            };
+            if (!$.isEmptyObject(e.data) && d && d == a.id) return History.pushState(f, document.title, c),
+            History.Adapter.trigger(window, "statechange"),
+            !1;
+            History.pushState(f, document.title, c);
+            return ! 1
+        },
+        loadByTraceUrl: function(b, a) {
+            var e = History.getState(),
+            d = Util.getUrlParam("p", e.cleanUrl) || null,
+            c = String.format("?p={0}&batchid={1}", a.id, a.params.BatchID),
+            f = {
+                elementId: b,
+                html: a
+            };
+            if (!$.isEmptyObject(e.data) && d && d == a.id) return History.pushState(f, document.title, c),
+            History.Adapter.trigger(window, "statechange"),
+            !1;
+            History.pushState(f, document.title, c);
+            return ! 1
+        },
+        loadScripts: function(b, a) {
+            for (var e = "",
+            d = "",
+            c = [], f = 0, p = b.length; f < p; f++) e = b[f] + Transfer.version.scriptVersion,
+            d = String.format('script[src="{0}"]', e),
+            0 >= $(d).length && c.push(e);
+            var g = function() {
+                "function" === typeof a && a()
+            };
+            0 < c.length ? $.getScripts(c,
+            function() {
+                g()
+            }) : g()
+        },
+        loadCSS: function(b) {
+            for (var a = [], e = "", d = "", c = 0, f = b.length; c < f; c++) e = b[c] + Transfer.version.scriptVersion,
+            d = String.format("link[href='{0}']", e),
+            0 >= $(d).length && a.push(e);
+            c = 0;
+            for (f = a.length; c < f; c++) $("head").append(String.format("<link rel='stylesheet' type='text/css' href='{0}' />", a[c]))
         }
     }
-}
-
-}())
+})();

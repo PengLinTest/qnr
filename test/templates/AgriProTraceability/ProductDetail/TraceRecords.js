@@ -1122,44 +1122,25 @@ function TraceRecords_getProBuywayInfo(buyIdList) {
 
 //图片裁剪
 function TraceRecords_ImgCutDialog() {
-    if ($("#ImgCutDialogID").length > 0) $("#ImgCutDialogID").remove();
-    $("<div id='ImgCutDialogID' class='hide'></div>").appendTo('body');
-
-    Transfer.reload("#ImgCutDialogID", {
-        url: "/AgriProTraceability/ImgCutter/ImgCutDialog.html",
-        scripts: [
-                "/Plugins/FileBase64/swfobject.js",
-                "/AgriProTraceability/EditTraceabilityDetails/BaseInfoImgAttachment.js",
-                "/AgriProTraceability/ImgCutter/js/jquery.Jcrop.min.js",
-                "/AgriProTraceability/ImgCutter/js/jQuery.UtrialAvatarCutter.js"]
-    },
-        function () {
-            Transfer.loadCSS([
-            "/AgriProTraceability/ImgCutter/css/jquery.Jcrop.css",
-            "/Plugins/WYSIWYG/jwysiwyg/jquery.wysiwyg.css",
-            "/Plugins/FileBase64/Attachment/Attachment.css"]);
-            //初始化插件
-            BaseInfoImgAttachment.initButton("Upload_BaseInfoImgAttachment", $(".BaseInfoImgAttachment"), '<dd class="imagedd"><p class="imgAttachment" style="cursor: pointer"><img src="{0}"></p></dd>');
-
-            $("#CancelsaveImg").unbind("click").click(function (e) {
-                $("#ImgCutDialogID").remove();
-            });
-            $("#ImgCutDialogID").dialog({
-                autoOpen: false,
-                width: '800',
-                height: 'auto',
-                title: "添加图片",
-                modal: true,
-                resizable: false,
-                show: {
-                    effect: "clip",
-                    duration: 300
-                },
-                hide: {
-                    effect: "clip",
-                    duration: 300
-                }
-            }).dialog("open");
+    BaseInfoImgAttachment.initButton("Upload_BaseInfoImgAttachment", $(".BaseInfoImgAttachment"), '<dd class="imagedd"><p class="imgAttachment" style="cursor: pointer"><img src="{0}"></p></dd>');
+    $("#CancelsaveImg").unbind("click").click(function (e) {
+        $("#ImgCutDialogID").dialog("destroy");
+    });
+    $("#ImgCutDialogID").dialog({
+        autoOpen: false,
+        width: '800',
+        height: 'auto',
+        //dialogClass: "modal-dialog user-dialog",
+        title: "添加图片",
+        modal: true,
+        resizable: false,
+        show: {
+            effect: "clip",
+            duration: 300
+        },
+        hide: {
+            effect: "clip",
+            duration: 300
         }
-    );
+    }).dialog("open");
 }

@@ -1,0 +1,100 @@
+<html>
+<head>
+    <title></title>
+    
+     <link rel="stylesheet" type="text/css" href="templates/Plugins/jqueryui/jquery-ui.css" />
+	<link rel="stylesheet" type="text/css" href="templates/Scripts/jquery.Cloud/jquery.Cloud.css" />
+	<link rel="stylesheet" type="text/css" href="templates/Plugins/LoadMask/jquery.loadmask.css" />
+	<link rel="stylesheet" type="text/css" href="templates/Styles/uniform.default.css">
+	<link rel="stylesheet" href="templates/Scripts/ueditor/themes/default/ueditor.css">
+	<link rel="stylesheet" type="text/css" href="templates/Plugins/WYSIWYG/jwysiwyg/jquery.wysiwyg.css">
+	<link rel="stylesheet" href="templates/Plugins/bootstrap/css/bootstrap.css">
+	<link rel="stylesheet" href="templates/Styles/reset.css">
+	<link rel="stylesheet" href="templates/Styles/global.css">
+	<link rel="stylesheet" href="templates/Styles/newTrace.css">
+	<link rel="stylesheet" href="templates/Styles/usercenter.css">
+	<link rel="stylesheet" href="templates/Plugins/ImgCutter/css/jquery.Jcrop.css">
+	<link rel="stylesheet" href="templates/Plugins/WYSIWYG/jwysiwyg/jquery.wysiwyg.css">
+	<link rel="stylesheet" href="templates/Plugins/FileBase64/Attachment/Attachment.css">
+	<link rel="stylesheet" href="templates/Plugins/DateTime/jquery-ui-timepicker-addon.css">
+    
+    <link rel="stylesheet" type="text/css" href="templates/Plugins/jqueryui/jquery-ui.css" />
+	<link rel="stylesheet" href="templates/Plugins/DateTime/jquery-ui-timepicker-addon.css">
+
+    <script type="text/javascript" src="templates/Scripts/jquery-1.9.1.js"></script>
+    <script type="text/javascript" src="templates/Scripts/jquery-ui.min.js"></script>
+	<script src="templates/Plugins/DateTime/jquery-ui-timepicker-addon.js" type="text/javascript"></script>
+    <script type="text/javascript">
+    $(function () {
+    	$("#GrowImgDiv").empty();
+        var html = '<div class="item clearfix"> <div class="col-right aaa"> <img src="{0}" width="286" height="207"></div>'
+                   + '<div class="col-left"><ul class="form-group"><li class="form-item"> <label class="form-label"> 拍照日期</label>'
+                   + '<input type="text" value="" class="form-text GrowImgTime"  name="username" placeholder="" /></li>'
+                   + '<li class="form-item"><label class="form-label"> 地理位置</label>'
+                   + '<input type="text" value="" class="form-text GrowAddr"  name="username" placeholder=""> </li><li class="form-item">'
+                   + '<label class="form-label"> 图片说明</label><textarea name="basic" class="form-text col19 Growintro" rows="7"></textarea>'
+                   + '</li></ul></div><span class="opration DeleteImagCard"><a href="javascript:"><i class="icon-recycle "></i></a></span></div>'
+        PublishUploadGrowImg.initButton("UploadGrowImg", $("#GrowImgDiv"), html);  //初始化生长周期的上传图片
+    });
+        /* jQuery(function () {
+            // 时间设置
+            jQuery('#time').datetimepicker({
+            	 dateFormat: "yy-mm-dd",
+                 showSecond: !1,
+                 timeFormat: "hh:mm",
+                 stepHour: 1,
+                 stepMinute: 1,
+                 stepSecond: 1,
+                 hour: 23,
+                 minute: 59
+            });
+
+        }); */
+    </script>
+</head>
+<script type="text/javascript" src="templates/Scripts/jquery-1.9.1.js"></script>
+	<script type="text/javascript" src="templates/Scripts/jquery-ui.min.js"></script>
+	<script src="templates/Scripts/Base.Storage.js" type="text/javascript"></script>
+	<script src="templates/Scripts/CookieStorage.js" type="text/javascript"></script>
+	<script type="text/javascript" src="templates/Scripts/Transfer.js"></script>
+	<script type="text/javascript" src="templates/Plugins/LoadMask/jquery.loadmask.min.js"></script>
+	<script type="text/javascript" src="templates/Plugins/Slides/jquery.slides.min.js"></script>
+	<script src="templates/Plugins/DateTime/jquery-ui-timepicker-addon.js" type="text/javascript"></script>
+<!-- 	<script src="templates/Plugins/DateTime/jquery-ui-timepicker-zh-CN.js" type="text/javascript"></script> -->
+	<script src="templates/Scripts/EditProduct/ueditor.config.js" type="text/javascript"></script>
+	<script src="templates/Scripts/EditProduct/ueditor.all.min.js" type="text/javascript"></script>
+	<script src="templates/Scripts/EditProduct/zh-cn.js" type="text/javascript"></script>
+	<script src="templates/Scripts/EditProduct/swfobject.js" type="text/javascript"></script>
+	<script src="templates/Plugins/bootstrap/js/bootstrap.min.js" type="text/javascript"></script>
+	<script src="templates/Scripts/jquery.uniform.min.js" type="text/javascript"></script>
+	<script src="templates/Scripts/Messages.js" type="text/javascript"></script>
+	<script src="templates/Scripts/custom.js" type="text/javascript"></script>
+	<script src="templates/Scripts/Util.js" type="text/javascript"></script>
+	<script src="templates/Plugins/FileBase64/swfobject.js" type="text/javascript"></script>
+	<script src="templates/AgriProTraceability/EditProduct/BaseInfoImgAttachment.js" type="text/javascript"></script>
+	<script src="templates/Plugins/ImgCutter/js/jquery.Jcrop.min.js" type="text/javascript"></script>
+	<script src="templates/Plugins/ImgCutter/js/jQuery.UtrialAvatarCutter.js" type="text/javascript"></script>
+	<script src="templates/AgriProTraceability/EditProduct/UserIDApplyUpload.js" type="text/javascript"></script>
+	<script src="templates/AgriProTraceability/LoadUser/TransferloadUser.js" type="text/javascript"></script>
+	<script src="templates/AgriProTraceability/EditProduct/PublishUploadDetection.js" type="text/javascript"></script>
+	<script src="templates/AgriProTraceability/EditProduct/PublishUploadGrowImg.js" type="text/javascript"></script>
+	<script src="templates/AgriProTraceability/EditProduct/PubilshUploadCertificate.js" type="text/javascript"></script>
+	<script src="templates/AgriProTraceability/EditProduct/PublishUpdateProduct.js" type="text/javascript"></script>
+	<script src="templates/AgriProTraceability/EditProduct/PubishSaveProduct.js" type="text/javascript"></script>
+	<script src="templates/AgriProTraceability/EditProduct/PublishArchives.js" type="text/javascript"></script>
+	<script src="templates/AgriProTraceability/ProductDetail/TraceRecords.js" type="text/javascript"></script>
+
+
+<body>
+    <!-- <input id="time" type="text" /> -->
+    <div id="GrowImgDiv"></div>
+    <p class="action-bar">
+       <!--<span class="btn-new"><i class="icon-new"></i></span>-->
+       <a title="添加图片" href="javascript:" class="btn-addAttachment"><span class="imageSpan  btn-success fileinput-button btn-new">
+           <i class="icon-new"></i>
+           <object id="UploadGrowImg" style="width: 150px;">
+           </object>
+       </span></a>
+   </p>
+</body>
+</html>

@@ -1,8 +1,29 @@
-﻿<!DOCTYPE HTML>
+<?php /* Smarty version Smarty-3.1.21-dev, created on 2016-01-09 14:37:51
+         compiled from ".\templates\page\UserCenter.html" */ ?>
+<?php /*%%SmartyHeaderCode:20380568dbd0ee273b0-88020997%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
+$_valid = $_smarty_tpl->decodeProperties(array (
+  'file_dependency' => 
+  array (
+    '08829e7a9c43bddee92a83a1ea781d89a5e640aa' => 
+    array (
+      0 => '.\\templates\\page\\UserCenter.html',
+      1 => 1452346632,
+      2 => 'file',
+    ),
+  ),
+  'nocache_hash' => '20380568dbd0ee273b0-88020997',
+  'function' => 
+  array (
+  ),
+  'version' => 'Smarty-3.1.21-dev',
+  'unifunc' => 'content_568dbd0ee90072_56397582',
+  'has_nocache_code' => false,
+),false); /*/%%SmartyHeaderCode%%*/?>
+<?php if ($_valid && !is_callable('content_568dbd0ee90072_56397582')) {function content_568dbd0ee90072_56397582($_smarty_tpl) {?><!DOCTYPE HTML>
 <html>
 <head>
 <meta charset="utf-8"/>
-<title>青农人Member</title>
+<title>青农人用户中心Test</title>
 <meta http-equiv="X-UA-Compatible" content="IE=edge" />
 <meta name="renderer" content="webkit" />
 <link rel="stylesheet" type="text/css" href="templates/Plugins/jqueryui/jquery-ui.css" />
@@ -31,7 +52,7 @@
 	<ul class="usercenter-nav">
     	<li><a href="javascript:">个人资料</a></li>
         <li><a href="javascript:">产品档案</a></li>
-        <li><a href="javascript:">成员管理</a></li>
+        <li><a href="javascript:">商家成员管理</a></li>
     </ul>
 </div>
 </div>
@@ -39,7 +60,6 @@
   <div class="w1030 clearfix">
   <div class="tabcontent">
   <!--个人资料 Begin-->
-        <!--个人资料 Begin-->
       <div class="base-info clearfix">
         <div class="card-list">
         <div class="col-8 fl mr10">
@@ -176,7 +196,6 @@
                   <li role="presentation"><a role="menuitem" tabindex="-1" href="javascript:;">Something else here</a></li>
                 </ul>
               </div>-->
-              <h2><i class="icon-produces"></i><span class="RecordCenterOrgName"></span> </h2>
             </div>
             <div class="bd">
               <div class="item-list RecordDivClass RecordDiv">
@@ -265,15 +284,48 @@
         </div>
         <div class="col-6">
           <div class="count"> <strong class="num RecordNum">0</strong> 条档案 </div>
-          <div class="field mt10">
-            <div class="title">我的地块</div>
-            <ul class="mt20 FieldUL">
-            </ul>
-          </div>
         </div>
       </div>
       <!--产品档案 End--> 
 
+      <!--商家成员管理 Begin-->
+      <div class="clearfix hide">
+        <div style="width:1000px">
+          <div class="produces">
+            <div class="title"> <a href="javascript:" class="btn btn-primary fr btnNewMember">新建商家成员</a>
+            </div>
+            <div class="bd">
+              <div class="item-list RecordDivClass MemberRecordDiv">
+                <div class="item">
+                  <table class="table table-striped">
+                    <thead>
+                      <tr>
+                        <th width="10%" scope="col">姓名</th>
+                        <th width="10%" scope="col">图像</th>
+                        <th width="25%" scope="col">公司职位</th>
+                        <th width="40%" scope="col">成员简介</th>
+                        <th width="15%" scope="col"></th>
+                      </tr>
+                    </thead>
+                    <tbody class="ProBatchMemberTable">
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+              <div class="no-content NoneMemberDivClass">
+                <p>还没有商家成员</p>
+                <p><a href="javascript:" class="btnNewMember"> <span class="btn-new"><i class="icon-new"></i></span><br/>
+                  点击新建 </a></p>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- <div class="col-6">
+          <div class="count"> <strong class="num RecordNum">0</strong> 条档案 </div>
+        </div> -->
+      </div>
+      <!--商家成员管理 End-->
+      
       <!--地块管理 Begin-->
       <div class="clearfix hide">
       	<div class="card-list">
@@ -604,15 +656,24 @@
   <div class="bd">
     <ul class="form-group">
       <li class="form-item">
-        <label class="form-label" autofocus>指标描述</label>
-        <textarea rows="4" cols="50" class="form-text form-text-block" id="ProductAttributesTxt" name="ProductAttributesTxt"></textarea>
+        <label class="form-label">外观</label>
+        <textarea rows="2" cols="50" class="form-text form-text-block" id="RemarkColorInput"></textarea>
       </li>
       <li class="form-item">
-        <label class="form-label">上市时间</label>
-        <input type="text" style="width: 200px;" class="form-text form-text-block" id="txtHarvestTime" value="" />
-        <span class="help-inline Putpwd1 pwd1">
-                <!--<font style="color: #eb000f">* 填写上市时间,批次将不可再编辑.</font></span>-->
-        </span>
+        <label class="form-label">成熟度</label>
+		<textarea rows="2" cols="50" class="form-text form-text-block" id="RemarkPowerInput"></textarea>
+      </li>
+       <li class="form-item">
+        <label class="form-label">口感</label>
+        <textarea rows="2" cols="50" class="form-text form-text-block" id="RemarkWeightInput"></textarea>
+      </li>
+       <li class="form-item">
+        <label class="form-label">多糖含量</label>
+        <textarea rows="2" cols="50" class="form-text form-text-block" id="RemarkSugarInput"></textarea>
+      </li>
+      <li class="form-item">
+        <label class="form-label">其他</label>
+        <textarea rows="2" cols="50" class="form-text form-text-block" id="RemarkOtherInput"></textarea>
       </li>
       <li class="form-item form-actions"> <a href="javascript:;" class="btn btn-primary mr10" id="SaveProductAttributes">提交</a> 
       <a href="javascript:;"  class="btn btn-default CancelSaveProductAttributes">取消</a> </li>
@@ -620,6 +681,56 @@
   </div>
 </div>
 <!-- 弹窗 产品指标 END -->
+
+<!-- 弹窗 商家成员 START -->
+<div class="dialog-contact VendorMemberDialog hide"> <span class="btn-close"><i class="icon-close"></i></span>
+  <div class="title">
+    <h2 id="VendorMemberTitle">编辑成员信息<br/></h2>
+  </div>
+  <div class="bd">
+    <ul class="form-group">
+      <li>
+      	<input type="hidden" id="VendorMemberID"/>
+      </li>
+      <li class="form-item">
+        <label class="form-label">姓名</label>
+        <input type="text" style="width: 200px;" class="form-text form-text-block" id="VendorNameInput"/>
+        <span class="help-inline PutVendorMemberName" style="display:none">
+        	<span class="error">请输入成员姓名</span>
+        </span>
+      </li>
+      <li class="form-item">
+      	<label class="form-label">图像</label>
+      	<div class="photo">
+        <div class="MemberImg">
+            <img id="VendorMemberImg" src="templates/images/trace/upload-img01.jpg" width="132" height="88">
+        </div>
+         <a title="添加图片" href="javascript:" class="btn-addAttachment">
+            <i class="icon icon-img"></i><object id="UploadVendorMemberImg" style="width: 150px;"></object>
+         </a>
+         </div>
+        <p class="tips"> 说明：
+         	<span class="text-primary">图片大小不超过2M。</span> </p>
+      </li>
+      <li class="form-item">
+        <label class="form-label">公司职位</label>
+        <input type="text" style="width: 200px;" class="form-text form-text-block" id="VendorPositionInput"/>
+        <span class="help-inline PutVendorPosition" style="display:none">
+        	<span class="error">请输入公司职位</span>
+        </span>
+      </li>
+      <li class="form-item">
+        <label class="form-label" autofocus>成员简介</label>
+        <textarea rows="4" cols="50" class="form-text form-text-block" id="VendorProfileInput"></textarea>
+      </li>
+      <li class="form-item form-actions">
+       	<a href="javascript:;" class="btn btn-primary mr10" id="SaveVendorMember">提交</a> 
+      	<a href="javascript:;"  class="btn btn-default CancelSaveVendorMember">取消</a> </li>
+    </ul>
+  </div>
+</div>
+<!-- 弹窗 商家成员 END -->
+
 <!-- 弹窗 公司联系人 -->
 <div id="contactDialog" class="hide">
             <div class="environment-records-dialog">
@@ -634,35 +745,95 @@
         </div>
   <span class="dialog_close_btn" title="关闭"><i class="icon_close"></i></span>
 </div>
-<script type="text/javascript" src="templates/Scripts/jquery-1.9.1.js"></script>
-<script src="templates/Scripts/Base.Storage.js" type="text/javascript"></script>
-<script src="templates/Scripts/CookieStorage.js" type="text/javascript"></script>
-<script type="text/javascript" src="templates/Scripts/Setting.js"></script>
-<script type="text/javascript" src="templates/Scripts/Util.js"></script>
-<script type="text/javascript" src="templates/Scripts/Transfer.js"></script>
-<script type="text/javascript" src="templates/Plugins/LoadMask/jquery.loadmask.min.js"></script>
-<script type="text/javascript" src="templates/Plugins/Slides/jquery.slides.min.js"></script>
-<script src="templates/Plugins/DateTime/jquery-ui-timepicker-addon.js" type="text/javascript"></script>
-<script src="templates/Plugins/DateTime/jquery-ui-timepicker-zh-CN.js" type="text/javascript"></script>
-<script src="templates/Plugins/WYSIWYG/jwysiwyg/jquery.wysiwyg.js" type="text/javascript"></script>
-<script src="templates/Plugins/WYSIWYG/jwysiwyg/plugins/wysiwyg.i18n.js" type="text/javascript"></script>
-<script src="templates/Plugins/WYSIWYG/jwysiwyg/i18n/lang.zh-cn.js" type="text/javascript"></script>
-<script src="templates/Plugins/WYSIWYG/jwysiwyg/plugins/wysiwyg.rmFormat.js" type="text/javascript"></script>
-<script src="templates/Plugins/bootstrap/js/bootstrap.min.js" type="text/javascript"></script>
-<script src="templates/Scripts/jquery.uniform.min.js" type="text/javascript"></script>
-<script src="templates/Scripts/Messages.js" type="text/javascript"></script>
-<script src="templates/Scripts/pager/pagelist.js" type="text/javascript"></script>
-<script src="templates/Scripts/custom.js" type="text/javascript"></script>
-<script src="templates/AgriProTraceability/UserCenter/UserCompanyApplyUpload.js" type="text/javascript"></script>
-<script src="templates/AgriProTraceability/UserCenter/UserCompanyOtherLogoUpload.js" type="text/javascript"></script>
-<script src="templates/AgriProTraceability/UserCenter/UserCompanyOtherTopUpload.js" type="text/javascript"></script>
-<script src="templates/AgriProTraceability/UserCenter/UserIDApplyUpload.js" type="text/javascript"></script>
-<script src="templates/AgriProTraceability/UserCenter/UserCenterField.js" type="text/javascript"></script>
-<script src="templates/AgriProTraceability/UserCenter/UserCenterRecord.js" type="text/javascript"></script>
-<script src="templates/AgriProTraceability/UserCenter/UserCenter.js" type="text/javascript"></script>
-<script src="templates/AgriProTraceability/LoadUser/TransferloadUser.js" type="text/javascript"></script>
-<script type="text/javascript" src="templates/Scripts/jquery.Cloud/jquery.Cloud.js"></script>
-<script type="text/javascript">
+<?php echo '<script'; ?>
+ type="text/javascript" src="templates/Scripts/jquery-1.9.1.js"><?php echo '</script'; ?>
+>
+<?php echo '<script'; ?>
+ src="templates/Scripts/Base.Storage.js" type="text/javascript"><?php echo '</script'; ?>
+>
+<?php echo '<script'; ?>
+ src="templates/Scripts/CookieStorage.js" type="text/javascript"><?php echo '</script'; ?>
+>
+<!-- <?php echo '<script'; ?>
+ type="text/javascript" src="templates/Scripts/Setting.js"><?php echo '</script'; ?>
+> -->
+<?php echo '<script'; ?>
+ type="text/javascript" src="templates/Scripts/Util.js"><?php echo '</script'; ?>
+>
+<?php echo '<script'; ?>
+ type="text/javascript" src="templates/Scripts/Transfer.js"><?php echo '</script'; ?>
+>
+<?php echo '<script'; ?>
+ type="text/javascript" src="templates/Plugins/LoadMask/jquery.loadmask.min.js"><?php echo '</script'; ?>
+>
+<?php echo '<script'; ?>
+ type="text/javascript" src="templates/Plugins/Slides/jquery.slides.min.js"><?php echo '</script'; ?>
+>
+<!-- <?php echo '<script'; ?>
+ src="templates/Plugins/DateTime/jquery-ui-timepicker-addon.js" type="text/javascript"><?php echo '</script'; ?>
+> -->
+<!-- <?php echo '<script'; ?>
+ src="templates/Plugins/DateTime/jquery-ui-timepicker-zh-CN.js" type="text/javascript"><?php echo '</script'; ?>
+> -->
+<?php echo '<script'; ?>
+ src="templates/Plugins/WYSIWYG/jwysiwyg/jquery.wysiwyg.js" type="text/javascript"><?php echo '</script'; ?>
+>
+<?php echo '<script'; ?>
+ src="templates/Plugins/WYSIWYG/jwysiwyg/plugins/wysiwyg.i18n.js" type="text/javascript"><?php echo '</script'; ?>
+>
+<?php echo '<script'; ?>
+ src="templates/Plugins/WYSIWYG/jwysiwyg/i18n/lang.zh-cn.js" type="text/javascript"><?php echo '</script'; ?>
+>
+<?php echo '<script'; ?>
+ src="templates/Plugins/WYSIWYG/jwysiwyg/plugins/wysiwyg.rmFormat.js" type="text/javascript"><?php echo '</script'; ?>
+>
+<?php echo '<script'; ?>
+ src="templates/Plugins/bootstrap/js/bootstrap.min.js" type="text/javascript"><?php echo '</script'; ?>
+>
+<?php echo '<script'; ?>
+ src="templates/Scripts/jquery.uniform.min.js" type="text/javascript"><?php echo '</script'; ?>
+>
+<?php echo '<script'; ?>
+ src="templates/Scripts/Messages.js" type="text/javascript"><?php echo '</script'; ?>
+>
+<?php echo '<script'; ?>
+ src="templates/Scripts/pager/pagelist.js" type="text/javascript"><?php echo '</script'; ?>
+>
+<?php echo '<script'; ?>
+ src="templates/Scripts/custom.js" type="text/javascript"><?php echo '</script'; ?>
+>
+<?php echo '<script'; ?>
+ type="text/javascript" src="templates/Scripts/jquery.Cloud/jquery.Cloud.js"><?php echo '</script'; ?>
+>
+<?php echo '<script'; ?>
+ src="templates/AgriProTraceability/UserCenter/UserCompanyApplyUpload.js" type="text/javascript"><?php echo '</script'; ?>
+>
+<?php echo '<script'; ?>
+ src="templates/AgriProTraceability/UserCenter/UserCompanyOtherLogoUpload.js" type="text/javascript"><?php echo '</script'; ?>
+>
+<?php echo '<script'; ?>
+ src="templates/AgriProTraceability/UserCenter/UserCompanyOtherTopUpload.js" type="text/javascript"><?php echo '</script'; ?>
+>
+<?php echo '<script'; ?>
+ src="templates/AgriProTraceability/UserCenter/UserIDApplyUpload.js" type="text/javascript"><?php echo '</script'; ?>
+>
+<?php echo '<script'; ?>
+ src="templates/AgriProTraceability/UserCenter/UserCenterField.js" type="text/javascript"><?php echo '</script'; ?>
+>
+<?php echo '<script'; ?>
+ src="templates/AgriProTraceability/UserCenter/UserCenterRecord.js" type="text/javascript"><?php echo '</script'; ?>
+>
+<?php echo '<script'; ?>
+ src="templates/AgriProTraceability/UserCenter/UserCenterMember.js" type="text/javascript"><?php echo '</script'; ?>
+>
+<?php echo '<script'; ?>
+ src="templates/AgriProTraceability/UserCenter/UserCenter.js" type="text/javascript"><?php echo '</script'; ?>
+>
+<?php echo '<script'; ?>
+ src="templates/AgriProTraceability/LoadUser/TransferloadUser.js" type="text/javascript"><?php echo '</script'; ?>
+>
+<?php echo '<script'; ?>
+ type="text/javascript">
     $(function () {
         TransferloadUser.initLoadHtml();
         //身份认证信息弹出框
@@ -677,8 +848,10 @@
         UserCenter.InitClick();
 
     });
-</script>
+<?php echo '</script'; ?>
+>
 
 </body>
 </html>
 
+<?php }} ?>

@@ -1,4 +1,25 @@
-<div class="topbar topbar-login">
+<?php /* Smarty version Smarty-3.1.21-dev, created on 2016-01-09 14:34:30
+         compiled from ".\templates\page\UserHeader.html" */ ?>
+<?php /*%%SmartyHeaderCode:7589568dbd0fcba732-15746701%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
+$_valid = $_smarty_tpl->decodeProperties(array (
+  'file_dependency' => 
+  array (
+    '4c513626d6e610008de7ba8d781f2960b94481db' => 
+    array (
+      0 => '.\\templates\\page\\UserHeader.html',
+      1 => 1452346444,
+      2 => 'file',
+    ),
+  ),
+  'nocache_hash' => '7589568dbd0fcba732-15746701',
+  'function' => 
+  array (
+  ),
+  'version' => 'Smarty-3.1.21-dev',
+  'unifunc' => 'content_568dbd0fdade63_78053183',
+  'has_nocache_code' => false,
+),false); /*/%%SmartyHeaderCode%%*/?>
+<?php if ($_valid && !is_callable('content_568dbd0fdade63_78053183')) {function content_568dbd0fdade63_78053183($_smarty_tpl) {?><div class="topbar topbar-login">
 	<div class="w1030">
 		<span class="login fr Unlogin" style="display: none"><a
 			href="javascript:;" id="BtnLogin">登录</a>|<a
@@ -87,6 +108,10 @@
 		</ul>
 	</div>
 </div>
-<script type="text/javascript" src="templates/Scripts/md5.js"></script>
-<!-- <script type="text/javascript"
-		src="templates/Scripts/jquery.Cloud/jquery.Cloud.js"></script> -->
+<?php echo '<script'; ?>
+ type="text/javascript" src="templates/Scripts/md5.js"><?php echo '</script'; ?>
+>
+<!-- <?php echo '<script'; ?>
+ type="text/javascript"
+		src="templates/Scripts/jquery.Cloud/jquery.Cloud.js"><?php echo '</script'; ?>
+> --><?php }} ?>
