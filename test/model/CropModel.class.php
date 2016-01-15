@@ -6,6 +6,8 @@
  */
 
 require_once '/dao/DaoCrop.class.php';
+require_once '/dao/DaoCropVarieties.class.php';
+require_once '/dao/DaoVarieties.class.php';
 
 class CropModel{
 
@@ -16,5 +18,26 @@ class CropModel{
     public function getCropList(){
     	$dao = new DaoCrop();
     	return $dao->getCropList();
+    }
+    public function getVarietiesListByCropID($cropID){
+    	$res = array();
+    	if(empty($cropID)){
+    		return $res;
+    	}
+    	$varietiesIDList = (new DaoCropVarieties())->getVarietiesIDListByCropID((int)$cropID);
+    	if(!$varietiesIDList || count($varietiesIDList) <= 0){
+    		return $res;
+    	}
+    	$vIDs = "";
+    	foreach($varietiesIDList as $value){
+    		$vIDs.=$value['varieties_id'].",";
+    	}
+    	$vIDs = substr($vIDs,0,-1);
+    	$temp = (new DaoVarieties())->getVarietiesByIDList($vIDs);
+//     	foreach($temp as $value){
+//     		array_push($res,$value['varieties_desc']);
+//     	}
+    	return $temp;
+    	
     }
 }

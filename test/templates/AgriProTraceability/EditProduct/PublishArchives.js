@@ -18,7 +18,8 @@ PublishArchives = {
         }
 
         UserIDApplyUpload.initButton("upload_IDImg", $(".IDImg"), '<img src="{0}" width="88" height="88">');  //初始化基本信息的上传图片
-
+        //初始化图片裁剪中的上传图片
+        BaseInfoImgAttachment.initButton("Upload_BaseInfoImgAttachment", $(".BaseInfoImgAttachment"), '<dd class="imagedd"><p class="imgAttachment" style="cursor: pointer"><img src="{0}"></p></dd>');
         $("#GrowImgDiv").empty();
         var html = '<div class="item clearfix"> <div class="col-right aaa"> <img src="{0}" width="286" height="207"></div>'
                    + '<div class="col-left"><ul class="form-group"><li class="form-item"> <label class="form-label"> 拍照日期</label>'
@@ -29,26 +30,25 @@ PublishArchives = {
                    + '</li></ul></div><span class="opration DeleteImagCard"><a href="javascript:"><i class="icon-recycle "></i></a></span></div>'
         PublishUploadGrowImg.initButton("UploadGrowImg", $("#GrowImgDiv"), html);  //初始化生长周期的上传图片
 
-//        $("#TitleName").html("新建产品档案");
-//
-//        PublishArchives.getProCertifiedType(); //初始化认证下拉数据
-//        PublishArchives.GetDetectionType(); //初始化检测类型下拉数据
-//        PublishArchives.GetCrops(); //获取作物
-//        PublishArchives.GetOrg(); //获取地块信息
-//        PubishSaveProduct.ProductRecordData = Base.sessionStorage.getSession("ProductRecord");
-//        if (PubishSaveProduct.ProductRecordData) {
-//            $("#TitleName").html("编辑产品档案");
-//            setTimeout("PubishSaveProduct.GetProductRecordDetailData()", 1000);//等待半秒，初始化下拉框数据
-//            PublishArchives.SubmitRecord(PubishSaveProduct.ProductRecordData); //提交档案
-//        }else{
-//            PublishArchives.ProductIntroEditor = new baidu.editor.ui.Editor();
-//            PublishArchives.ProductIntroEditor.render('ProductIntro');
-//
-//            PublishArchives.CompanyIntroEditor = new baidu.editor.ui.Editor();
-//            PublishArchives.CompanyIntroEditor.render('CompanyIntro');  
-//            PublishArchives.SubmitRecord(); //提交档案
-//        }
-//        PublishArchives.initClick();
+        $("#TitleName").html("新建产品档案");
+
+        PublishArchives.getProCertifiedType(); //初始化认证下拉数据
+        //PublishArchives.GetDetectionType(); //初始化检测类型下拉数据
+        PublishArchives.GetCrops(); //获取作物
+        PubishSaveProduct.ProductRecordData = Base.sessionStorage.getSession("ProductRecord");
+        if (PubishSaveProduct.ProductRecordData) {
+            $("#TitleName").html("编辑产品档案");
+            setTimeout("PubishSaveProduct.GetProductRecordDetailData()", 1000);//等待半秒，初始化下拉框数据
+            PublishArchives.SubmitRecord(PubishSaveProduct.ProductRecordData); //提交档案
+        }else{
+            PublishArchives.ProductIntroEditor = new baidu.editor.ui.Editor();
+            PublishArchives.ProductIntroEditor.render('ProductIntro');
+
+            PublishArchives.CompanyIntroEditor = new baidu.editor.ui.Editor();
+            PublishArchives.CompanyIntroEditor.render('CompanyIntro');  
+            PublishArchives.SubmitRecord(); //提交档案
+        }
+        PublishArchives.initClick();
     },
     SubmitRecord: function (data) {
         $(".SubmitRecord").unbind("click").click(function () {
@@ -56,25 +56,13 @@ PublishArchives = {
         });
     },
     initClick: function () {
-        
-        $(".SwitchMoudle").unbind("click").click(function () {
-            var moudleid=$(this)[0].id.split("_")[1];
-            if($(this).hasClass("switch-on")){
-                $(this).removeClass("switch-on");
-                $(".txtMoudle_"+moudleid).html("隐藏模块"); 
-            }else{
-                $(this).addClass("switch-on");
-                $(".txtMoudle_"+moudleid).html("显示模块");
-            }
-            
-        });
 
         $(".BackUserCenter").unbind("click").click(function () {
-            window.location = "/AgriProTraceability/91QueryEntrance/UserCenter.html";
+            window.location = "?action=UserCenter";
         });
         $("#selCrops").unbind("change").change(function () {
             var value = $(this).val();
-            PublishArchives.GetCropVariety(value, "", "", "新增");
+            PublishArchives.GetCropVariety(value, "新增");
         });
         //新增肥料
         $(".newManure").unbind("click").click(function () {
@@ -171,7 +159,7 @@ PublishArchives = {
                       + 'class="form-text form-text-block CertifiedValidDate"  placeholder="填写有效日期"> </li> <li class="form-item form-item-inline">'
                       + '<label class="form-label"> 颁证机构</label> <input type="text" value="" class="form-text form-text-block CertifiedOrg"  name="username"'
                       + 'placeholder="填写颁证机构名称"></li><li style="position: absolute;top: 135px;" class="form-item ImgContainer{0}">'
-                      + '<span id="Certificateidimg' + PublishArchives.i + '"><img src="/images/trace/upload-img03.jpg" width="50" height="50"></span>'
+                      + '<span id="Certificateidimg' + PublishArchives.i + '"><img src="templates/images/trace/upload-img03.jpg" width="50" height="50"></span>'
                       + '</li><li style="position: absolute;top: 200px;" class="form-item"><label class="form-label"> 证书图片</label>'
                       + '<p><a title="添加图片" href="javascript:" class="btn-addAttachment"><i class="icon icon-img"></i><object class="UploadCertificate_{0}" style="width: 150px;">'
                       + '</object> </a></p></li></ul> <span class="opration"><a href="javascript:">'
@@ -202,7 +190,7 @@ PublishArchives = {
                       + 'placeholder="填写检测值"><span class="unit"></span></li><li class="form-item form-item-inline"> <label class="form-label"> 标准</label>'
                       +'<span class="IspassU"></span></li>'
                       + '<li class="form-item form-item-block"><label class="form-label"> 检测图片</label>'
-                      + '<p class="ImgDeContainer{0} mt10"><span id="DetectionImg{0}"><img src="/images/trace/upload-img03.jpg" width="50" height="50"></span></p><p class="mt10"><a title="添加图片" href="javascript:" class="btn-addAttachment"><i class="icon icon-img"></i><object class="UploadDetection_{0}" style="width: 150px;">'
+                      + '<p class="ImgDeContainer{0} mt10"><span id="DetectionImg{0}"><img src="templates/images/trace/upload-img03.jpg" width="50" height="50"></span></p><p class="mt10"><a title="添加图片" href="javascript:" class="btn-addAttachment"><i class="icon icon-img"></i><object class="UploadDetection_{0}" style="width: 150px;">'
                       + '</object> </a></p></li></ul> <span class="opration"><a href="javascript:">'
                       + '<i class="icon-recycle DeleteDetectionI"></i></a></span></div>', PublishArchives.j);
             $("#DetectionDiv").append(html);
@@ -243,7 +231,15 @@ PublishArchives = {
                 $(this).parents('div').first().remove();
             });
         });
-
+        
+        $("#dLabelbuyinfo").unbind("click").click(function () {
+            if ($(this).parent().hasClass("open")) {
+                $(this).parent().removeClass("open");
+            }
+            else {
+                $(this).parent().addClass("open");
+            }
+        });
 
         $(".btnNewInternetLink").unbind("click").click(function () {
             var html = '<p class="mt10"> <input type="text" value="" class="form-text IternetShoplink"  name="IternetShoplink" placeholder="填写产品的网店销售链接"/>'
@@ -254,7 +250,7 @@ PublishArchives = {
             })
         });
         $(".btn_uploadPic").unbind("click").click(function(){
-             TraceRecords_ImgCutDialog();
+        	PublishArchives.TraceRecords_ImgCutDialog();
         });
         $(".DelIternetShoplink").unbind("click").click(function () {
             $(this).parents('p').first().remove();
@@ -321,81 +317,62 @@ PublishArchives = {
     },
     //获取认证类型
     getProCertifiedType: function (Onoff) {
-        Service.post({
-            url: "/TraceabilityService.svc/getProCertifiedType",
-            params: {
-                Type: 0
+        $.ajax({
+            url: "?action=UserCenterEditProduct",
+            type:"post",
+            data: {
+                htmlMethod: "getProductCertiType",
             },
+            dataType:"json",
             success: function (response) {
-                if (response && response.Items) {
-                    var jsonData = response.Items;
+                if (response && response.length) {
+                    var jsonData = response;
                     PublishArchives.CertifiedTypedl = "";
                     PublishArchives.CertifiedTypedl += "<option value='-1'>请选择证书类型</option>";
                     for (var i = 0; i < jsonData.length; i++) {
-                        PublishArchives.CertifiedTypedl += "<option value='" + jsonData[i].CertifiedType + "'>" + jsonData[i].CertifiedTypeName + "</option>";
+                        PublishArchives.CertifiedTypedl += "<option value='" + jsonData[i].certi_id + "'>" + jsonData[i].certi_desc + "</option>";
                     }
                 }
             }
         });
     },
-    //获取检测类型
-     GetDetectionType: function () {
-        Service.post({
-            url: "/TraceabilityService.svc/GetDetectionType",
-            params: {
-                PageNum:1,
-                PageSize:9999
-            },
-            success: function (response) {
-                if (response && response.Items) {
-                    var jsonData = response.Items;
-                    PublishArchives.DetectionTypedl = "";
-                    PublishArchives.DetectionTypedl += "<option value='-1'>请选择检测类型</option>";
-                    for (var i = 0; i < jsonData.length; i++) {
-                        PublishArchives.DetectionTypedl += "<option data-unit='"+jsonData[i].Unit+"' data-condition='"+jsonData[i].Condition+"' data-standarvalue='"
-                                            +jsonData[i].StandardValue+"' value='" + jsonData[i].DetectionTypeId 
-                                            + "'>" + jsonData[i].DetectionTypeName + "</option>";
-                    }
-                }
-            }
-        });
-    },
-    GetOrg: function () {
-        Service.post({
-            url: "/TraceabilityService.svc/GetFieldData",
-            params: {
-                UserID: TransferloadUser.TraceabilityInfo.UserID,
-            },
-            success: function (response) {
-                if (response) {
-                    var jsonData = response.Items;
-                    PublishArchives.dlRecordOrg = "";
-                    PublishArchives.dlRecordOrg += "<option value='-1'>请选择园区</option>";
-                    for (var i = 0; i < jsonData.length; i++) {
-                        PublishArchives.dlRecordOrg += "<option value='" + jsonData[i].OrgID + "'>" + jsonData[i].Name + "</option>";
-                    }
-                    $("#SelectedOrg").empty();
-                    $("#SelectedOrg").append(PublishArchives.dlRecordOrg);
-                }
-            }
-        });
-
-    },
+//    //获取检测类型
+//     GetDetectionType: function () {
+//        Service.post({
+//            url: "/TraceabilityService.svc/GetDetectionType",
+//            params: {
+//                PageNum:1,
+//                PageSize:9999
+//            },
+//            success: function (response) {
+//                if (response && response.Items) {
+//                    var jsonData = response.Items;
+//                    PublishArchives.DetectionTypedl = "";
+//                    PublishArchives.DetectionTypedl += "<option value='-1'>请选择检测类型</option>";
+//                    for (var i = 0; i < jsonData.length; i++) {
+//                        PublishArchives.DetectionTypedl += "<option data-unit='"+jsonData[i].Unit+"' data-condition='"+jsonData[i].Condition+"' data-standarvalue='"
+//                                            +jsonData[i].StandardValue+"' value='" + jsonData[i].DetectionTypeId 
+//                                            + "'>" + jsonData[i].DetectionTypeName + "</option>";
+//                    }
+//                }
+//            }
+//        });
+//    },
     GetCrops: function () {
-        Service.post({
-            url: "/TraceabilityService.svc/GetCropVariety",
-            params: {
-                UseType: "GetCrops",
-                CropID: ""
+        $.ajax({
+            url: "?action=Crop",
+            type:"post",
+            data: {
+            	htmlMethod:"getTraceDataCrop",
             },
+            dataType:"json",
             success: function (response) {
                 $("#selCrops").empty();
-                if (response && response.Items) {
-                    var jsonData = response.Items;
+                if (response && response.length) {
                     PublishArchives.dlCropList = "";
                     PublishArchives.dlCropList += "<option value='-1'>请选择作物</option>";
-                    for (var i = 0; i < jsonData.length; i++) {
-                        PublishArchives.dlCropList += "<option value='" + jsonData[i].CropID + "'>" + jsonData[i].CropName + "</option>";
+                    for (var i = 0,len = response.length; i < len; i++) {
+                        PublishArchives.dlCropList += "<option value='" + response[i].crops_id + "'>" + response[i].crops_desc + "</option>";
                     }
                     $("#selCrops").append(PublishArchives.dlCropList);
                 }
@@ -411,22 +388,23 @@ PublishArchives = {
     /// <param name="orgid">组织ID</param>
     /// <param name="cropid">作物ID</param>
     /// <returns></returns>
-    GetCropVariety: function (cropid, useType, orgid, CropVarietyID) {
-        Service.post({
-            url: "/TraceabilityService.svc/GetCropVariety",
-            params: {
-                UseType: useType,
-                OrgID: orgid,
-                CropID: cropid
+    GetCropVariety: function (cropid,CropVarietyID) {
+        $.ajax({
+            url: "?action=Crop",
+            type:"post",
+            data:{
+            	htmlMethod:"getVarietiesList",
+            	cropID: cropid
             },
+            dataType:"json",
             success: function (response) {
                 $("#txtCropVariety").empty();
-                if (response && response.Items) {
-                    var jsonData = response.Items;
+                if (response.result) {
+                    var jsonData = response.data;
                     var dlCropList = "";
                     dlCropList += "<option value='-1'>请选择品种</option>";
                     for (var i = 0; i < jsonData.length; i++) {
-                        dlCropList += "<option value='" + jsonData[i].CropVarietyID + "'>" + jsonData[i].CropVarietyName + "</option>";
+                        dlCropList += "<option value='" + jsonData[i]['varieties_id'] + "'>" + jsonData[i]['varieties_desc'] + "</option>";
                     }
                     $("#txtCropVariety").append(dlCropList);
                     if (CropVarietyID != "新增") { //编辑档案的时候用
@@ -435,5 +413,27 @@ PublishArchives = {
                 }
             }
         });
+    },
+  //图片裁剪
+    TraceRecords_ImgCutDialog:function () {
+        $("#CancelsaveImg").unbind("click").click(function (e) {
+            $("#ImgCutDialogID").dialog("destroy");
+        });
+        $("#ImgCutDialogID").dialog({
+            autoOpen: false,
+            width: '800',
+            height: 'auto',
+            title: "添加图片",
+            modal: true,
+            resizable: false,
+            show: {
+                effect: "clip",
+                duration: 300
+            },
+            hide: {
+                effect: "clip",
+                duration: 300
+            }
+        }).dialog("open");
     }
 }

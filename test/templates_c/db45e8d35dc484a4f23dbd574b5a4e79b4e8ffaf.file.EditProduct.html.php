@@ -1,4 +1,4 @@
-<?php /* Smarty version Smarty-3.1.21-dev, created on 2016-01-09 14:35:59
+<?php /* Smarty version Smarty-3.1.21-dev, created on 2016-01-15 08:57:23
          compiled from ".\templates\page\EditProduct.html" */ ?>
 <?php /*%%SmartyHeaderCode:13697568dcc097d7426-03790865%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
 $_valid = $_smarty_tpl->decodeProperties(array (
@@ -7,7 +7,7 @@ $_valid = $_smarty_tpl->decodeProperties(array (
     'db45e8d35dc484a4f23dbd574b5a4e79b4e8ffaf' => 
     array (
       0 => '.\\templates\\page\\EditProduct.html',
-      1 => 1452346546,
+      1 => 1452844633,
       2 => 'file',
     ),
   ),
@@ -63,18 +63,23 @@ $_valid = $_smarty_tpl->decodeProperties(array (
                     <div class="bd">
                         <ul class="form-group">
                             <li class="form-item">
-                                <label class="form-label">
-                                    产品名称</label>
+                                <label class="form-label">产品名称</label>
                                 <input type="text" value="" class="form-text" id="txtProductName">
                                 <span class="help-inline"></span></li>
                             <li class="form-item">
-                                <label class="form-label">
-                                    产品图片</label>
+                                <label class="form-label">产品图片</label>
                                 <a href="javascript:void(0);" class="btn btn-default btn_uploadPic">添加图片</a>
                                 <div class="reply-content mt10">
                                     <div class="piclist clearfix">
                                         <div class="filecell">
                                             <dl class="ImgCutAttachment">
+                                            	<dd class="imagesadd">
+                                            		<p class="imgAttachment" style="cursor: pointer">
+                                            			<img src="templates/images/trace/upload-img03.jpg">
+                                            		</p>
+                                            	</dd>
+                                            
+                                            
                                             </dl>
                                         </div>
                                     </div>
@@ -108,17 +113,24 @@ $_valid = $_smarty_tpl->decodeProperties(array (
                                     <option value="4">第四季</option>
                                 </select>
                                 <span class="help-inline"></span></li>
-                            <li class="form-item">
+                             <li class="form-item">
                                 <label class="form-label">
-                                    种植园区</label>
-                                <select name="select" id="SelectedOrg" class="form-text">
+                                    产品类型</label>
+                                <select name="select" id="selProductType" class="form-text">
+                                    <option value="1">吃喝</option>
+                                    <option value="2">娱乐</option>
+                                    <option value="3">实用</option>
                                 </select>
                                 <span class="help-inline"></span></li>
-                            <li class="form-item">
+                             <li class="form-item">
                                 <label class="form-label">
-                                    负责人</label>
-                                <input type="text" value="" class="form-text" id="txtProductManager">
-                                <span class="help-inline"></span></li>
+                                    产品标签</label>
+                                <input type="text" value="" class="form-text form-text-block" id="txtContent" placeholder="" style="width:200px"/>
+                            	<p class="tips mt10">
+                                    说明：<br />
+                                    请添加产品的标签，以","分割，例如：<span class="text-primary">大米,主食,干吃</span><br />
+                                    最多三个标签，<span class="text-primary">如果超过三个，则将自动忽略。</span>
+                                </p></li>
                             <li class="form-item">
                                 <label class="form-label">
                                     备注</label>
@@ -233,7 +245,7 @@ $_valid = $_smarty_tpl->decodeProperties(array (
                         </p>
                     </div>
                 </div>
-                <div class="section product-certification">
+                <!-- <div class="section product-certification">
                     <div class="title">企业自检</div>
                     <div class="bd">
                         <div id="DetectionDiv">
@@ -242,7 +254,7 @@ $_valid = $_smarty_tpl->decodeProperties(array (
                             <span class="btn-new btnNewDetection"><i class="icon-new"></i></span>
                         </p>
                     </div>
-                </div>
+                </div> -->
                 <div class="section">
                     <div class="title">产品简介</div>
                     <div class="bd" id="ProductDiv">
@@ -320,9 +332,9 @@ $_valid = $_smarty_tpl->decodeProperties(array (
                         </div>
                         <p class="action-bar">
                             <div class="dropdown dropup">
-                                <a class="dropdown-toggle" id="dLabel" role="button" data-toggle="dropdown" data-target="#"
+                                <a class="dropdown-toggle" id="dLabelbuyinfo" role="button" data-toggle="dropdown" data-target="#"
                                     href="javascript:;"><span class="btn-new"><i class="icon-new"></i></span></a>
-                                <ul class="dropdown-menu" role="menu" aria-labelledby="dLabel">
+                                <ul class="dropdown-menu" role="menu" aria-labelledby="dLabelbuyinfo">
                                     <li role="presentation"><a class="btnNewInternetLink" role="menuitem" tabindex="-1"
                                         href="javascript:;">新建网店链接</a></li>
                                     <li role="presentation"><a class="btnNewShopAddr" role="menuitem" tabindex="-1" href="javascript:;">
@@ -415,20 +427,17 @@ $_valid = $_smarty_tpl->decodeProperties(array (
 	<?php echo '<script'; ?>
  src="templates/Plugins/DateTime/jquery-ui-timepicker-addon.js" type="text/javascript"><?php echo '</script'; ?>
 >
-<!-- 	<?php echo '<script'; ?>
+ 	<?php echo '<script'; ?>
  src="templates/Plugins/DateTime/jquery-ui-timepicker-zh-CN.js" type="text/javascript"><?php echo '</script'; ?>
-> -->
-	<?php echo '<script'; ?>
- src="templates/Scripts/EditProduct/ueditor.config.js" type="text/javascript"><?php echo '</script'; ?>
 >
 	<?php echo '<script'; ?>
- src="templates/Scripts/EditProduct/ueditor.all.min.js" type="text/javascript"><?php echo '</script'; ?>
+ src="templates/Plugins/ueditor/ueditor.config.js" type="text/javascript"><?php echo '</script'; ?>
 >
 	<?php echo '<script'; ?>
- src="templates/Scripts/EditProduct/zh-cn.js" type="text/javascript"><?php echo '</script'; ?>
+ src="templates/Plugins/ueditor/ueditor.all.min.js" type="text/javascript"><?php echo '</script'; ?>
 >
 	<?php echo '<script'; ?>
- src="templates/Scripts/EditProduct/swfobject.js" type="text/javascript"><?php echo '</script'; ?>
+ src="templates/Plugins/ueditor/lang/zh-cn.js" type="text/javascript"><?php echo '</script'; ?>
 >
 	<?php echo '<script'; ?>
  src="templates/Plugins/bootstrap/js/bootstrap.min.js" type="text/javascript"><?php echo '</script'; ?>

@@ -272,6 +272,10 @@
 	right: -40px;
 	bottom: 20px
 }
+.product-certification .form-item-block{
+	width:100%;
+	overflow:hidden;
+}
 
 /*档案中心*/
 .produces {

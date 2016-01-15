@@ -9,18 +9,20 @@ require_once '/lib/Tools.class.php';
 require_once '/lib/ConstData.class.php';
 require_once '/model/LoginModel.class.php';
 require_once '/model/UserCenterProductModel.class.php';
+require_once '/model/UserCenterEditProductModel.class.php';
 
 class UserCenterEditProduct extends ActionBase {
 	
 	//构造函数
 	public function __construct(){
-		$this->need_login = 0;
+		$this->need_login = 1;
 		parent::__construct();
 	}
 	
 	// 方法列表
 	public $methodlist = array(
-			"getHtml"
+			"getHtml",
+			"getProductCertiType"
 	);
 	
 	/**
@@ -39,6 +41,12 @@ class UserCenterEditProduct extends ActionBase {
 	public function getHtml(){
 		//获取静态页面
 		$this->tpl->display('page/EditProduct.html');
+	}
+	/**
+	 * 获取产品认证的类型列表
+	 */
+	public function getProductCertiType(){
+		echo json_encode((new UserCenterEditProductModel())->getProductCertiType());
 	}
 	
 }

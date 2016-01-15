@@ -59,4 +59,31 @@ class Tools{
     	QRcode::png($text,$path,$level,$size,$margin);
     	return $path;
     }
+    public static function cutImage($str_file,$cutWidth,$cutHeight,$cutX,$cutY,$picWidth,$picHeight){
+    	if(empty($str_file)) return false;
+    	$size=getimagesize($str_file);
+    	if($size[2]==1)
+    		$im_in=imagecreatefromgif($str_file);
+    	if($size[2]==2)
+    		$im_in=imagecreatefromjpeg($str_file);
+    	if($size[2]==3)
+    		$im_in=imagecreatefrompng($str_file);
+    	//图像的缩小，由于本网站用的图像都是缩小的，所以根据网上的经验，都经宽度比和高度比较大的一个
+    	$scale_h = 1.0 * $picWidth / $size[0];
+    	$scale_w = 1.0 * $picHeight / $size[1];
+    	$im_out=imagecreatetruecolor($cutWidth,$cutHeight);
+    	$scale = $scale_h > $scale_w ? $scale_h : $scale_w;
+    	imagecopyresampled($im_out,$im_in,0,0,$cutX / $scale,$cutY / $scale,$cutWidth,$cutHeight,$cutWidth / $scale,$cutHeight / $scale);
+    	if($size[2]==1)
+    		imagegif($im_out,$str_file);
+    	if($size[2]==2)
+    		imagejpeg($im_out,$str_file);
+    	if($size[2]==3)
+    		imagepng($im_out,$str_file);
+    	
+    	chmod($str_file,0777);
+    	imagedestroy($im_in);
+    	imagedestroy($im_out);
+    	return true;
+    }
 }

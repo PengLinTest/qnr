@@ -9,7 +9,7 @@ class DaoProduct extends DaoBase {
 				.", pesticides_list, video_loc, environment_data_exist, product_certi_list"
 				.", product_intro, buy_info_list, qrcodeloc"
 				.", basicinfo_id, basicinfo_img_loc,basicinfo_crops_index,batchlist"
-				.", pv.varisties_desc as variety, basicinfo_season, basicinfo_representative"
+				.", pv.varieties_desc as variety, basicinfo_season, basicinfo_representative"
 				.", basicinfo_remark, basicinfo_name, basicinfo_time, basicinfo_type"
 				.", basicinfo_lable FROM product AS p,planting_varieties AS pv"
 				.", product_basicinfo AS pb WHERE p.product_id = '".(int)$productId."'" 

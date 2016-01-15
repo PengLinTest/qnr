@@ -13,7 +13,8 @@ class Crop extends ActionBase {
 	
 	// 方法列表
 	public $methodlist = array(
-			'getTraceDataCrop'
+			'getTraceDataCrop',
+			"getVarietiesList"
 	);
 	
 	/**
@@ -34,6 +35,20 @@ class Crop extends ActionBase {
 	 */
 	public function getTraceDataCrop(){
 		$res = (new CropModel())->getCropList();
+		echo json_encode($res);
+	}
+	/*
+	 * 根据作物id获取相应的品种信息
+	 */
+	public function getVarietiesList(){
+		$cropID = isset($_REQUEST['cropID'])?$_REQUEST['cropID']:null;
+		$res = array("result" => false);
+		if(empty($cropID)){
+			echo json_encode($res);
+			return ;
+		}
+		$res['data'] = (new CropModel())->getVarietiesListByCropID($cropID);
+		$res['result'] = true;
 		echo json_encode($res);
 	}
 }

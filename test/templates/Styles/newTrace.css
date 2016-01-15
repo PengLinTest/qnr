@@ -2262,7 +2262,7 @@ ul.pages .btn-jump: hover {
 	top: -20px;
 	right: 10px;
 	cursor: pointer;
-	background: url(/images/newMessage/ic_img_delete.png) 0 0 no-repeat
+	background: url(/templates/images/newMessage/ic_img_delete.png) 0 0 no-repeat
 }
 
 .footer {

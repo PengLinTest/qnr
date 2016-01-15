@@ -1119,28 +1119,3 @@ function TraceRecords_getProBuywayInfo(buyIdList) {
         }
     });
 }
-
-//图片裁剪
-function TraceRecords_ImgCutDialog() {
-    BaseInfoImgAttachment.initButton("Upload_BaseInfoImgAttachment", $(".BaseInfoImgAttachment"), '<dd class="imagedd"><p class="imgAttachment" style="cursor: pointer"><img src="{0}"></p></dd>');
-    $("#CancelsaveImg").unbind("click").click(function (e) {
-        $("#ImgCutDialogID").dialog("destroy");
-    });
-    $("#ImgCutDialogID").dialog({
-        autoOpen: false,
-        width: '800',
-        height: 'auto',
-        //dialogClass: "modal-dialog user-dialog",
-        title: "添加图片",
-        modal: true,
-        resizable: false,
-        show: {
-            effect: "clip",
-            duration: 300
-        },
-        hide: {
-            effect: "clip",
-            duration: 300
-        }
-    }).dialog("open");
-}
