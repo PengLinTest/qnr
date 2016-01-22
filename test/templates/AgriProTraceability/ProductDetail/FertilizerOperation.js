@@ -16,7 +16,6 @@ function loadFertilizerData(pageNumber, fertilizerType, idList) {
         data: {
         	htmlMethod:"getProductFerPesList",
         	idList: idList,
-            type: fertilizerType,
             PageNumber: pageNumber,
             PageSize: PageData.pageSize
         },

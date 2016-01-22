@@ -215,8 +215,8 @@ $(document).ready(function () {
             if (Onoff == true) {
                 UserIDApplyUpload.initButton("upload_IDImg", $(".IDImg"), '<img src="{0}" width="132" height="88">');
                 UserCompanyApplyUpload.initButton("UploadCompanyImginfo", $(".CompanyImg"), '<img id="CompanyImginfo" src="{0}" width="132" height="88">');
-                UserCompanyOtherTopUpload.initButton("UploadCompanyTopImg", $(".TopImg"), '<img id="ComapnyTopImg" src="{0}" width="132" height="88">');
-                UserCompanyOtherLogoUpload.initButton("UploadCompanyLogo", $(".Logo"), '<img id="ComapnyLogoImg" src="{0}" width="132" height="88">');
+                UserCompanyOtherTopUpload.initButton("UploadCompanyTopImg", $(".TopImg"), '<img id="CompanyTopImg" src="{0}" width="132" height="88">');
+                UserCompanyLogo.initButton("UploadCompanyLogo", $(".Logo"), '<img id="CompanyLogoImg" src="{0}" width="132" height="88">');
                 Onoff = false;
             }
         }

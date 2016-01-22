@@ -62,7 +62,6 @@ class DaoBase {
     }
     
     protected function selectBySql($sql){
-    
     	if(empty($sql)){
     		return false;
     	}

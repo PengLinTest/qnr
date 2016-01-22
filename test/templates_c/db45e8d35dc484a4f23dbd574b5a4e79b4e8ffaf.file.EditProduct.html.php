@@ -1,25 +1,25 @@
-<?php /* Smarty version Smarty-3.1.21-dev, created on 2016-01-15 08:57:23
+<?php /* Smarty version Smarty-3.1.21-dev, created on 2016-01-20 08:04:20
          compiled from ".\templates\page\EditProduct.html" */ ?>
-<?php /*%%SmartyHeaderCode:13697568dcc097d7426-03790865%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
+<?php /*%%SmartyHeaderCode:12793569f3174364d51-53458143%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
 $_valid = $_smarty_tpl->decodeProperties(array (
   'file_dependency' => 
   array (
     'db45e8d35dc484a4f23dbd574b5a4e79b4e8ffaf' => 
     array (
       0 => '.\\templates\\page\\EditProduct.html',
-      1 => 1452844633,
+      1 => 1452928097,
       2 => 'file',
     ),
   ),
-  'nocache_hash' => '13697568dcc097d7426-03790865',
+  'nocache_hash' => '12793569f3174364d51-53458143',
   'function' => 
   array (
   ),
-  'version' => 'Smarty-3.1.21-dev',
-  'unifunc' => 'content_568dcc09961c22_49433644',
   'has_nocache_code' => false,
+  'version' => 'Smarty-3.1.21-dev',
+  'unifunc' => 'content_569f31744d10b3_01160413',
 ),false); /*/%%SmartyHeaderCode%%*/?>
-<?php if ($_valid && !is_callable('content_568dcc09961c22_49433644')) {function content_568dcc09961c22_49433644($_smarty_tpl) {?><!DOCTYPE HTML>
+<?php if ($_valid && !is_callable('content_569f31744d10b3_01160413')) {function content_569f31744d10b3_01160413($_smarty_tpl) {?><!DOCTYPE HTML>
 <html>
 <head>
     <meta charset="utf-8" />
@@ -125,7 +125,7 @@ $_valid = $_smarty_tpl->decodeProperties(array (
                              <li class="form-item">
                                 <label class="form-label">
                                     产品标签</label>
-                                <input type="text" value="" class="form-text form-text-block" id="txtContent" placeholder="" style="width:200px"/>
+                                <input type="text" value="" class="form-text form-text-block" id="productLable" placeholder="" style="width:200px"/>
                             	<p class="tips mt10">
                                     说明：<br />
                                     请添加产品的标签，以","分割，例如：<span class="text-primary">大米,主食,干吃</span><br />
@@ -262,16 +262,6 @@ $_valid = $_smarty_tpl->decodeProperties(array (
                         <!--<textarea rows="5" cols="118" width="791" height="253" id="ProductIntro" name="ProductIntro"></textarea>-->
                         <?php echo '<script'; ?>
  type="text/plain" id="ProductIntro" style="width: 800px; height: 300px;">
-                        <?php echo '</script'; ?>
->
-                    </div>
-                </div>
-                <div class="section">
-                    <div class="title"> 公司简介</div>
-                    <div class="bd" id="CompanyDiv">
-                        <!--<textarea rows="5" cols="118" width="791" height="253" id="CompanyIntro" name="CompanyIntro"></textarea>-->
-                        <?php echo '<script'; ?>
- type="text/plain" id="CompanyIntro" style="width: 800px; height: 300px;">
                         <?php echo '</script'; ?>
 >
                     </div>

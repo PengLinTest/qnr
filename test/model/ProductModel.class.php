@@ -82,7 +82,7 @@ class ProductModel{
 					$IdString .= $value['product_id'].",";
 				}
 				$IdString = substr($IdString, 0,-1).")";
-				$res = (new DaoProductBasicinfo())->getProductBasicinfoByproductIdStringPage($IdString,$top);
+				$res = (new DaoProductBasicinfo())->getProductBasicinfoByproductIdStringPage($IdString,1,$top);
 			}
 		}
 		return $res;

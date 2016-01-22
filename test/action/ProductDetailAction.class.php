@@ -101,10 +101,8 @@ class ProductDetail extends ActionBase {
 		$idList = isset($_REQUEST['idList'])?$_REQUEST['idList']:null;
 		$pageNum = isset($_REQUEST['PageNumber'])?$_REQUEST['PageNumber']:1;
 		$pageSize = isset($_REQUEST['PageSize'])?$_REQUEST['PageSize']:10;
-// 		$type 0:有机肥 1:无机肥   2:农药
-		$type = isset($_REQUEST['type'])?(int)$_REQUEST['type']:0;
 		if(!empty($idList)){
-			$res = (new ProductFerPesUseModel())->getProductFerOrPesByIdList($idList,$type,$pageNum,$pageSize);
+			$res = (new ProductFerPesUseModel())->getProductFerOrPesByIdList($idList,$pageNum,$pageSize);
 		}
 		echo json_encode($res);
 	}

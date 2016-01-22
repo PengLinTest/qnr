@@ -1,29 +1,29 @@
-<?php /* Smarty version Smarty-3.1.21-dev, created on 2016-01-09 14:37:51
+<?php /* Smarty version Smarty-3.1.21-dev, created on 2016-01-22 08:49:04
          compiled from ".\templates\page\UserCenter.html" */ ?>
-<?php /*%%SmartyHeaderCode:20380568dbd0ee273b0-88020997%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
+<?php /*%%SmartyHeaderCode:597456a0495ece69a8-69429546%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
 $_valid = $_smarty_tpl->decodeProperties(array (
   'file_dependency' => 
   array (
     '08829e7a9c43bddee92a83a1ea781d89a5e640aa' => 
     array (
       0 => '.\\templates\\page\\UserCenter.html',
-      1 => 1452346632,
+      1 => 1453448932,
       2 => 'file',
     ),
   ),
-  'nocache_hash' => '20380568dbd0ee273b0-88020997',
+  'nocache_hash' => '597456a0495ece69a8-69429546',
   'function' => 
   array (
   ),
   'version' => 'Smarty-3.1.21-dev',
-  'unifunc' => 'content_568dbd0ee90072_56397582',
+  'unifunc' => 'content_56a0495ed85a33_97956808',
   'has_nocache_code' => false,
 ),false); /*/%%SmartyHeaderCode%%*/?>
-<?php if ($_valid && !is_callable('content_568dbd0ee90072_56397582')) {function content_568dbd0ee90072_56397582($_smarty_tpl) {?><!DOCTYPE HTML>
+<?php if ($_valid && !is_callable('content_56a0495ed85a33_97956808')) {function content_56a0495ed85a33_97956808($_smarty_tpl) {?><!DOCTYPE HTML>
 <html>
 <head>
 <meta charset="utf-8"/>
-<title>青农人用户中心Test</title>
+<title>青农人用户中心</title>
 <meta http-equiv="X-UA-Compatible" content="IE=edge" />
 <meta name="renderer" content="webkit" />
 <link rel="stylesheet" type="text/css" href="templates/Plugins/jqueryui/jquery-ui.css" />
@@ -810,6 +810,9 @@ $_valid = $_smarty_tpl->decodeProperties(array (
 >
 <?php echo '<script'; ?>
  src="templates/AgriProTraceability/UserCenter/UserCompanyOtherLogoUpload.js" type="text/javascript"><?php echo '</script'; ?>
+>
+<?php echo '<script'; ?>
+ src="templates/AgriProTraceability/UserCenter/UserCompanyLogo.js" type="text/javascript"><?php echo '</script'; ?>
 >
 <?php echo '<script'; ?>
  src="templates/AgriProTraceability/UserCenter/UserCompanyOtherTopUpload.js" type="text/javascript"><?php echo '</script'; ?>

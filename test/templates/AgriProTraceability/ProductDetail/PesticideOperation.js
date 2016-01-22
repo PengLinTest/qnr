@@ -15,7 +15,6 @@ function loadPesticideData(pageNumber, productId) {
             //EndTime: $(".date").data("HarvestTime"),
             PageNumber: pageNumber,
             PageSize: PageData.pageSize,
-            type:"0",
     		productId:productId
         },
         dataType:"json",

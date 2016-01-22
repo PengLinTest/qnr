@@ -19,4 +19,16 @@ class DaoProductGrowImgs extends DaoBase {
 		$endWith = "";
 		return $this->select($filed,$where,$endWith);
 	}
+	public function getGrowImgListByIdListString($idString){
+		$filed = array(
+				"img_id",
+				"img_date",
+				"img_address",
+				"img_desc",
+				"img_loc"
+		);
+		$where = "";
+		$endWith = " where img_id in (".$idString.")";
+		return $this->select($filed,$where,$endWith);
+	}
 }

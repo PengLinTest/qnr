@@ -46,7 +46,7 @@ var Flash = {
             $(b.fileListUL).children().last().find(".GrowImgTime").datetimepicker({
                 dateFormat: "yy-mm-dd",
                 showSecond: !1,
-                timeFormat: "hh:mm",
+                timeFormat: "HH:mm",
                 stepHour: 1,
                 stepMinute: 1,
                 stepSecond: 1,

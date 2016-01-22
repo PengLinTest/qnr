@@ -105,7 +105,7 @@ UserCenterRecord = {
         $(".EditProductRecord").unbind("click").click(function() {
             var a = $(this).data("EditProductRecord");
             Base.sessionStorage.storeSession("ProductRecord", a);
-            window.location = "/AgriProTraceability/91QueryEntrance/PublishArchives.html"
+            window.location = "?action=UserCenterEditProduct";
         });
         $(".SubmitProductRecord").unbind("click").click(function() {
         	var data = $(this).data("SubmitProductRecord");

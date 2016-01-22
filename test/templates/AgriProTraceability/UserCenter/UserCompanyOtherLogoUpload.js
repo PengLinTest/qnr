@@ -10,6 +10,7 @@ var Flash = {
         fileIndex: 0,
         fileListUL: "",
         fileItemFormat: "",
+        hasFile:false,
         // 参数说明
         // a:上传文件的控件id
         // c:图片显示的控件id
@@ -53,6 +54,7 @@ var Flash = {
             var b = UserCompanyOtherLogoUpload;
             b.fileIndex++;
             b.files = [];
+            b.hasFile = true;
             b.files.push({
                 FileName: a,
                 File: c,

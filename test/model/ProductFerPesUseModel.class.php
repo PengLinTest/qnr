@@ -15,12 +15,12 @@ class ProductFerPesUseModel{
      * @param type 0:化肥，1:农药
      * @return 返回使用列表，同时返回总数
      */
-    public function getProductFerOrPesByIdList($idList,$type = 0,$pageNum = 1,$pageSize = 10){
+    public function getProductFerOrPesByIdList($idList,$pageNum = 1,$pageSize = 10){
     	$res = array();
     	if(!empty($idList)){
     		$dao = new DaoProductFerPes();
-    		$res['Item'] = $dao->getFerOrPesListByIdList($idList,$type,$pageNum,$pageSize);
-    		$res['Total'] = $dao->getFerOrPesCountByIdList($idList, $type);
+    		$res['Item'] = $dao->getFerOrPesListByIdList($idList,$pageNum,$pageSize);
+    		$res['Total'] = $dao->getFerOrPesCountByIdList($idList);
     	}
     	return $res;
     }

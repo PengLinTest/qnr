@@ -1,6 +1,6 @@
-<?php /* Smarty version Smarty-3.1.21-dev, created on 2016-01-07 02:18:54
+<?php /* Smarty version Smarty-3.1.21-dev, created on 2016-01-20 08:04:21
          compiled from ".\templates\page\WebFooter.html" */ ?>
-<?php /*%%SmartyHeaderCode:29264568dbcfe3ffed0-40689815%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
+<?php /*%%SmartyHeaderCode:20797569f31752b4829-97056426%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
 $_valid = $_smarty_tpl->decodeProperties(array (
   'file_dependency' => 
   array (
@@ -11,15 +11,15 @@ $_valid = $_smarty_tpl->decodeProperties(array (
       2 => 'file',
     ),
   ),
-  'nocache_hash' => '29264568dbcfe3ffed0-40689815',
+  'nocache_hash' => '20797569f31752b4829-97056426',
   'function' => 
   array (
   ),
   'has_nocache_code' => false,
   'version' => 'Smarty-3.1.21-dev',
-  'unifunc' => 'content_568dbcfe4747d7_28110847',
+  'unifunc' => 'content_569f31752ed9b2_70944038',
 ),false); /*/%%SmartyHeaderCode%%*/?>
-<?php if ($_valid && !is_callable('content_568dbcfe4747d7_28110847')) {function content_568dbcfe4747d7_28110847($_smarty_tpl) {?>		<div class="foot-bar">
+<?php if ($_valid && !is_callable('content_569f31752ed9b2_70944038')) {function content_569f31752ed9b2_70944038($_smarty_tpl) {?>		<div class="foot-bar">
 			<div class="container">
 				<span class="link fr"><a href="#"
 					target="_blank"><i class="icon-dot">•</i>青犀科技</a><a

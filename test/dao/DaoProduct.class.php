@@ -25,7 +25,7 @@ class DaoProduct extends DaoBase {
 		$filed = array(
 				'product_id',
 		);
-		$where = array("vendor_id =" => $vendorId);
+		$where = array("vendor_id =" => $vendorId,"product_isdelete =" =>0);
 		$endWith = "";
 		return $this->select($filed,$where,$endWith);
 	}

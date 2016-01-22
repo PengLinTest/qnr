@@ -7,7 +7,7 @@ class DaoProductFerPes extends DaoBase {
 	 * 根据id获取信息
 	 * @param $id
 	 */
-	public function getFerOrPesListByIdList($idList,$type,$pageNum,$pageSize){
+	public function getFerOrPesListByIdList($idList,$pageNum,$pageSize){
 		$filed = array(
 			"use_id",
 			"use_time",
@@ -17,8 +17,8 @@ class DaoProductFerPes extends DaoBase {
 			"use_suppliers",
 			"use_type"
 		);
-		$where = array('use_type = ' => (int)$type);
-		$endWith = " and use_id in (".$idList.")"." order by use_id asc limit ".($pageNum-1)*$pageSize.",".$pageSize;
+		$where = "";
+		$endWith = " where use_id in (".$idList.")"." order by use_id asc limit ".($pageNum-1)*$pageSize.",".$pageSize;
 		return $this->select($filed,$where,$endWith);
 	}
 	
@@ -26,10 +26,27 @@ class DaoProductFerPes extends DaoBase {
 	 * 根据idList获取总数
 	 * @param $id
 	 */
-	public function getFerOrPesCountByIdList($idList,$type){
-		$where = array('use_type = ' => (int)$type);
-		$endWith = " and use_id in (".$idList.")";
+	public function getFerOrPesCountByIdList($idList){
+		$where = "";
+		$endWith = " where use_id in (".$idList.")";
 		return $this->getCount($where,$endWith);
+	}
+	/**
+	 * 根据idList获取信息
+	 */
+	public function getFerOrPesListByIdListString($idList){
+		$filed = array(
+				"use_id",
+				"use_time",
+				"use_name",
+				"use_level",
+				"use_brand",
+				"use_suppliers",
+				"use_type"
+		);
+		$where = "";
+		$endWith = " where use_id in (".$idList.")";
+		return $this->select($filed,$where,$endWith);
 	}
 	
 }

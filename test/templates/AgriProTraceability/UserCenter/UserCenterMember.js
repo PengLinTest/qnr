@@ -6,8 +6,6 @@ UserCenterMember = {
     	var user = Base.session.getLoginUser();
     	UserCenterMember.vendorID = user.vendorId;
         UserCenterMember.GetBatchData();
-      //绑定图片上传的事件，借用UserCompanyOtherLogoUpload的东西
-        UserCompanyOtherLogoUpload.initButton("UploadVendorMemberImg", $(".MemberImg"), '<img id="VendorMemberImg" src="{0}" width="132" height="88">');
         $(".btnNewMember").unbind("click").click(function(){UserCenterMember.InitProBatchDialog()});
     },
     

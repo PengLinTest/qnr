@@ -192,7 +192,7 @@ exploratory.config = {
             })
             //获取所有认证图片
             //if (QueryTraceaDetail91.RecordType == 0) { //如果是云平台的溯源档案
-            var ZSid = $(this).parent().parent().data("id");
+            var ZSid = $(this).data("id");
             getOrgProCertifiedPicsData(certiId, ZSid);
             e.preventDefault();
             return false;
@@ -700,7 +700,7 @@ exploratory.config = {
             }
             
             //关键环境记录
-            if(data.environment_data_exist == "" || !data.environment_data_exist){
+            if(data.environment_data_exist == 0 || !data.environment_data_exist){
             	$(".btn_view.btn_environment").html("没有记录");
                 $(".btn_environment").parents("li").addClass("notrack");
             }else{

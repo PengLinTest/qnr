@@ -100,7 +100,7 @@ function getOrgProCertifiedData(certiId) {
                 $(".certification-list").show();
                 $("#procernone").hide();
                 for (var i = 0; i < data.length; i++) {
-                        tbHtml += "<tr data-id=" + data[i].certi_type_index + "><td>" + data[i].certi_type_name + "</td><td><i class=\"icon ic_check\"></i>已检测</td>";
+                        tbHtml += "<tr class='btn_certification' style='cursor:pointer' data-id=" + data[i].certi_type_index + "><td>" + data[i].certi_type_name + "</td><td><i class=\"icon ic_check\"></i>已检测</td>";
                         tbHtml += "<td><a href='javascript:void(0);' class=\"btn btn_certification\"></a></td></tr>";
                 }
             } else {
@@ -136,17 +136,23 @@ function getOrgProCertifiedPicsData(certiId, zsid) {
 	                pics = 0;
 	            if (data && data.length > 0) {
 	                for (var i = 0, len = data.length; i < len; i++) {
-	                        var bigImg = data[i].certi_imgloclist.split(',')[1];
-	//                        var icon = setProCertifiedEnum(jsonItems[i].CertifiedType, "icon");
-	                        divHtml += "<div class=\"slide\" data-parent=" + data[i].certi_type_index + "><div class=\"slide-image\"><img src='" + bigImg + "'/></div>";
-	                        divHtml += "<div class=\"slide-info\"><div class=\"hd\">";
-	//                        if (icon != "") {
-	//                            divHtml += "<div class=\"certification-logo\">" + icon + "</div>";
-	//                        }
-	                        divHtml += "<p class=\"sub-title\">" + data[i].certi_type_name + "</p><p>由 " + data[i].certi_awarddepart + " 认证</p>"
-	                        divHtml += "</div><div class=\"bd\"><p class=\"explain\">描述内容";
-	                        divHtml += "</div></div></div>";
-	                        pics++;
+	                        var imgList = data[i].certi_imgloclist.split(',');
+	                        if(imgList && imgList.length > 0){
+	                        	for(var j = 0,imgLen = imgList.length; j < imgLen;j++){
+		                        	bigImg = imgList[j]; 
+			//                        var icon = setProCertifiedEnum(jsonItems[i].CertifiedType, "icon");
+			                        divHtml += "<div class=\"slide\" data-parent=" + data[i].certi_type_index + "><div class=\"slide-image\"><img src='" + bigImg + "'/></div>";
+			                        divHtml += "<div class=\"slide-info\"><div class=\"hd\">";
+			//                        if (icon != "") {
+			//                            divHtml += "<div class=\"certification-logo\">" + icon + "</div>";
+			//                        }
+			                        divHtml += "<p class=\"sub-title\">" + data[i].certi_type_name + "</p><p>由 " + data[i].certi_awarddepart + " 认证</p>"
+			                        divHtml += "</div><div class=\"bd\"><p class=\"explain\">描述内容";
+			                        divHtml += "</div></div></div>";
+			                        pics++;
+	                        	}
+
+	                        }
 	                    }
 	            }
 	            $(".certification-slides").remove();

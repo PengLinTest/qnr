@@ -44,8 +44,8 @@ PublishArchives = {
             PublishArchives.ProductIntroEditor = new baidu.editor.ui.Editor();
             PublishArchives.ProductIntroEditor.render('ProductIntro');
 
-            PublishArchives.CompanyIntroEditor = new baidu.editor.ui.Editor();
-            PublishArchives.CompanyIntroEditor.render('CompanyIntro');  
+//            PublishArchives.CompanyIntroEditor = new baidu.editor.ui.Editor();
+//            PublishArchives.CompanyIntroEditor.render('CompanyIntro');  
             PublishArchives.SubmitRecord(); //提交档案
         }
         PublishArchives.initClick();
@@ -178,59 +178,59 @@ PublishArchives = {
         });
 
 
-        //新增农残检测
-        PublishUploadDetection.Files = [];
-        $(".btnNewDetection").unbind("click").click(function () {
-            var html = String.format('<div style="height: 250px;" class="item clearfix" id="item_{0}"><ul class="form-group"><li class="form-item form-item-inline"><label class="form-label"> 检测类型</label>'
-                      + '<select name="select"  class="form-text form-text-block DetectionSeleted"></select></li><li class="form-item form-item-inline even">'
-                      + '<label class="form-label"> 检测日期</label><input type="text" value="" class="form-text form-text-block DetectionDate" '
-                      + 'placeholder="填写检测日期"></li><li class="form-item form-item-inline"> <label class="form-label"> 检测员</label>'
-                      + '<input type="text" value="" class="form-text form-text-block DetectionUser"  placeholder="填写检测员姓名"> </li><li class="form-item form-item-inline even">'
-                      + '<label class="form-label"> 检测值</label> <input type="text" value="" class="form-text form-text-block DetectionValue"  name="username"'
-                      + 'placeholder="填写检测值"><span class="unit"></span></li><li class="form-item form-item-inline"> <label class="form-label"> 标准</label>'
-                      +'<span class="IspassU"></span></li>'
-                      + '<li class="form-item form-item-block"><label class="form-label"> 检测图片</label>'
-                      + '<p class="ImgDeContainer{0} mt10"><span id="DetectionImg{0}"><img src="templates/images/trace/upload-img03.jpg" width="50" height="50"></span></p><p class="mt10"><a title="添加图片" href="javascript:" class="btn-addAttachment"><i class="icon icon-img"></i><object class="UploadDetection_{0}" style="width: 150px;">'
-                      + '</object> </a></p></li></ul> <span class="opration"><a href="javascript:">'
-                      + '<i class="icon-recycle DeleteDetectionI"></i></a></span></div>', PublishArchives.j);
-            $("#DetectionDiv").append(html);
-
-            $("#DetectionDiv").children().last().find(".DetectionSeleted").empty();
-            $("#DetectionDiv").children().last().find(".DetectionSeleted").append(PublishArchives.DetectionTypedl);
-            $("#DetectionDiv").children().last().find(".DetectionSeleted").unbind("change").change(function(){
-                var selectoption=$(this).find("option:selected");
-                var unit=selectoption.data("unit");
-                $(this).parents("ul").first().find(".unit").html(unit);
-                var Condition=selectoption.data("condition");
-                var standarvalue=selectoption.data("standarvalue");
-                var value=$(this).parents("ul").first().find(".DetectionValue").val();
-                var ispass=PublishArchives.returnCpmpare(value,standarvalue,Condition)+"("+Condition+standarvalue+" "+unit+")";
-                $(this).parents("ul").first().find(".IspassU").html(ispass);
-            })
-            $("#DetectionDiv").children().last().find(".DetectionValue").unbind("keyup").keyup(function(){
-                 var value=$(this).val();
-                 var Condition= $(this).parents("ul").first().find(".DetectionSeleted").find("option:selected").data("condition");
-                 var standarvalue= $(this).parents("ul").first().find(".DetectionSeleted").find("option:selected").data("standarvalue");
-                if(standarvalue){
-                   var ispass=PublishArchives.returnCpmpare(value,standarvalue,Condition);
-                   $(this).parents("ul").first().find(".IspassU").html(ispass);
-                }else{
-                    ZENG.msgbox.show("未选择检测类型", 4, 2000);
-                }
-                
-            });
-            $("#DetectionDiv").children().last().find(".DetectionDate").datepicker({
-                dateFormat: 'yy-mm-dd',
-                changeMonth: true,
-                changeYear: true
-             });      //初始化时间控件
-            PublishUploadDetection.Files["UploadDetection_" + PublishArchives.j] = [];
-            PublishUploadDetection.initButton("UploadDetection_" + PublishArchives.j, ".ImgDeContainer", '<span><img src="{0}" width="50" height="50"><s class="dddel dddelDetection"></s></span>');  //初始化基本信息的上传图片
-            PublishArchives.j++;
-            $(".DeleteDetectionI").unbind("click").click(function () {
-                $(this).parents('div').first().remove();
-            });
-        });
+//        //新增农残检测，后期再看
+//        PublishUploadDetection.Files = [];
+//        $(".btnNewDetection").unbind("click").click(function () {
+//            var html = String.format('<div style="height: 250px;" class="item clearfix" id="item_{0}"><ul class="form-group"><li class="form-item form-item-inline"><label class="form-label"> 检测类型</label>'
+//                      + '<select name="select"  class="form-text form-text-block DetectionSeleted"></select></li><li class="form-item form-item-inline even">'
+//                      + '<label class="form-label"> 检测日期</label><input type="text" value="" class="form-text form-text-block DetectionDate" '
+//                      + 'placeholder="填写检测日期"></li><li class="form-item form-item-inline"> <label class="form-label"> 检测员</label>'
+//                      + '<input type="text" value="" class="form-text form-text-block DetectionUser"  placeholder="填写检测员姓名"> </li><li class="form-item form-item-inline even">'
+//                      + '<label class="form-label"> 检测值</label> <input type="text" value="" class="form-text form-text-block DetectionValue"  name="username"'
+//                      + 'placeholder="填写检测值"><span class="unit"></span></li><li class="form-item form-item-inline"> <label class="form-label"> 标准</label>'
+//                      +'<span class="IspassU"></span></li>'
+//                      + '<li class="form-item form-item-block"><label class="form-label"> 检测图片</label>'
+//                      + '<p class="ImgDeContainer{0} mt10"><span id="DetectionImg{0}"><img src="templates/images/trace/upload-img03.jpg" width="50" height="50"></span></p><p class="mt10"><a title="添加图片" href="javascript:" class="btn-addAttachment"><i class="icon icon-img"></i><object class="UploadDetection_{0}" style="width: 150px;">'
+//                      + '</object> </a></p></li></ul> <span class="opration"><a href="javascript:">'
+//                      + '<i class="icon-recycle DeleteDetectionI"></i></a></span></div>', PublishArchives.j);
+//            $("#DetectionDiv").append(html);
+//
+//            $("#DetectionDiv").children().last().find(".DetectionSeleted").empty();
+//            $("#DetectionDiv").children().last().find(".DetectionSeleted").append(PublishArchives.DetectionTypedl);
+//            $("#DetectionDiv").children().last().find(".DetectionSeleted").unbind("change").change(function(){
+//                var selectoption=$(this).find("option:selected");
+//                var unit=selectoption.data("unit");
+//                $(this).parents("ul").first().find(".unit").html(unit);
+//                var Condition=selectoption.data("condition");
+//                var standarvalue=selectoption.data("standarvalue");
+//                var value=$(this).parents("ul").first().find(".DetectionValue").val();
+//                var ispass=PublishArchives.returnCpmpare(value,standarvalue,Condition)+"("+Condition+standarvalue+" "+unit+")";
+//                $(this).parents("ul").first().find(".IspassU").html(ispass);
+//            })
+//            $("#DetectionDiv").children().last().find(".DetectionValue").unbind("keyup").keyup(function(){
+//                 var value=$(this).val();
+//                 var Condition= $(this).parents("ul").first().find(".DetectionSeleted").find("option:selected").data("condition");
+//                 var standarvalue= $(this).parents("ul").first().find(".DetectionSeleted").find("option:selected").data("standarvalue");
+//                if(standarvalue){
+//                   var ispass=PublishArchives.returnCpmpare(value,standarvalue,Condition);
+//                   $(this).parents("ul").first().find(".IspassU").html(ispass);
+//                }else{
+//                    ZENG.msgbox.show("未选择检测类型", 4, 2000);
+//                }
+//                
+//            });
+//            $("#DetectionDiv").children().last().find(".DetectionDate").datepicker({
+//                dateFormat: 'yy-mm-dd',
+//                changeMonth: true,
+//                changeYear: true
+//             });      //初始化时间控件
+//            PublishUploadDetection.Files["UploadDetection_" + PublishArchives.j] = [];
+//            PublishUploadDetection.initButton("UploadDetection_" + PublishArchives.j, ".ImgDeContainer", '<span><img src="{0}" width="50" height="50"><s class="dddel dddelDetection"></s></span>');  //初始化基本信息的上传图片
+//            PublishArchives.j++;
+//            $(".DeleteDetectionI").unbind("click").click(function () {
+//                $(this).parents('div').first().remove();
+//            });
+//        });
         
         $("#dLabelbuyinfo").unbind("click").click(function () {
             if ($(this).parent().hasClass("open")) {
@@ -427,7 +427,7 @@ PublishArchives = {
             modal: true,
             resizable: false,
             show: {
-                effect: "clip",
+                effect: "clip ",
                 duration: 300
             },
             hide: {

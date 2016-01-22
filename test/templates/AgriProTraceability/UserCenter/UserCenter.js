@@ -67,12 +67,12 @@ UserCenter = {
             	ZENG.msgbox.show("请输入商家描述", 5, 2E3);
             	return;
             };
-            var topImg = $("#ComapnyTopImg").attr("src");
+            var topImg = $("#CompanyTopImg").attr("src");
             if(typeof(topImg) == "undefined"){
             	ZENG.msgbox.show("请选择上传商家广告图片", 5, 2E3);
             	return;
             }
-            var topImg = $("#ComapnyLogoImg").attr("src");
+            var topImg = $("#CompanyLogoImg").attr("src");
             if(typeof(topImg) == "undefined"){
             	ZENG.msgbox.show("请选择上传商家logo图片", 5, 2E3);
             	return;
@@ -81,15 +81,25 @@ UserCenter = {
         })
     },
     InitClick: function() {
+    	//商家成员管理
+    	//绑定图片上传的事件，借用UserCompanyOtherLogoUpload的东西
+        UserCompanyOtherLogoUpload.initButton("UploadVendorMemberImg", $(".MemberImg"), '<img id="VendorMemberImg" src="{0}" width="132" height="88">');
+        //个人资料
         UserCenter.InitCompanycheckClick();
         UserCenter.InitIDcheckClick();
         UserCenter.InitOtherInfocheckClick();
         $("#btn_savebaseinfo").unbind("click").click(function() {
             UserCenter.UpdateBaseuserinfo()
         });
-        $(".FiledClick").unbind("click").click(function() {
-            $(".usercenter-nav li:eq(2)").trigger("click")
-        })
+//        $(".FiledClick").unbind("click").click(function() {
+//            $(".usercenter-nav li:eq(2)").trigger("click")
+//        });
+        //新建档案
+        $(".btnNewRecord").unbind("click").click(function(a) {
+            a = parseInt(Base.sessionStorage.getSession("CompanyCertified"));
+            var c = parseInt(Base.sessionStorage.getSession("CertifiedStatus"));
+            3 == a && 3 == c ? (Base.sessionStorage.storeSession("ProductRecord", null), window.location = "?action=UserCenterEditProduct") : ZENG.msgbox.show("身份认证和企业认证审核通过之后,才可以新建档案.", 5, 3E3)
+        });
     },
     OperateNewOrg: function(a) {
         $("#btnSaveNewOrg").unbind("click").click(function() {
@@ -269,6 +279,12 @@ UserCenter = {
         	a = '<span class="text fr"><a href="javascript:" class="btn btn-default btnNewRecord">新建档案</a></span><i class="icon-produces icon-disabled CardReordClick" style="cursor:pointer"></i><p class="text CardReordClick" style="cursor:pointer"> 0条产品档案 </p>';
         }
         $(".CardRecorddiv").append(a);
+        //新建档案
+        $(".btnNewRecord").unbind("click").click(function(a) {
+            a = parseInt(Base.sessionStorage.getSession("CompanyCertified"));
+            var c = parseInt(Base.sessionStorage.getSession("CertifiedStatus"));
+            3 == a && 3 == c ? (Base.sessionStorage.storeSession("ProductRecord", null), window.location = "?action=UserCenterEditProduct") : ZENG.msgbox.show("身份认证和企业认证审核通过之后,才可以新建档案.", 5, 3E3)
+        });
         $(".CardReordClick").unbind("click").click(function() {
             $(".usercenter-nav li:eq(1)").trigger("click")
         })
