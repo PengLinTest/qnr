@@ -51,7 +51,6 @@ class Product extends ActionBase {
 		$pageSize = isset($_REQUEST['PageSize'])?(int)$_REQUEST['PageSize']:16;
 		$keyword = (isset($_REQUEST['keyword']) && !empty($_REQUEST['keyword']))?$_REQUEST['keyword']:"null";
 		$cropID = (isset($_REQUEST['CropID']) && !empty($_REQUEST['CropID']))?$_REQUEST['CropID']:"null";
-		
 		$model = new ProductModel();
 		$res = $model->getSimpleProductList($pageNumber,$pageSize,$keyword,$cropID);
 		

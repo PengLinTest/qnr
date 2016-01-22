@@ -34,7 +34,7 @@ class DaoProductBasicinfo extends DaoBase {
 			if($keyword != "null"){
 				$endWith.=' and basicinfo_crops_index in '.$cropID;
 			}else{
-				$endWith.=' where basicinfo_crops_index in '.$cropID;
+				$endWith.=' and basicinfo_crops_index in '.$cropID;
 			}
 			
 		}
