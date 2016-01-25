@@ -18,8 +18,9 @@ class ProductCertiModel{
     		$arr = explode(",", $idList);
     		$i = 0;
     		$res = array();
+    		$dao = new DaoProductCerti();
     		foreach($arr as $id){
-    			$certi = (new DaoProductCerti())->getProductCertiById((int)$id);
+    			$certi = $dao->getProductCertiById((int)$id);
     			if(!empty($certi)){
     				$res[$i] = $certi[0];
     				$i += 1;

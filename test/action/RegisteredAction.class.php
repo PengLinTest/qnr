@@ -43,7 +43,8 @@ class Registered extends ActionBase {
     	$res = array();
     	$res['result'] = 0;
     	$name = isset($_REQUEST['name'])?(string)($_REQUEST['name']):null;
-    	if($name != null && (new UserModel())->userNameIsExist($name)){
+    	$model = new UserModel();
+    	if($name != null && $model->userNameIsExist($name)){
     		$res['result'] = 1;
     	}
     	echo json_encode($res);
@@ -56,7 +57,8 @@ class Registered extends ActionBase {
     	$res = array();
     	$res['result'] = 0;
     	$info_name = isset($_REQUEST['info_name'])?(string)($_REQUEST['info_name']):null;
-    	if($info_name != null && (new UserModel())->VendorBasicInfoNameIsExist($info_name)){
+    	$model = new UserModel();
+    	if($info_name != null && $model->VendorBasicInfoNameIsExist($info_name)){
     		$res['result'] = 1;
     	}
     	echo json_encode($res);
@@ -73,6 +75,7 @@ class Registered extends ActionBase {
     	$pwd = isset($_REQUEST['pwd'])?(string)($_REQUEST['pwd']):null;
     	$pwd_confirm = isset($_REQUEST['pwd_confirm'])?(string)($_REQUEST['pwd_confirm']):null;
     	$info_name = isset($_REQUEST['info_name'])?(string)($_REQUEST['info_name']):null;
+    	$model = new UserModel();
     	//判断是否为空
     	if(!$name || !$pwd || !$pwd_confirm || !$info_name){
     		$res['result'] = 0;
@@ -85,15 +88,15 @@ class Registered extends ActionBase {
     	else if($pwd != $pwd_confirm){
     		$res['result'] = 0;
     		$res['info'] = "两次密码不一致";
-    	}else if((new UserModel())->VendorBasicInfoNameIsExist($info_name)){
+    	}else if($model->VendorBasicInfoNameIsExist($info_name)){
     		//判断用户名或者公司名是否存在
     		$res['result'] = 0;
     		$res['info'] = "公司名已存在";
-    	}else if((new UserModel())->userNameIsExist($name)){
+    	}else if($model->userNameIsExist($name)){
     		$res['result'] = 0;
     		$res['info'] = "用户名已存在";
     	}else{
-    		if((new UserModel())->saveUser($name,$pwd,$info_name)){
+    		if($model->saveUser($name,$pwd,$info_name)){
     			$res['result'] = 1;
     		}else{
     			$res['result'] = 0;

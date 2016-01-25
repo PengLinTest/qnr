@@ -53,7 +53,8 @@ class Vendor extends ActionBase {
 		$vendorId = isset($_REQUEST['vendorId'])?(int)$_REQUEST['vendorId']:-1;
 		$cerType = isset($_REQUEST['cerType'])?(int)$_REQUEST['cerType']:0;
 		if($vendorId > 0){
-			$res = (new VendorModel())->getVendorAuthById($vendorId, $cerType);
+			$model = new VendorModel();
+			$res = $model->getVendorAuthById($vendorId, $cerType);
 			if(!empty($res)){
 				echo json_encode($res);
 			}
@@ -69,7 +70,8 @@ class Vendor extends ActionBase {
 	public function getVendorInfo(){
 		$vendorId = isset($_REQUEST['vendorId'])?(int)$_REQUEST['vendorId']:-1;
 		if($vendorId > 0){
-			$res = (new VendorModel())->getVendorInfoById($vendorId);
+			$model = new VendorModel();
+			$res = $model->getVendorInfoById($vendorId);
 			if(!empty($res)){
 				echo json_encode($res);
 			}
@@ -83,7 +85,8 @@ class Vendor extends ActionBase {
 	public function getNewVendorList(){
 		$type = isset($_REQUEST['type'])?(int)$_REQUEST['type']:1;
 		$top = isset($_REQUEST['top'])?(int)$_REQUEST['top']:4;
-		$res =  (new VendorModel())->getNewVendorByType($top, $type);
+		$model = new VendorModel();
+		$res =  $model->getNewVendorByType($top, $type);
 		echo json_encode($res);
 		
 	}
@@ -121,7 +124,8 @@ class Vendor extends ActionBase {
 		$vendorId = isset($_REQUEST['vendorId'])?(int)$_REQUEST['vendorId']:null;
 		$res = array();
 		if(!empty($vendorId)){
-			$res = (new ProductModel())->getProductBasicinfoListByVendorId($vendorId,3);
+			$dao = new ProductModel();
+			$res = $dao->getProductBasicinfoListByVendorId($vendorId,3);
 		}
 		echo json_encode($res);
 	}

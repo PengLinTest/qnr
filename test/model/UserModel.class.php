@@ -19,7 +19,8 @@ class UserModel{
 	 * @return true:用户存在;flase:用户不存在
 	 */
     public function userNameIsExist($name){
-    	$vendor = (new DaoVendor())->getVendorByVendorName($name);
+    	$dao = new DaoVendor();
+    	$vendor = $dao->getVendorByVendorName($name);
     	if(count($vendor) == 0){
     		return false;
     	}else{
@@ -27,7 +28,8 @@ class UserModel{
     	}
     }
     public function VendorBasicInfoNameIsExist($name){
-    	$vendor = (new DaoVendorInfo())->getVendorInfoByName($name);
+    	$dao = new DaoVendorInfo();
+    	$vendor = $dao->getVendorInfoByName($name);
     	if(count($vendor) == 0){
     		return false;
     	}else{
@@ -52,14 +54,17 @@ class UserModel{
     	$conn = DaoBase::_getConn();
     	mysql_query("BEGIN"); //或者mysql_query("START TRANSACTION");
     	//保存公司信息，vendoeInfo
-    	$info_id = (new DaoVendorInfo())->insertVendorInfo($info_name, $conn);
+    	$daoVendorInfo = new DaoVendorInfo();
+    	$info_id = $daoVendorInfo->insertVendorInfo($info_name, $conn);
     	//法人认证信息
-    	$iden_id = (new DaoVendorAuth())->insertVendorAuth(1, $conn);
+    	$daoVendorAuth = new DaoVendorAuth();
+    	$iden_id = $daoVendorAuth->insertVendorAuth(1, $conn);
 		//公司认证信息
-		$certi_id = (new DaoVendorAuth())->insertVendorAuth(0, $conn);
+		$certi_id = $daoVendorAuth->insertVendorAuth(0, $conn);
     	if($info_id > 0 && $iden_id > 0 && $certi_id > 0){
     		//保存商家信息
-    		if((new DaoVendor())->insertVendor($name,$pwd,$info_id,$iden_id,$certi_id,$conn) > 0){
+    		$dao = new DaoVendor();
+    		if($dao->insertVendor($name,$pwd,$info_id,$iden_id,$certi_id,$conn) > 0){
     			$vendorResult = true;
     		}
     		$data = array();
@@ -70,7 +75,8 @@ class UserModel{
     			$data['info_email'] = $name;
     		}
     		//更新商家信息的手机号或者邮箱
-    		if((new DaoVendorInfo())->updateTransaction($conn, $data,array("info_id = " => $info_id))){
+    		$dao = new DaoVendorInfo();
+    		if($dao->updateTransaction($conn, $data,array("info_id = " => $info_id))){
     			$infoResult = true;
     		}
     	}
@@ -84,7 +90,8 @@ class UserModel{
     	return $result;
     }
     public function updateUserPwd($name,$pwd){
-    	return (new DaoVendor())->updateVendorPwd($name,$pwd);
+    	$dao = new DaoVendor();
+    	return $dao->updateVendorPwd($name,$pwd);
     }
     /**
      * 
@@ -92,26 +99,31 @@ class UserModel{
     public function getAllVendorInfo($vendorId){
     	$res = array();
 //     	根据id获取商家信息
-		$vendors = (new DaoVendor())->getVendorById($vendorId);
+		$dao = new DaoVendor();
+		$vendors = $dao->getVendorById($vendorId);
 		if(count($vendors) == 1){
 			$vendor = $vendors[0];
 			//获取法人验证信息id
 			$idenId = $vendor['vendor_iden_id'];
 			if($idenId != null){
-				$res['iden'] = (new DaoVendorAuth())->getVendorAuthById($idenId);
+				$daoVendorAuth = new DaoVendorAuth();
+				$res['iden'] = $daoVendorAuth->getVendorAuthById($idenId);
 			}
 			//获取公司验证信息id
 			$certiId = $vendor['vendor_certi_id'];
 			if($certiId != null){
-				$res['certi'] = (new DaoVendorAuth())->getVendorAuthById($certiId);
+				$daoVendorAuth = new DaoVendorAuth();
+				$res['certi'] = $daoVendorAuth->getVendorAuthById($certiId);
 			}
 			//获取公司信息id
 			$info_id = $vendor['vendor_info_id'];
 			if($info_id){
-				$res['info'] = (new DaoVendorInfo())->getVendorInfoById($info_id);
+				$dao = new DaoVendorInfo();
+				$res['info'] = $dao->getVendorInfoById($info_id);
 			}
 			//获取产品总数
-			$res['productSum'] = (new DaoProduct())->getCountProductByVendorId($vendorId);
+			$dao = new DaoProduct();
+			$res['productSum'] = $dao->getCountProductByVendorId($vendorId);
 		}
 		return $res;
     	
@@ -136,18 +148,22 @@ class UserModel{
     		$infoId = $vendor['vendor_info_id'];
     		//获取这个验证信息，判断验证信息的状态是否合法
     		if($certiId != null && $infoId != null){
-    			$certi= (new DaoVendorAuth())->getVendorAuthById($certiId);
+    			$dao = new DaoVendorAuth();
+    			$certi= $dao->getVendorAuthById($certiId);
     			if(count($certi) == 1 && ($certi[0]['auth_ispass'] == 1 || $certi[0]['auth_ispass'] == 4)){
     				//更新保存验证信息
     				if($filePath == null){
-    					$resAuth = (new DaoVendorAuth())->updateTransaction($conn,
+    					$dao = new DaoVendorAuth();
+    					$resAuth = $dao->updateTransaction($conn,
     							array("auth_ispass" => 2),array("auth_id =" =>$certiId));
     				}else{
-    					$resAuth = (new DaoVendorAuth())->updateTransaction($conn,
+    					$dao = new DaoVendorAuth();
+    					$resAuth = $dao->updateTransaction($conn,
     						array("auth_license_loc" => $filePath,"auth_ispass" => 2),array("auth_id =" =>$certiId));
     				}
     				//更新infoName
-    				$resInfo = (new DaoVendorInfo())->updateTransaction($conn, array("info_name" => $infoName),array("info_id = "=>$infoId));
+    				$dao = new DaoVendorInfo();
+    				$resInfo = $dao->updateTransaction($conn, array("info_name" => $infoName),array("info_id = "=>$infoId));
     				if($resAuth && $resInfo){
     					$result  =true;
     				}
@@ -178,10 +194,12 @@ class UserModel{
     		$idenId = $vendor['vendor_iden_id'];
     		//获取这个验证信息，判断验证信息的状态是否合法
     		if($idenId != null){
-    			$iden= (new DaoVendorAuth())->getVendorAuthById($idenId);
+    			$dao = new DaoVendorAuth();
+    			$iden= $dao->getVendorAuthById($idenId);
     			if(count($iden) == 1 && ($iden[0]['auth_ispass'] == 1 || $iden[0]['auth_ispass'] == 4)){
     				//更新保存验证信息
-    				$resAuth = (new DaoVendorAuth())->updateTransaction($conn,
+    				$dao = new DaoVendorAuth();
+    				$resAuth = $dao->updateTransaction($conn,
     						array("auth_license_loc" => $filePath,"auth_ispass" => 2),array("auth_id =" =>$idenId));
     				if($resAuth){
     					$result  =true;
@@ -209,7 +227,8 @@ class UserModel{
     		$infoId = $vendor['vendor_info_id'];
     		$resType = false;
     		//判断商家类型是否需要修改
-    		if((new DaoVendor())->updateTransaction($conn, array("vendor_type" => $vendorType)
+    		$dao = new DaoVendor();
+    		if($dao->updateTransaction($conn, array("vendor_type" => $vendorType)
     				,array("vendor_id = " => $vendor['vendor_id']))){
     			//更新session信息
     			$vendor['vendor_type'] = $vendorType;
@@ -222,7 +241,8 @@ class UserModel{
     				"info_taobao" => $vendorInfo['taobao'],"info_leader" => $vendorInfo['leader'],
     				"vendor_lable" => $vendorInfo['vendorLabel']);
     		$where = array("info_id = " => $infoId);
-    		$resInfo = (new DaoVendorInfo())->update($data,$where);
+    		$dao = new DaoVendorInfo();
+    		$resInfo = $dao->update($data,$where);
     	}
     	$result = $resType && $resInfo;
     	if($result){
@@ -254,7 +274,8 @@ class UserModel{
     			$data['vendor_img_loc'] = $vendor_logoImg;
     		}
     		$where = array("info_id = " => $infoId);
-    		$result = (new DaoVendorInfo())->update($data,$where);
+    		$dao = new DaoVendorInfo();
+    		$result = $dao->update($data,$where);
     	}
     	if($result){
     		mysql_query("COMMIT");

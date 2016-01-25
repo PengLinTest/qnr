@@ -29,8 +29,10 @@ class UserCenterProductModel{
 		$conn = DaoBase::_getConn();
 		mysql_query("BEGIN"); //或者mysql_query("START TRANSACTION");
 		if(!empty($productID) && !empty($basicinfoID)){
-			$productResult = (new DaoProduct())->updateTransaction($conn,array("product_isdelete" => 1),array("product_id = " => $productID));
-			$basicinfoResult = (new DaoProductBasicinfo())->updateTransaction($conn,array("basicinfo_isdelete" => 1),array("basicinfo_id = " => $basicinfoID));
+			$daoProdcut = new DaoProduct();
+			$productResult = $daoProdcut->updateTransaction($conn,array("product_isdelete" => 1),array("product_id = " => $productID));
+			$daoProductBasicinfo = new DaoProductBasicinfo();
+			$basicinfoResult = $daoProductBasicinfo->updateTransaction($conn,array("basicinfo_isdelete" => 1),array("basicinfo_id = " => $basicinfoID));
 		}
 		$result = $productResult && $basicinfoResult;
 		if($result){
@@ -51,8 +53,10 @@ class UserCenterProductModel{
 	 */
 	public function addProductBatch($productID,$batch){
 		$result = false;
-		$products = (new DaoProduct())->getProductByproductId($productID);
-		$basicinfo = (new DaoProductBasicinfo())->getProductBasicinfoByproductId($productID);
+		$daoProduct = new DaoProduct();
+		$products = $daoProduct->getProductByproductId($productID);
+		$daoProductBasicinfo = new DaoProductBasicinfo();
+		$basicinfo = $daoProductBasicinfo->getProductBasicinfoByproductId($productID);
 		$product = array();
 		if(count($products) != 1 || count($basicinfo) != 1){
 			return $result;
@@ -84,7 +88,8 @@ class UserCenterProductModel{
 			}else{
 				$batchlist = $batchID;
 			}
-			$productResult = (new DaoProduct())->updateTransaction($conn, array("batchlist" => $batchlist),array("product_id = " =>$productID));
+			$dao = new DaoProduct();
+			$productResult = $dao->updateTransaction($conn, array("batchlist" => $batchlist),array("product_id = " =>$productID));
 		}
 		
 		$result = $batchResult && $productResult;
@@ -117,7 +122,8 @@ class UserCenterProductModel{
 	public function updateProductStatus($basicinfoID,$status){
 		$data = array("basicinfo_status" => $status);
 		$where = array("basicinfo_id = " => $basicinfoID);
-		return (new DaoProductBasicinfo())->update($data,$where);
+		$dao = new DaoProductBasicinfo();
+		return $dao->update($data,$where);
 	}
 	/**
 	 * 根据产品id获取产品的批次信息列表
@@ -127,11 +133,13 @@ class UserCenterProductModel{
 	 */
 	public function getProductBatchList($productID){
 		$res = array();
-		$product = (new DaoProduct())->getProductByproductId($productID);
+		$dao = new DaoProduct();
+		$product = $dao->getProductByproductId($productID);
 		if($product && count($product) == 1){
 			$batchlist = $product[0]['batchlist'];
 			if(!empty($batchlist)){
-				$res = (new DaoProductBatch())->getBatchListByIdList($batchlist);
+				$daoProductBatch = new DaoProductBatch();
+				$res = $daoProductBatch->getBatchListByIdList($batchlist);
 			}
 		}
 		return $res;
@@ -141,7 +149,8 @@ class UserCenterProductModel{
 		$res = false;
 		if($batchid != null){
 			$data = array("batch_isvalid" => $isUp);
-			$res = (new DaoProductBatch())->update($data,array("batch_id = " =>$batchid));
+			$dao = new DaoProductBatch();
+			$res = $dao->update($data,array("batch_id = " =>$batchid));
 		}
 		return $res;
 	}

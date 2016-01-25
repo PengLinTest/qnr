@@ -38,7 +38,8 @@ class ProductCerti extends ActionBase {
 	public function getProductCertiList(){
 		$idList = isset($_REQUEST['idList'])?$_REQUEST['idList']:null;
 		if(!empty($idList)){
-			$res = (new ProductCertiModel())->getProductCertiList($idList);
+			$model = new ProductCertiModel();
+			$res = $model->getProductCertiList($idList);
 			echo json_encode($res);
 		}
 	}

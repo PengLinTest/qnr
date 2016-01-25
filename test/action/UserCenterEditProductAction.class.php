@@ -48,7 +48,8 @@ class UserCenterEditProduct extends ActionBase {
 	 * 获取产品认证的类型列表
 	 */
 	public function getProductCertiType(){
-		echo json_encode((new UserCenterEditProductModel())->getProductCertiType());
+		$model = new UserCenterEditProductModel();
+		echo json_encode($model->getProductCertiType());
 	}
 	/**
 	 * 保存产品(新建产品，编辑产品)
@@ -108,9 +109,9 @@ class UserCenterEditProduct extends ActionBase {
 			echo json_encode($res);
 			return ;
 		}
-		
+		$model = new UserCenterEditProductModel();
 		//保存数据
-		$res['result'] = (new UserCenterEditProductModel())->addProductRecord($product);
+		$res['result'] = $model->addProductRecord($product);
 		
 		echo json_encode($res);
 	}
@@ -301,7 +302,8 @@ class UserCenterEditProduct extends ActionBase {
 		$res = array("result" => false);
 		$ProductID = isset($_REQUEST['ProductID'])?$_REQUEST['ProductID']:null;
 		if(!empty($ProductID)){
-			$res = (new UserCenterEditProductModel())->getProductRecordDetail($ProductID);
+			$model = new UserCenterEditProductModel();
+			$res = $model->getProductRecordDetail($ProductID);
 		}
 		echo json_encode($res);
 	}

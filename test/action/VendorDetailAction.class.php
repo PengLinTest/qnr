@@ -45,7 +45,8 @@ class VendorDetail extends ActionBase {
 		$vendorId = isset($_REQUEST['vendorId'])?(int)$_REQUEST['vendorId']:null;
 		$res = array();
 		if(!empty($vendorId)){
-			$res = (new VendorModel())->getVendorById($vendorId);
+			$model = new VendorModel();
+			$res = $model->getVendorById($vendorId);
 		}
 		echo json_encode($res);
 	}
@@ -56,7 +57,8 @@ class VendorDetail extends ActionBase {
 		$vendorId = isset($_REQUEST['vendorId'])?(int)$_REQUEST['vendorId']:null;
 		$res = array();
 		if(!empty($vendorId)){
-			$res = (new VendorModel())->getVendorMemberListByVendorId($vendorId);
+			$model = new VendorModel();
+			$res = $model->getVendorMemberListByVendorId($vendorId);
 		}
 		echo json_encode($res);
 	}
@@ -67,7 +69,8 @@ class VendorDetail extends ActionBase {
 		$vendorId = isset($_REQUEST['vendorId'])?(int)$_REQUEST['vendorId']:null;
 		$res = array();
 		if(!empty($vendorId)){
-			$res = (new ProductModel())->getProductBasicinfoListByVendorId($vendorId);
+			$model = new ProductModel();
+			$res = $model->getProductBasicinfoListByVendorId($vendorId);
 		}
 		echo json_encode($res);
 	}
@@ -78,7 +81,8 @@ class VendorDetail extends ActionBase {
 		$vendorId = isset($_REQUEST['vendorId'])?(int)$_REQUEST['vendorId']:null;
 		$res = array();
 		if(!empty($vendorId)){
-			$res = (new VendorModel())->getVendorInfoById($vendorId);
+			$model = new VendorModel();
+			$res = $model->getVendorInfoById($vendorId);
 		}
 		echo json_encode($res);
 	}

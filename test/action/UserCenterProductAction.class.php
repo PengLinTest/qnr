@@ -47,7 +47,8 @@ class UserCenterProduct extends ActionBase {
 		$productID = isset($_REQUEST['productID'])?$_REQUEST['productID']:null;
 		$basicinfoID = isset($_REQUEST['basicinfoID'])?$_REQUEST['basicinfoID']:null;
 		if(!empty($productID) && !empty($basicinfoID)){
-			$res['result'] = (new UserCenterProductModel())->deleteProduct($productID, $basicinfoID);
+			$model = new UserCenterProductModel();
+			$res['result'] = $model->deleteProduct($productID, $basicinfoID);
 		}
 		echo json_encode($res);
 	}
@@ -73,7 +74,8 @@ class UserCenterProduct extends ActionBase {
 				,"weight" => $RemarkWeightInput,"sugar" =>$RemarkSugarInput
 				,"other" => $RemarkOtherInput,"batch_qrcode_loc" => $QRpath
 		);
-		$res['result'] = (new UserCenterProductModel())->addProductBatch($productID, $batch);
+		$model = new UserCenterProductModel();
+		$res['result'] = $model->addProductBatch($productID, $batch);
 		echo json_encode($res);
 	}
 	public function updateProductBatch(){
@@ -95,7 +97,8 @@ class UserCenterProduct extends ActionBase {
 				,"weight" => $RemarkWeightInput,"sugar" =>$RemarkSugarInput
 				,"other" => $RemarkOtherInput,"id" =>$batchID
 		);
-		$res['result'] = (new UserCenterProductModel())->updateProductBatch($batch);
+		$model = new UserCenterProductModel();
+		$res['result'] = $model->updateProductBatch($batch);
 		echo json_encode($res);
 	}
 	/**
@@ -105,7 +108,8 @@ class UserCenterProduct extends ActionBase {
 		$res['result'] = false;
 		$basicInfoID = isset($_REQUEST['basicinfoID'])?$_REQUEST['basicinfoID']:null;
 		if(!empty($basicInfoID)){
-			$res['result'] = (new UserCenterProductModel())->updateProductStatus($basicInfoID, 2);
+			$model = new UserCenterProductModel();
+			$res['result'] = $model->updateProductStatus($basicInfoID, 2);
 		}
 		echo json_encode($res);
 	}
@@ -116,7 +120,8 @@ class UserCenterProduct extends ActionBase {
 		$result = array();
 		$productID = isset($_REQUEST['productID'])?$_REQUEST['productID']:null;
 		if(!empty($productID)){
-			$result = (new UserCenterProductModel())->getProductBatchList($productID);
+			$model = new UserCenterProductModel();
+			$result = $model->getProductBatchList($productID);
 		}
 		echo json_encode($result);
 	}
@@ -128,7 +133,8 @@ class UserCenterProduct extends ActionBase {
 		$batchID = isset($_REQUEST['batchID'])?$_REQUEST['batchID']:null;
 		$isUp = isset($_REQUEST['isUp'])?$_REQUEST['isUp']:null;
 		if($batchID != null & $isUp != null){
-			$res['result'] = (new UserCenterProductModel())->upOrDownBatch($batchID, $isUp);
+			$model = new UserCenterProductModel();
+			$res['result'] = $model->upOrDownBatch($batchID, $isUp);
 		}
 		echo json_encode($res);		
 	}

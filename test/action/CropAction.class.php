@@ -34,7 +34,8 @@ class Crop extends ActionBase {
 	 * 查找产品和作物列表信息
 	 */
 	public function getTraceDataCrop(){
-		$res = (new CropModel())->getCropList();
+		$dao = new CropModel();
+		$res = $dao->getCropList();
 		echo json_encode($res);
 	}
 	/*
@@ -47,7 +48,8 @@ class Crop extends ActionBase {
 			echo json_encode($res);
 			return ;
 		}
-		$res['data'] = (new CropModel())->getVarietiesListByCropID($cropID);
+		$dao = new CropModel();
+		$res['data'] = $dao->getVarietiesListByCropID($cropID);
 		$res['result'] = true;
 		echo json_encode($res);
 	}

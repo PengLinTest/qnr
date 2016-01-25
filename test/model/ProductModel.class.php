@@ -45,15 +45,18 @@ class ProductModel{
 		if(!empty($productId)){
 			$res = array();
 			//根据产品id获取商家id
-			$ids = (new DaoProduct())->getVendorIdByProductId($productId);
+			$dao = new DaoProduct();
+			$ids = $dao->getVendorIdByProductId($productId);
 			if(!empty($ids) && count($ids) == 1){
 				$vendorId = $ids[0]['vendor_id'];
 				//获取产品id地址
-				$productIdList = (new DaoProduct())->getProductIdListByVendorId($vendorId);
+				$daoProduct = (new DaoProduct());
+				$productIdList = $daoProduct->getProductIdListByVendorId($vendorId);
 				if(!empty($productIdList) && count($productIdList) > 0){
 					//根据产品id获取详细的产品基本信息
+					$daoProBaiscinfo = (new DaoProductBasicinfo());
 					foreach ($productIdList as $value){
-						$temp = (new DaoProductBasicinfo())->getProductBasicinfoByproductId($value["product_id"]);
+						$temp = $daoProBaiscinfo->getProductBasicinfoByproductId($value["product_id"]);
 						if(!empty($temp) && count($temp) == 1){
 							array_push($res, $temp[0]);
 						}
@@ -73,7 +76,8 @@ class ProductModel{
 		$res = array();
 		if(!empty($vendorId)){
 			//获取产品id地址
-			$productIdList = (new DaoProduct())->getProductIdListByVendorId($vendorId);
+			$dao = new DaoProduct();
+			$productIdList = $dao->getProductIdListByVendorId($vendorId);
 			if(!empty($productIdList) && count($productIdList) > 0){
 				//根据产品id获取详细的产品基本信息
 				$IdString = "(";
@@ -82,7 +86,8 @@ class ProductModel{
 					$IdString .= $value['product_id'].",";
 				}
 				$IdString = substr($IdString, 0,-1).")";
-				$res = (new DaoProductBasicinfo())->getProductBasicinfoByproductIdStringPage($IdString,1,$top);
+				$daoProBasicinfo = new DaoProductBasicinfo();
+				$res = $daoProBasicinfo->getProductBasicinfoByproductIdStringPage($IdString,1,$top);
 			}
 		}
 		return $res;
@@ -94,7 +99,8 @@ class ProductModel{
 	public function getBasicInfoByProductId($pId){
 		$pBasicinfo = array();
 		if(!empty($pId)){
-			$pBasicinfo = (new DaoProductBasicinfo())->getProductBasicinfoByproductId($pId);
+			$dao = new DaoProductBasicinfo();
+			$pBasicinfo = $dao->getProductBasicinfoByproductId($pId);
 		}
 		return $pBasicinfo;
 	}
@@ -104,7 +110,8 @@ class ProductModel{
 	public function getEnvironmentDataByType($type,$productId){
 		$res = array();
 		if(!empty($type)){
-			$res = (new DaoEnvironmentData())->getEnvironmentDataListByType($type,$productId);
+			$dao = new DaoEnvironmentData();
+			$res = $dao->getEnvironmentDataListByType($type,$productId);
 		}
 		return $res;
 	}
@@ -117,17 +124,21 @@ class ProductModel{
 	 */
 	public function getTopProductByType($top,$type){
 		$res = array();
-		$res = (new DaoProductBasicinfo())->getTopBasicinfoByType($top, $type);
+		$dao = new DaoProductBasicinfo();
+		$res = $dao->getTopBasicinfoByType($top, $type);
 		if(!empty($res)){
+			$daoProduct = new DaoProduct();
+			$daoVendor = new DaoVendor();
+			$daoVendorInfo = new DaoVendorInfo();
 			for($i = 0,$len = count($res);$i < $len;$i++){
 				$res[$i]['vendor_info'] = 0;
 				$productId = (int)$res[$i]['product_id'];
 				if(!empty($productId)){
-					$vendorIdList = (new DaoProduct())->getVendorIdByProductId($productId);
+					$vendorIdList = $daoProduct->getVendorIdByProductId($productId);
 					if(count($vendorIdList) == 1){
-						$vendor = (new DaoVendor())->getVendorById((int)$vendorIdList[0]);
+						$vendor = $daoVendor->getVendorById((int)$vendorIdList[0]);
 						if(!empty($vendor) && ($info_id = $vendor[0]['vendor_info_id']) != null){
-							$vendor_info = (new DaoVendorInfo())->getVendorInfoById((int)$info_id);
+							$vendor_info = $daoVendorInfo->getVendorInfoById((int)$info_id);
 							if(count($vendor_info) == 1){
 								$res[$i]['vendor_info'] = $vendor_info[0];		
 							}
@@ -143,7 +154,8 @@ class ProductModel{
 	 * @param 商家id $vendorID
 	 */
 	public function getCountProductByVendorID($vendorID){
-		return (new DaoProduct())->getCountProductByVendorId($vendorID);
+		$dao = new DaoProduct();
+		return $dao->getCountProductByVendorId($vendorID);
 	}
 	
 	/**
@@ -154,7 +166,8 @@ class ProductModel{
 		$res = array();
 		if(!empty($vendorId)){
 			//获取产品id地址
-			$productIdList = (new DaoProduct())->getProductIdListByVendorId($vendorId);
+			$dao = new DaoProduct();
+			$productIdList = $dao->getProductIdListByVendorId($vendorId);
 			if(!empty($productIdList) && count($productIdList) > 0){
 				//根据产品id获取详细的产品基本信息
 				$IdString = "(";
@@ -163,7 +176,8 @@ class ProductModel{
 					$IdString .= $value['product_id'].",";
 				}
 				$IdString = substr($IdString, 0,-1).")";
-				$res = (new DaoProductBasicinfo())->getProductBasicinfoByproductIdStringPage($IdString,$pageNum,$pageSize);
+				$daoProductBasicinfo = new DaoProductBasicinfo();
+				$res = $daoProductBasicinfo->getProductBasicinfoByproductIdStringPage($IdString,$pageNum,$pageSize);
 			}
 		}
 		return $res;

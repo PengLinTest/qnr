@@ -15,7 +15,8 @@ class ProductBatchModel{
      */
     public function getProductBatch($id){
     	if(!empty($id)){
-    		$res = (new DaoProductBatch())->getProductBatchById((int)$id);
+    		$dao = new DaoProductBatch();
+    		$res = $dao->getProductBatchById((int)$id);
     		if(count($res) == 1){
     			return $res[0];
     		}
@@ -25,7 +26,8 @@ class ProductBatchModel{
     public function getlastVaildBatch($idString){
     	$res = array();
     	if(!empty($idString)){
-    		$temp = (new DaoProductBatch())->getBatchListByIdListOrderTimeDesc($idString);
+    		$dao = new DaoProductBatch();
+    		$temp = $dao->getBatchListByIdListOrderTimeDesc($idString);
     		if($temp && count($temp) > 0){
     			$res = $temp[0];
     		}

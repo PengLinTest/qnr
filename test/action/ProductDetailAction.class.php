@@ -69,7 +69,8 @@ class ProductDetail extends ActionBase {
 		$batchIdList = isset($_REQUEST['batchIdList'])?$_REQUEST['batchIdList']:null;
 		if(!empty($batchIdList)){
 			//调用获取batch数据
-			$temp = (new ProductBatchModel())->getlastVaildBatch($batchIdList);
+			$model = new ProductBatchModel();
+			$temp = $model->getlastVaildBatch($batchIdList);
 			if($temp != null){
 				$res['result'] = true;
 				$res['data'] = $temp;
@@ -85,7 +86,8 @@ class ProductDetail extends ActionBase {
 	public function getProductBuyinfo(){
 		$buyIdList = isset($_REQUEST['buyIdList'])?$_REQUEST['buyIdList']:null;
 		if($buyIdList != null){
-			$res = (new ProductBuyinfoModel())->getProductBuyinfoByIdList($buyIdList);
+			$model = new ProductBuyinfoModel();
+			$res = $model->getProductBuyinfoByIdList($buyIdList);
 			if($res != null){
 				echo json_encode($res);
 			}
@@ -102,7 +104,8 @@ class ProductDetail extends ActionBase {
 		$pageNum = isset($_REQUEST['PageNumber'])?$_REQUEST['PageNumber']:1;
 		$pageSize = isset($_REQUEST['PageSize'])?$_REQUEST['PageSize']:10;
 		if(!empty($idList)){
-			$res = (new ProductFerPesUseModel())->getProductFerOrPesByIdList($idList,$pageNum,$pageSize);
+			$model = new ProductFerPesUseModel();
+			$res = $model->getProductFerOrPesByIdList($idList,$pageNum,$pageSize);
 		}
 		echo json_encode($res);
 	}
@@ -116,7 +119,8 @@ class ProductDetail extends ActionBase {
 		if(!empty($imgList)){
 			$arr = explode(",", $imgList);
 			if(count($arr) > 0){
-				$res = (new ProductGrowImgsModel())->getProductGrowImgListByIdList($imgList);
+				$model = new ProductGrowImgsModel();
+				$res = $model->getProductGrowImgListByIdList($imgList);
 			}
 		}
 		echo json_encode($res);
@@ -126,7 +130,8 @@ class ProductDetail extends ActionBase {
 		$type = isset($_REQUEST['type'])?$_REQUEST['type']:1;
 		$productId = isset($_REQUEST['productId'])?$_REQUEST['productId']:null;
 		if(!empty($productId)){
-			$res = (new ProductModel())->getEnvironmentDataByType($type,$productId);
+			$model = new ProductModel();
+			$res = $model->getEnvironmentDataByType($type,$productId);
 		}
 		echo json_encode($res);
 	}

@@ -68,6 +68,8 @@ class UserCenter extends ActionBase {
     	}else{
     		$name = $vendor['vendor_name'];
     	}
+    	$loginmodel = new LoginModel();
+    	$usermodel = new UserModel();
     	//判断是否为空
     	if(!$name || !$pwd_old || !$pwd_new || !$pwd_new_confirm){
     		$res['result'] = 0;
@@ -80,12 +82,12 @@ class UserCenter extends ActionBase {
     	else if($pwd_new != $pwd_new_confirm){
     		$res['result'] = 0;
     		$res['info'] = "新两次密码不一致";
-    	}else if((new LoginModel())->UserLogin($name, $pwd_old) == null){
+    	}else if($loginmodel->UserLogin($name, $pwd_old) == null){
     		//判断旧密码是否正确
     		$res['result'] = 0;
     		$res['info'] = "原始密码不对";
     	}else{
-    		if((new UserModel())->updateUserPwd($name,$pwd_new)){
+    		if($usermodel->updateUserPwd($name,$pwd_new)){
     			$res['result'] = 1;
     			$res['info'] = "修改成功";
     		}else{
@@ -102,7 +104,8 @@ class UserCenter extends ActionBase {
     	$res = array();
     	$vendorId = isset($_REQUEST['vendorId'])?(int)($_REQUEST['vendorId']):null;
     	if($vendorId != null){
-    		$res = (new UserModel())->getAllVendorInfo($vendorId);
+    		$model = new UserModel();
+    		$res = $model->getAllVendorInfo($vendorId);
     	}
     	echo json_encode($res);
     }
@@ -135,7 +138,8 @@ class UserCenter extends ActionBase {
     		}
     	}
     	if($fileName !== false){
-    		if((new UserModel())->saveCertiAuth($infoName, $fileName)){
+    		$model = new UserModel();
+    		if($model->saveCertiAuth($infoName, $fileName)){
     			$res = true;
     		}
     	}
@@ -170,7 +174,8 @@ class UserCenter extends ActionBase {
     		}
     	}
     	if($vendorLogoImage !== false && $vendorTopImage !== false){
-    		if((new UserModel())->updateVendorOtherInfo($companyDesc, $vendorTopImage, $vendorLogoImage)){
+    		$model = new UserModel();
+    		if($model->updateVendorOtherInfo($companyDesc, $vendorTopImage, $vendorLogoImage)){
     			$res = true;
     		}
     	}
@@ -197,7 +202,8 @@ class UserCenter extends ActionBase {
     	if (preg_match('/^(data:\s*image\/(\w+);base64,)/', $base64_image_content, $result)){
     		if($fileName = Tools::saveBase64image($base64_image_content, $result)){
     			//更新信息，包括公司名称和营业执照
-    			if((new UserModel())->saveIdenAuth($fileName)){
+    			$model = new UserModel();
+    			if($model->saveIdenAuth($fileName)){
     				$res = true;
     			}
     		}
@@ -237,7 +243,8 @@ class UserCenter extends ActionBase {
     						"vendorLabel" => $InputVendorLabel, "address" => $InputAddress,
     						"webChat" => $InputWeChat);
     	//更新数据
-    	$res = (new UserModel())->updateVendorInfo($vendorInfo,$InputCompanyType);
+    	$model = new UserModel();
+    	$res = $model->updateVendorInfo($vendorInfo,$InputCompanyType);
     	echo json_encode($res);
     }
     
@@ -251,8 +258,9 @@ class UserCenter extends ActionBase {
     	$res['result'] = false;
     	if(!empty($vendorId)){
     		$res['result'] = true;
-    		$res['total'] = (new ProductModel())->getCountProductByVendorID($vendorId);
-    		$res['data'] = (new ProductModel())->getProBasicinfoByVendorIdPage($vendorId,$pageNum,$pageSize);
+    		$model = new ProductModel();
+    		$res['total'] = $model->getCountProductByVendorID($vendorId);
+    		$res['data'] = $model->getProBasicinfoByVendorIdPage($vendorId,$pageNum,$pageSize);
     	}
     	echo json_encode($res);
     }

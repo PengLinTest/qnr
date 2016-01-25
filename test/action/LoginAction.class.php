@@ -68,7 +68,8 @@ class Login extends ActionBase {
 			return ;
 		}
 		//判断用户名，密码是否正确
-		if($vendor = (new LoginModel())->UserLogin($name, $pwd)){
+		$model = new LoginModel();
+		if($vendor = $model->UserLogin($name, $pwd)){
 			//设置Session
 			User::_setVendor($vendor);
 			$res['result'] = 1;
@@ -104,7 +105,8 @@ class Login extends ActionBase {
     		return ;
     	}
     	//判断用户名，密码是否正确
-    	if($vendor = (new LoginModel())->UserLogin($name, $pwd)){
+    	$model = new LoginModel();
+    	if($vendor = $model->UserLogin($name, $pwd)){
     		//设置Session
     		User::_setVendor($vendor);
     		$res['result'] = 1;

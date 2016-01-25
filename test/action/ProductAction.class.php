@@ -81,7 +81,8 @@ class Product extends ActionBase {
 	public function getTraceDataListByProductId(){
 		$productId = (isset($_REQUEST['productId']) && !empty($_REQUEST['productId']))?$_REQUEST['productId']:"null";
 		if($productId != "null"){
-			$res = (new ProductModel())->getProductBasicinfoListByProductId($productId);
+			$model = new ProductModel();
+			$res = $model->getProductBasicinfoListByProductId($productId);
 			if(!empty($res)){
 				echo json_encode($res);
 			}	
@@ -96,7 +97,8 @@ class Product extends ActionBase {
 		$productId = (isset($_REQUEST['productId']) && !empty($_REQUEST['productId']))?$_REQUEST['productId']:"null";
 		$res = array();
 		if($productId != "null"){
-			$basicInfo = (new ProductModel())->getBasicInfoByProductId((int)$productId);
+			$model = new ProductModel();
+			$basicInfo = $model->getBasicInfoByProductId((int)$productId);
 			if(!empty($basicInfo)){
 				$res['cropId'] = $basicInfo[0]['basicinfo_crops_index'];
 			}
@@ -113,7 +115,8 @@ class Product extends ActionBase {
 	public function getTopProduct(){
 		$top = (isset($_REQUEST['top']))?(int)$_REQUEST['top']:4;//默认为4个
 		$type = (isset($_REQUEST['type']))?(int)$_REQUEST['type']:1;
-		$res = (new ProductModel())->getTopProductByType($top, $type);
+		$model = new ProductModel();
+		$res = $model->getTopProductByType($top, $type);
 		echo json_encode($res);
 	}
 }

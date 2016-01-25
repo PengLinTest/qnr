@@ -51,7 +51,8 @@ class UserCenterMember extends ActionBase {
 		$vendorID = isset($_REQUEST['vendorID'])?$_REQUEST['vendorID']:null;
 		$res['result'] = false;
 		if(!empty($vendorID)){
-			$data = (new UserCenterMemberModel())->getVendorMember($vendorID);
+			$model = new UserCenterMemberModel();
+			$data = $model->getVendorMember($vendorID);
 			$res['result'] = true;
 			$res['data'] = $data;
 		}
@@ -65,7 +66,8 @@ class UserCenterMember extends ActionBase {
 		$memberID = isset($_REQUEST['memberID'])?$_REQUEST['memberID']:null;
 		$res['result'] = false;
 		if(!empty($memberID)){
-			if((new UserCenterMemberModel())->deleteVendorMember($memberID)){
+			$model = new UserCenterMemberModel();
+			if($model->deleteVendorMember($memberID)){
 				$res['result'] = true;
 			}
 		}
@@ -78,7 +80,8 @@ class UserCenterMember extends ActionBase {
 		$memberID = isset($_REQUEST['memberID'])?$_REQUEST['memberID']:null;
 		$res['result'] = false;
 		if(!empty($memberID)){
-			$data = (new UserCenterMemberModel())->getVendorMemberInfoByMemberID($memberID);
+			$model = new UserCenterMemberModel();
+			$data = $model->getVendorMemberInfoByMemberID($memberID);
 			if(count($data) == 1){
 				$res['result'] = true;
 				$res['data'] = $data[0];
@@ -118,7 +121,8 @@ class UserCenterMember extends ActionBase {
 		$member = array("member_id" => $memberID,"member_name" => $memberName
 					,"member_img_loc" => $imgPath,"member_position" =>$memberPosition
 					,"member_profile" => $memberProfile);
-		if((new UserCenterMemberModel())->updateVendorMemberInfo($member)){
+		$model = new UserCenterMemberModel();
+		if($model->updateVendorMemberInfo($member)){
 			$res['result'] = true;
 		}
 		echo json_encode($res);
@@ -155,7 +159,8 @@ class UserCenterMember extends ActionBase {
 		$member = array("vendor_id" => $vendorID,"member_name" => $memberName
 				,"member_img_loc" => $imgPath,"member_position" =>$memberPosition
 				,"member_profile" => $memberProfile);
-		if((new UserCenterMemberModel())->addVendorMemberInfo($member)){
+		$model = new UserCenterMemberModel();
+		if($model->addVendorMemberInfo($member)){
 			$res['result'] = true;
 		}
 		echo json_encode($res);

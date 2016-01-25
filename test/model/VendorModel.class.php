@@ -21,7 +21,8 @@ class VendorModel{
 	public function getVendorAuthById($vendorId,$cerType){
 		//根据商家id获取认证信息的id
 		$res = array();
-		$vendor = (new DaoVendor())->getVendorById($vendorId);
+		$dao = new DaoVendor();
+		$vendor = $dao->getVendorById($vendorId);
 		$infoId = -1;
 		if(!empty($vendor) && sizeof($vendor) == 1){
 			if($cerType == 1){
@@ -33,7 +34,8 @@ class VendorModel{
 			}
 		}
 		if($infoId > 0){
-			$vendorAuth = (new DaoVendorAuth())->getVendorAuthById($infoId);
+			$dao = new DaoVendorAuth();
+			$vendorAuth = $dao->getVendorAuthById($infoId);
 			$res['vendor'] = $vendor;
 			$res['vendorAuth'] = $vendorAuth;
 			return $res;
@@ -50,14 +52,16 @@ class VendorModel{
 	public function getVendorInfoById($vendorId){
 		//根据商家id获取商家基本信息的id
 		$res = array();
-		$vendor = (new DaoVendor())->getVendorById($vendorId);
+		$dao = new DaoVendor();
+		$vendor = $dao->getVendorById($vendorId);
 		$infoId = -1;
 		if(!empty($vendor) && sizeof($vendor) == 1){
 			//获取商家信息
 			$infoId = (int)$vendor[0]['vendor_info_id'];
 		}
 		if($infoId > 0){
-			$res = (new DaoVendorInfo())->getVendorInfoById($infoId);
+			$daoVendorInfo = new DaoVendorInfo();
+			$res = $daoVendorInfo->getVendorInfoById($infoId);
 			if(!empty($res) && count($res)){
 				return $res[0];
 			}
@@ -72,20 +76,23 @@ class VendorModel{
 	 * @return 同时返回每个商家的基本信息vendor_info
 	 */
 	public function getNewVendorByType($top,$type){
-		$vendorList = (new DaoVendor())->getTopVendorByType($top, $type);
+		$dao = new DaoVendor();
+		$vendorList = $dao->getTopVendorByType($top, $type);
 		if(!empty($vendorList)){
 			for($i = 0,$len = count($vendorList); $i < $len; $i++){
 				$certiId = $vendorList[$i]['vendor_certi_id'];
 				$infoId = $vendorList[$i]['vendor_info_id'];
 				//获取商家验证信息
 				if(!empty($certiId)){
-					$vendorList[$i]['vendorAuth'] = (new DaoVendorAuth())->getVendorAuthById($certiId);
+					$daoVendorAuth = new DaoVendorAuth();
+					$vendorList[$i]['vendorAuth'] = $daoVendorAuth->getVendorAuthById($certiId);
 				}else{
 					$vendorList[$i]['vendorAuth'] = 0;
 				};
 				//获取商家基本信息
 				if(!empty($infoId)){
-					$vendorList[$i]['vendorInfo'] = (new DaoVendorInfo())->getVendorInfoById($infoId);
+					$daoVendorInfo = new DaoVendorInfo();
+					$vendorList[$i]['vendorInfo'] = $daoVendorInfo->getVendorInfoById($infoId);
 				}else{
 					$vendorList[$i]['vendorInfo'] = 0;
 				}
@@ -101,19 +108,22 @@ class VendorModel{
 	 * @param $keyword 关键字
 	 */
 	public function getVendorList($pageNumber,$pageSize,$keyword){
-		$vendorList = (new DaoVendor())->getVendorList($pageNumber, $pageSize, $keyword);
+		$dao = new DaoVendor();
+		$vendorList = $dao->getVendorList($pageNumber, $pageSize, $keyword);
 		if(!empty($vendorList)){
 			for($i = 0,$len = count($vendorList); $i < $len; $i++){
 				$certiId = $vendorList[$i]['vendor_certi_id'];
 				$infoId = $vendorList[$i]['vendor_info_id'];
 				if(!empty($certiId)){
-					$vendorList[$i]['vendorAuth'] = (new DaoVendorAuth())->getVendorAuthById($certiId);
+					$daoVendorAuth = new DaoVendorAuth();
+					$vendorList[$i]['vendorAuth'] = $daoVendorAuth->getVendorAuthById($certiId);
 				}else{
 					$vendorList[$i]['vendorAuth'] = 0;
 				}
 				//获取商家基本信息
 				if(!empty($infoId)){
-					$vendorList[$i]['vendorInfo'] = (new DaoVendorInfo())->getVendorInfoById($infoId);
+					$daoVendorInfo = new DaoVendorInfo();
+					$vendorList[$i]['vendorInfo'] = $daoVendorInfo->getVendorInfoById($infoId);
 				}else{
 					$vendorList[$i]['vendorInfo'] = 0;
 				}
@@ -123,7 +133,8 @@ class VendorModel{
 	}
 	
 	public function getCountVendor($keyword){
-		return (new DaoVendor())->getCountVendorByKey($keyword);
+		$dao = new DaoVendor();
+		return $dao->getCountVendorByKey($keyword);
 	}
 	
 	/*
@@ -133,7 +144,8 @@ class VendorModel{
 	
 	public function getVendorById($vendorId){
 		//根据商家id获取商家基本信息的id
-		return (new DaoVendor())->getVendorById($vendorId);
+		$dao = new DaoVendor();
+		return $dao->getVendorById($vendorId);
 	}
 	
 	/*
@@ -143,6 +155,7 @@ class VendorModel{
 	
 	public function getVendorMemberListByVendorId($vendorId){
 		//根据商家id获取商家基本信息的id
-		return (new DaoVendorMember())->getVendorMemberListByVendorId($vendorId);
+		$dao = new DaoVendorMember();
+		return $dao->getVendorMemberListByVendorId($vendorId);
 	}
 }

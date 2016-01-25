@@ -47,7 +47,8 @@ class Policy extends ActionBase {
 	 * 首页获取政策列表信息
 	 */
 	public function getSimplePolicyList(){
-		$res = (new PolicyModel())->getTopPolicy(9);
+		$model = new PolicyModel();
+		$res = $model->getTopPolicy(9);
 		echo json_encode($res);
 	}
 	/**
@@ -58,7 +59,8 @@ class Policy extends ActionBase {
 	public function getPolicyList(){
 		$pageNum = isset($_REQUEST['pageNum'])?(int)$_REQUEST['pageNum']:1;
 		$type = isset($_REQUEST['type'])?(int)$_REQUEST['type']:1;
-		$res = (new PolicyModel())->getPolicyListByPage($pageNum, $type, ConstData::$pageSize);
+		$model = new PolicyModel();
+		$res = $model->getPolicyListByPage($pageNum, $type, ConstData::$pageSize);
 		echo json_encode($res);
 	}
 	/**
@@ -66,7 +68,8 @@ class Policy extends ActionBase {
 	 */
 	public function getPageInfo(){
 		$type = isset($_REQUEST['type'])?(int)$_REQUEST['type']:1;
-		$res = (new PolicyModel())->getPolicyTotalPage(ConstData::$pageSize, $type);
+		$model = new PolicyModel();
+		$res = $model->getPolicyTotalPage(ConstData::$pageSize, $type);
 		echo json_encode($res);
 	}
 }

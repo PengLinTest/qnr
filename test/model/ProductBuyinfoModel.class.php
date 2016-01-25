@@ -18,8 +18,9 @@ class ProductBuyinfoModel{
     		$arr = explode(",", $idList);
     		$i = 0;
     		$res = array();
+    		$dao = new DaoProductBuyinfo();
     		foreach($arr as $id){
-    			$buyinfo = (new DaoProductBuyinfo())->getProductBuyinfoById((int)$id);
+    			$buyinfo = $dao->getProductBuyinfoById((int)$id);
     			if(!empty($buyinfo)){
     				$res[$i] = $buyinfo[0];
     				$i += 1;

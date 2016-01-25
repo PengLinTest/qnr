@@ -18,8 +18,9 @@ class ProductGrowImgsModel{
     	if(!empty($idList)){
     		$arr = explode(",", $idList);
     		$i = 0;
+    		$dao = new DaoProductGrowImgs();
     		foreach($arr as $id){
-    			$growImg = (new DaoProductGrowImgs())->getGrowImgListById((int)$id);
+    			$growImg = $dao->getGrowImgListById((int)$id);
     			if(!empty($growImg)){
     				$res[$i] = $growImg[0];
     				$i += 1;

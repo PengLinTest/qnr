@@ -24,7 +24,8 @@ class CropModel{
     	if(empty($cropID)){
     		return $res;
     	}
-    	$varietiesIDList = (new DaoCropVarieties())->getVarietiesIDListByCropID((int)$cropID);
+    	$dao = new DaoCropVarieties();
+    	$varietiesIDList = $dao->getVarietiesIDListByCropID((int)$cropID);
     	if(!$varietiesIDList || count($varietiesIDList) <= 0){
     		return $res;
     	}
@@ -33,7 +34,8 @@ class CropModel{
     		$vIDs.=$value['varieties_id'].",";
     	}
     	$vIDs = substr($vIDs,0,-1);
-    	$temp = (new DaoVarieties())->getVarietiesByIDList($vIDs);
+    	$dao = new DaoVarieties();
+    	$temp = $dao->getVarietiesByIDList($vIDs);
 //     	foreach($temp as $value){
 //     		array_push($res,$value['varieties_desc']);
 //     	}

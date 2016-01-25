@@ -18,7 +18,8 @@ class UserCenterEditProductModel{
 	 * 获取产品的类型列表
 	 */
 	public function getProductCertiType(){
-		return (new DaoProductCertiType())->getCertiTypeList();
+		$dao = new DaoProductCertiType();
+		return $dao->getCertiTypeList();
 	}
 	/**
 	 * 新增产品信息
@@ -88,7 +89,8 @@ class UserCenterEditProductModel{
 							,"pesticides_list" => $product['pesticides_list'],"product_certi_list" =>$product['product_certi_list']
 							,"product_intro" => $product['product_intro'],"buy_info_list" => $product['buy_info_list']
 					);
-					$result = (new DaoProduct())->updateTransaction($conn, $data,array("product_id =" =>$productID));
+					$daoProduct = new DaoProduct();
+					$result = $daoProduct->updateTransaction($conn, $data,array("product_id =" =>$productID));
 				}else{
 					//获取商家id
 					$vendor = User::_getVendor();
@@ -105,7 +107,8 @@ class UserCenterEditProductModel{
 								,"product_intro" => $product['product_intro'],"buy_info_list" => $product['buy_info_list']
 								,"batchlist" => "","qrcodeloc" =>$product['qrcodeloc'],"product_isdelete" => 0
 						);
-						$result = (new DaoProduct())->updateTransaction($conn, $data,array("product_id =" =>$productID));
+						$daoProduct = new DaoProduct();
+						$result = $daoProduct->updateTransaction($conn, $data,array("product_id =" =>$productID));
 					}
 				}
 			}
@@ -144,7 +147,8 @@ class UserCenterEditProductModel{
 			//更新产品基本信息
 			$basicinfoID = $basicinfo['basicinfo_id'];
 			unset($basicinfo['basicinfo_id']);
-			$resUpdate = (new DaoProductBasicinfo())->updateTransaction($conn, $basicinfo,array("basicinfo_id =" => $basicinfoID));
+			$dao = new DaoProductBasicinfo();
+			$resUpdate = $dao->updateTransaction($conn, $basicinfo,array("basicinfo_id =" => $basicinfoID));
 			if($resUpdate){
 				$res['result'] = true;
 				$res["basicinfo_id"] = $basicinfoID;
